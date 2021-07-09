@@ -32,10 +32,12 @@ Route::group(['middleware' => 'auth'], function(){
     
 });
 
-Route::get('/data-pegawai', [App\Http\Controllers\PegawaiController::class, 'index'])->name('data-pegawai');
-Route::delete('/data-pegawai', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('data-pegawai');
-Route::get('/input-pegawai', [App\Http\Controllers\PegawaiController::class, 'create'])->name('input-pegawai');
-Route::post('/simpan-pegawai', [App\Http\Controllers\PegawaiController::class, 'store'])->name('simpan-pegawai');
+ Route::resource('data-pegawai', PegawaiController::class);
+Route::get('/data-pegawai', [App\Http\Controllers\Pegawai\PegawaiController::class, 'index'])->name('data-pegawai');
+Route::get('/index', [App\Http\Controllers\Pegawai\PegawaiController::class, 'update'])->name('update-pegawai');
+Route::delete('/data-pegawai/{item}', [App\Http\Controllers\Pegawai\PegawaiController::class, 'destroy']);
+Route::get('/input-pegawai', [App\Http\Controllers\Pegawai\PegawaiController::class, 'create'])->name('input-pegawai');
+Route::post('/simpan-pegawai', [App\Http\Controllers\Pegawai\PegawaiController::class, 'store'])->name('simpan-pegawai');
 Route::get('auth/google',[App\Http\Controllers\GoogleController::class,'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback',[App\Http\Controllers\GoogleController::class,'handleGoogleCallback'])->name('google.callback');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -87,13 +87,14 @@
 
            
               <td>
-                  <a class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
+                  <a href="index/{{ $item->id }}" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
               </td>
           <td>
-          <form action="" method="POST">
+
+          <form action="route{{'data-pegawai.destroy','$item->id'}}" method="POST">
           @method('delete')
           @csrf
-          <a href="{{ $item->id }}" class="btn btn-danger btn-xs" title="Hapus" disabled><i class="fa fa-trash"></i></a>
+          <button class="btn btn-danger" title="Hapus" ><i class="fa fa-trash"></i></button>
           </td>
           </form>
           

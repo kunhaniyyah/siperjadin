@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -45,8 +46,7 @@ class LoginController extends Controller
 
         protected function sendFailedLoginResponse()
     {
-        throw ValidationException::withMessages([
-           'username' => [trans('auth.failed')],
+        throw ValidationException::withMessages(['username' => [trans('auth.failed')],
         ]);
     }
 
