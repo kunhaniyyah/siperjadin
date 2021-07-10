@@ -10,7 +10,7 @@
             </button>
             </div>
             <div class="modal-body">
-            <form action="{{route('ruang.store')}}" method="post">
+            <form action="{{route('pegawai.pegawai')}}" method="post">
                 @csrf
                 
                 <div class="form-group">
@@ -34,7 +34,7 @@
                     name="golongan" value="{{ old('golongan') }}" id="golongan">
                 </div>
                 <div class="form-group">
-                    <label for="fasilitas">Jabatan Fungsional</label>
+                    <label for="jabfung">Jabatan Fungsional</label>
                     <input type="text" class="form-control" placeholder="Masukkan Jabatan Fungsional" 
                     name="jabfung" value="{{ old('jabfung') }}" id="jabfung">
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jabatan">Jabatan</label>
-                    <input type="text" class="form-control" placeholder="Masukkan Fasilitas" 
+                    <input type="text" class="form-control" placeholder="Masukkan Jabatan" 
                     name="jabatan" value="{{ old('jabatan') }}" id="jabatan">
                 </div>
             </div>
@@ -71,7 +71,7 @@
       <table class="table table-bordered table-sm">
         <thead class="thead-dark">
           <tr class="text-center">
-          <th scope="col">ID</th>
+          
           <th scope="col">Nama</th>
           <th scope="col">Fakultas</th>
           <th scope="col">Pangkat</th>
@@ -83,9 +83,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($datapegawai as $item)
+          @foreach ($pegawai as $item)
           <tr class="text-center">
-          <td>{{ $item->id}}</td>
+         
           <td>{{ $item->nip}}</td>
           <td>{{ $item->nama}}</td>
           <td>{{ $item->pangkat}}</td>
@@ -95,7 +95,7 @@
           <td>{{ $item->jabatan}}</td>
           <td>{{ $item->fakultas}}</td>
             <td>
-            <form action="{{route('ruang.destroy',$room->id_room)}}" method="POST" class="d-inline">
+            <form action="" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateModal"><i class="fas fa-pencil-alt"></i></button>
@@ -121,11 +121,11 @@
             </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="/ruang/{{$item->id}}">
+            <form method="POST" action="">
             @method('PATCH')
             @csrf
                 <div class="mb-3">
-                    <label for="kd_ruang">KD Ruang</label>
+                    <label for="nip">NIP</label>
                     <input type="text" class="form-control" 
                     id="nip" placeholder="Masukkan NIP" name="nip" value="{{ $item->nip }}">
                 </div>
@@ -140,14 +140,39 @@
                 <div class="mb-3">
                     <label for="kapasitas">Kapasitas</label>
                     <input type="text" class="form-control" 
-                    id="kapasitas" placeholder="Masukkan Kapasitas" name="kapasitas" value="{{ $room->kapasitas }}">
+                    id="kapasitas" placeholder="Masukkan Kapasitas" name="kapasitas" value="{{ $item->pangkat }}">
                     
                 </div>
 
                 <div class="mb-3">
-                    <label for="fasilitas">Fasilitas</label>
+                    <label for="golongan">Golongan</label>
                     <input type="text" class="form-control" 
-                    id="fasilitas" placeholder="Masukkan Fasilitas" name="fasilitas" value="{{ $room->fasilitas }}">
+                    id="golongan" placeholder="Masukkan golongan" name="golongan" value="{{ $item->golongan }}">
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="jabstruk">jabstruk</label>
+                    <input type="text" class="form-control" 
+                    id="jabstruk" placeholder="Masukkan jabstruk" name="jabstruk" value="{{ $item->jabstruk }}">
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="jabfung">jabfung</label>
+                    <input type="text" class="form-control" 
+                    id="jabfung" placeholder="Masukkan jabfung" name="jabfung" value="{{ $item->jabfung }}">
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="jabatan">Jabatan</label>
+                    <input type="text" class="form-control" 
+                    id="jabatan" placeholder="Masukkan jabatan" name="jabatan" value="{{ $item->jabatan }}">
+                    
+                </div>
+                </div>
+                <div class="mb-3">
+                    <label for="fakultas">Fakultas</label>
+                    <input type="text" class="form-control" 
+                    id="fakultas" placeholder="Masukkan Fakultas" name="fakultas" value="{{ $item->fakultas }}">
                     
                 </div>
 

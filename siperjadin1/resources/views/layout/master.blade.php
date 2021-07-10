@@ -3,90 +3,68 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Dashboard')</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
- 
+  <title>@yield('title','Dashboard')</title>
   @stack('custom-css')
-
-
-
-    <!-- Theme style -->
-    <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
-
-
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
 <div class="wrapper">
 
-  @include('layout.nav-header')
-  @include('layout.sidebar')
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+@include('layout.nav-header')
+@include('layout.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
+    <section class="content-header">
+@yield('content')
+    </section>
+@yield('modal')
     <!-- Main content -->
-    <div class="jumbotron">
-    <div class="container">
-      <center>
-    <h2>SISTEM INFORMASI PERJALANAN DINAS PEGAWAI
-    <br>
-    SEKOLAH VOKASI
-    <br>
-    UNIVERSITAS SEBELAS MARET(UNS)
-</br></h2>
-<div class="image">
-          <img src="{{ asset('') }}assets/dist/img/uns2.png" width="110" class="img-circle" alt="UNS Logo">
-          <img src="{{ asset('') }}assets/dist/img/logosv.png" width="120" class="img-circle" alt="SV Logo">
+    <section class="content">
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Default Modal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
-  </center>
-    </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+    </section>
+    <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 
 @include('layout.footer')
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-
+</div>
 <!-- ./wrapper -->
 
-
-
-<!-- jQuery -->
-<script src=" assets/plugins/jquery/jquery.min.js"></script>
 @stack('custom-script')
-
+<!-- jQuery -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('assetsplugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="assets/dist/js/demo.js"></script> -->
-
+<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 
 </body>
 </html>

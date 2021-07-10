@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pegawai;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class PegawaiController extends Controller
 {
@@ -12,23 +17,33 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+     public function __construct()
+     {
+         
+     }
+
+    public function index(Request $request)
     {
-        $datapegawai = pegawai::all();
-        return view('Pegawai.data-pegawai', compact('datapegawai'));
+      
+        $datapegawai = Pegawai::paginate(5);
+        //$datapegawai = Pegawai::with('pegawai')->pagination(5);
+        return view('pegawai.pegawai', compact('datapegawai'));
     }
-    
+
+    public function create()
+    {
+        
+        return view('pegawai.tambahpegawai');
+    }
+
+   
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('Pegawai.input-pegawai');
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -38,17 +53,26 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        pegawai::create([
-            'nip'       => $request->nip,
-            'nama'      => $request->nama,
-            'fakultas'  => $request->fakultas,
-            'pangkat'   => $request->pangkat,
-            'golongan'  => $request->golongan,
-            'jabfung'   => $request->jabfung,
-            'jabstruk'  => $request->jabstruk,
-            'jabatan'   => $request->jabatan,
+        $this->validate($request, 
+        [
+            'nip'       =>'required|max:18',
+            'nama'      =>'required',
+            'fakultas'  =>'required|in:FMIPA,FP,FIB,FEB',
+            'pangkat'   =>'required',
+            'golongan'  =>'required',
+            'jabfung'   =>'required',
+            'tingkat'   =>'required'
         ]);
-        return redirect('data-pegawai');
+        Pegawai::create([
+            'nip'       =>$request->nip,
+            'nama'      =>$request->nama,
+            'fakultas'  =>$request->fakultas,
+            'pangkat'   =>$request->pangkat,
+            'golongan'  =>$request->golongan,
+            'jabfung'   =>$request->jabfung,
+            'tingkat'   =>$request->tingkat,
+        ]);
+        return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');;
     }
 
     /**
@@ -68,11 +92,12 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nip)
     {
-        //
+        $peg = Pegawai::findorfail($nip);
+        return view('pegawai.editpegawai', compact('peg'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -80,19 +105,22 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $nip)
     {
-        //
+        $peg = Pegawai::findorfail($nip);
+        $peg->update($request->all());
+        return redirect('pegawai')->with('status', 'Data berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return redirect('datapegawai');
-    }
+    public function destroy($nip)
+        {
+            $datapegawai = Pegawai::findorfail($nip);
+            $datapegawai->delete();
+            return back()->with('success', 'Data berhasil dihapus!');
+        }
+    public function export_excel()
+        {
+            //return Excel::download(new Pegawai, 'pegawai.xlsx');
+        }
 }
+        

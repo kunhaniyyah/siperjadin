@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\ValidationException;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -38,21 +39,16 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
     public function showLoginForm()
     {
         return view('page.auth.login');
     }
-
-        protected function sendFailedLoginResponse()
+    protected function sendFailedLoginResponse()
     {
-        throw ValidationException::withMessages(['username' => [trans('auth.failed')],
+        throw ValidationException::withMessages([
+            'username' => [trans('auth.failed')],
         ]);
     }
-
-
-    //kalo mau login pake nya username bukan email
-    //kalo pke email returnnya diganti / function ini dihapus
     public function username()
     {
         $login = request()->input('username');

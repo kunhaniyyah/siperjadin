@@ -4,21 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class Pegawai extends Model
 {
-    use HasFactory;
-    protected $table = "pegawai";
-    protected $primaryKey = "id";
+    //Explanation : By default laravel will expect created_at & updated_at column in your table.
+    // By making it to false it will override the default setting.
+    public $timestamps = false;
+    protected $table ="pegawai";
+    protected $primaryKey ="nip";
     protected $fillable = [
-        'id',
-        'nip', 
-        'nama', 
-        'fakultas', 
-        'golongan', 
+        'nip',
+        'nama',
+        'fakultas',
         'pangkat',
-        'jabfung', 
-        'jabstruk', 
-        'jabatan',
+        'golongan',
+        'jabfung',
+        'tingkat',
     ];
+
 }
