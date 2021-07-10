@@ -19,9 +19,14 @@ class Pegawai extends Model
         'nama',
         'fakultas',
         'pangkat',
+        'jabfung_id',
         'golongan',
-        'jabfung',
         'tingkat',
     ];
 
+    public function jabfung()
+    {
+        //belongsto , 1 jabfung memiliki banyak pegawai
+        return $this->belongsTo(Jabfung::class);
+    }
 }

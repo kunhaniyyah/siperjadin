@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Jabfung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
@@ -26,15 +27,15 @@ class PegawaiController extends Controller
     public function index(Request $request)
     {
       
-        $datapegawai = Pegawai::paginate(5);
+        $datapegawai = Pegawai::with('jabfung')->paginate(5);
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
         return view('pegawai.pegawai', compact('datapegawai'));
     }
 
     public function create()
     {
-        
-        return view('pegawai.tambahpegawai');
+        $jab = Jabfung::all();
+        return view('pegawai.tambahpegawai', compact('jab'));
     }
 
    
@@ -70,9 +71,10 @@ class PegawaiController extends Controller
             'pangkat'   =>$request->pangkat,
             'golongan'  =>$request->golongan,
             'jabfung'   =>$request->jabfung,
+            'jabfung_id'   =>$request->jabfung_id,
             'tingkat'   =>$request->tingkat,
         ]);
-        return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');;
+        return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');
     }
 
     /**

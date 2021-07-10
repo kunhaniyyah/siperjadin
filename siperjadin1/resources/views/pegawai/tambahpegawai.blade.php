@@ -46,21 +46,13 @@
       @enderror
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Jabatan Fungsional</label>
-    <select class="form-control" id="jabfung" name="jabfung" value="{{old('jabfung')}}"> 
-      <option>Lektor</option>
-      <option>Lektor Kepala</option>
-      <option>Fungsional Umum</option>
-      <option>Tenaga Pengajar</option>
-      <option>Asisten Ahli</option>
-      <option>Guru Besar</option>
-      <option>Arsiparis</option>
-      <option>Tenaga Pendidik</option>
-      <option>Pranata Laboratorium</option>
+    <label for="exampleFormControlInput1">Jabatan Fungsional</label>
+    <select class="form-control" id="jabfung_id" name="jabfung_id">
+    <option disabled value="">Pilih Jabatan</option>
+        @foreach ($jab as $item)
+          <option value="{{ $item->jabfung_id }}">{{$item->jabfung}}</option>
+        @endforeach
     </select>
-    @error('jabfung')
-        <span class="text-danger">{{ $message }}</span>
-      @enderror
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Pangkat</label>
@@ -117,23 +109,23 @@
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Fakultas</label>
-    <select class="custom-select" id="fakultas" name="fakultas">
-      <option value="" selected disabled>Pilih Fakultas</option>
-      <option value={{($Pegawai->fakultas === 'FMIPA')? 'selected' : ''}}>FMIPA</option>
+    <select class="form-control" id="fakultas" name="fakultas">
+      <option>Pilih Fakultas</option>
       <option value="Sekolah Vokasi">Sekolah Vokasi</option>
-      <option value="FP">FP</option>
-      <option value="FK">FK</option>
-      <option value="FKIP">FKIP</option>
-      <option value="FISIP">FISIP</option>
-      <option value="FH">FH</option>
-      <option value="FEB">FEB</option>
-      <option value="FIB">FIB</option>
-      <option value="FT">FT</option>
-      <option value="FSRD">FSRD</option>
-      <option value="FKOR">FKOR</option>
-      <option value="PDD Madiun">PDD Madiun</option>
-      <option value="UNS Pusat">UNS Pusat</option>
-      <option value="UPT Kearsipan">UPT Kearsipan</option>
+      <option>FMIPA</option>
+      <option>FP</option>
+      <option>FK</option>
+      <option>FKIP</option>
+      <option>FISIP</option>
+      <option>FH</option>
+      <option>FEB</option>
+      <option>FIB</option>
+      <option>FT</option>
+      <option>FSRD</option>
+      <option>FKOR</option>
+      <option>PDD Madiun</option>
+      <option>UNS Pusat</option>
+      <option>UPT Kearsipan</option>
     </select>
   </div>
   <button type="submit" class="btn btn-success">Simpan Data</button>

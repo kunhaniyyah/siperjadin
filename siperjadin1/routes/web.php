@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     Route::post('/updatest/{no_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
     
     Route::get('/sppd', [App\Http\Controllers\SppdController::class, 'index'])->name('sppd');
+    Route::get('/tambahsppd', [App\Http\Controllers\SppdController::class, 'create'])->name('tambahsppd');
+    Route::post('/simpanppd', [App\Http\Controllers\SppdController::class, 'store'])->name('simpansppd');
+    Route::get('/deletesppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'destroy'])->name('deletesppd');
+    Route::get('/editsppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'edit'])->name('editsppd');
+    Route::post('/updatesppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'update'])->name('updatesppd');
     
     //pengajuan
     Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');

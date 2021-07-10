@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Halaman SPPD')</title>
+  <title>@yield('title', 'Halaman Edit Data SPPD')</title>
 
   @section('content')
   <!-- Google Font: Source Sans Pro -->
@@ -37,7 +37,7 @@
   <div class="card card-info card-outline">
   <div class="card-header">
       <div class="card-tools">
-          <a href="{{ route('tambahsppd') }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+          <a href="{{ route('tambahpegawai') }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </a>
       </div>
   </div>
@@ -52,7 +52,12 @@
               <th scope="col">Aksi</th>
           </tr>
           <tbody>
-          
+          <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
+          @if ($sppd->count() == 0)
+        <tr>
+            <td colspan="10">No data to display.</td>
+        </tr>
+        @endif
          @foreach ($sppd as $item)
           <tr class="text-center">
               <td>{{ $loop->iteration }}</td>
@@ -65,9 +70,9 @@
                   <form action="" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
-                            <a href="{{ route('editsppd', $item->no_sppd) }}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('editsppd') }}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{url('deletesppd', $item->no_sppd) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <a href="" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
                     </form>
               </td>
           </tr>

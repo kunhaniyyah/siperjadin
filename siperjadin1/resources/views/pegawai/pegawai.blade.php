@@ -42,6 +42,7 @@
               <th scope="col">NIP</th>
               <th scope="col">Nama</th>
               <th scope="col">Fakultas</th>
+              <th scope="col">Jabatan Fungsional</th>
               <th scope="col">Aksi</th>
           </tr>
           <tbody>
@@ -57,6 +58,8 @@
               <td>{{ $item->nip}}</td>
               <td>{{ $item->nama}}</td>
               <td>{{ $item->fakultas}}</td>
+              <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
+              <td>{{ $item->jabfung['jabfung']}}</td>
               <td>
                   <form action="" method="POST" class="d-inline">
                         @method('Delete')

@@ -17,6 +17,7 @@ class CreatePegawaisTable extends Migration
             $table->id();
             $table->integer('nip', 18);
             $table->string('nama', 100);
+            $table->string('jabfung_id', 100);
             $table->enum('pangkat', 
             [
                 'Lektor',
@@ -45,18 +46,6 @@ class CreatePegawaisTable extends Migration
                 'IV/a',
                 'IV/b',
                 'IV/c',
-            ]);
-            $table->enum('jabfung',
-            [
-                'Lektor',
-                'Lektor Kepala',
-                'Fungsional Umum',
-                'Tenaga Pengajar',
-                'Asisten Ahli',
-                'Guru Besar',
-                'Arsiparis',
-                'Tenaga Pendidik',
-                'Pranata Laboratorium',
             ]);
             $table->enum('tingkat',
             [

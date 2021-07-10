@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sppd;
 
 class SppdController extends Controller
 {
@@ -13,7 +14,8 @@ class SppdController extends Controller
      */
     public function index()
     {
-        return view('sppd.sppd');
+        $sppd = Sppd::paginate(5);
+        return view('sppd.sppd', compact('sppd'));
     }
 
     /**
@@ -23,7 +25,7 @@ class SppdController extends Controller
      */
     public function create()
     {
-        //
+        return view('sppd.tambahsppd');
     }
 
     /**
@@ -34,7 +36,34 @@ class SppdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+        [
+            'no_sppd'       => 'required',
+            'no_st'         => 'required',
+            'nama'          => 'required',
+            'nip'           => 'required',
+            'tingkat'       => 'required',
+            'tgl_sppd'      => 'required',
+            'tgl_berangkat' => 'required',
+            'tgl_pulang'    => 'required',
+            'provinsi'      => 'required',
+            'kota'          => 'required',
+            'total_ajuan'   => 'required',
+        ]);
+        Sppd::create([
+            'no_sppd'       =>$request->no_sppd,
+            'no_st'         =>$request->no_st,
+            'nama'          =>$request->nama,
+            'nip'           =>$request->nip,
+            'tingkat'       =>$request->tingkat,
+            'tgl_sppd'      =>$request->tgl_sppd,
+            'tgl_berangkat' =>$request->tgl_berangkat,
+            'tgl_pulang'    =>$request->tgl_pulang,
+            'provinsi'      =>$request->provinsi,
+            'kota'          =>$request->kota,
+            'total_ajuan'   =>$request->total_ajuan,
+        ]);
+        return redirect('sppd')->with('toast_success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -54,9 +83,10 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($no_sppd)
     {
-        //
+        $dinas = Sppd::findordail($no_sppd);
+        return view ('sppd.editsppd', compact('dinas'));
     }
 
     /**
@@ -66,9 +96,11 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $no_sppd)
     {
-        //
+        $dinas = Sppd::findordail($no_sppd);
+        $dinas->update($request->all());
+        return redirect('sppd');
     }
 
     /**
@@ -77,8 +109,10 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($no_sppd)
     {
-        //
+        $sppd = Sppd::findorfail($no_sppd);
+        $sppd->delete();
+        return back()->with('success', 'Data Berhasil Dihapus');
     }
 }
