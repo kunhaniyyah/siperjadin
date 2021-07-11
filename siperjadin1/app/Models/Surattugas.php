@@ -10,7 +10,7 @@ class Surattugas extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ="surattugas";
-    protected $primaryKey ="no_st";
+    protected $primaryKey ="id_st";
     protected $fillable = [
         'no_st',
         'nip',

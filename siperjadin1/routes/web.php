@@ -39,22 +39,24 @@ Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     Route::post('/updatepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'update'])->name('updatepegawai');
     Route::get('/deletepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('deletepegawai');
     
+    Route::get('/modal', [App\Http\Controllers\ModalController::class, 'index'])->name('modal');
+    
     Route::get('/surattugas', [App\Http\Controllers\SurattugasController::class, 'index'])->name('surattugas');
     Route::get('/tambahst', [App\Http\Controllers\SurattugasController::class, 'create'])->name('tambahst');
     Route::post('/simpanst', [App\Http\Controllers\SurattugasController::class, 'store'])->name('simpanst');
-    Route::get('/deletest/{no_st}', [App\Http\Controllers\SurattugasController::class, 'destroy'])->name('deletest');
-    Route::get('/editst/{no_st}', [App\Http\Controllers\SurattugasController::class, 'edit'])->name('editst');
-    Route::post('/updatest/{no_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
+    Route::get('/deletest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'destroy'])->name('deletest');
+    Route::get('/editst/{id_st}', [App\Http\Controllers\SurattugasController::class, 'edit'])->name('editst');
+    Route::post('/updatest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
     
     Route::get('/sppd', [App\Http\Controllers\SppdController::class, 'index'])->name('sppd');
     Route::get('/tambahsppd', [App\Http\Controllers\SppdController::class, 'create'])->name('tambahsppd');
-    Route::post('/simpanppd', [App\Http\Controllers\SppdController::class, 'store'])->name('simpansppd');
+    Route::post('/simpansppd', [App\Http\Controllers\SppdController::class, 'store'])->name('simpansppd');
     Route::get('/deletesppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'destroy'])->name('deletesppd');
     Route::get('/editsppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'edit'])->name('editsppd');
-    Route::post('/updatesppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'update'])->name('updatesppd');
+    Route::post('/updatesppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'update'])->name('updatesppd');
     
     //pengajuan
-    Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
+    Route::get('/surattgs/{nip}', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
 
     
 });

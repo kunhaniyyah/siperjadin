@@ -62,6 +62,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('modal') }}" class="nav-link {{ Request::path() === 'modal' ? 'bg-primary' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Data Modal
+              </p>
+            </a>
+          </li>
           @endif
 
           @if(auth()->user()->level_user == "staff")

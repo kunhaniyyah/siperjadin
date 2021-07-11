@@ -52,22 +52,21 @@
               <th scope="col">Aksi</th>
           </tr>
           <tbody>
-          
          @foreach ($sppd as $item)
           <tr class="text-center">
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $item->no_sppd}}</td>
-              <td>{{date('d-m-Y', strtotime($item->tgl_sppd)) }}</td>
               <td>{{ $item->no_st}}</td>
+              <td>{{date('d-m-Y', strtotime($item->tgl_sppd)) }}</td>
+              <td>{{ $item->no_sppd}}</td>
               <td>{{ $item->tingkat}}</td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
                   <form action="" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
-                            <a href="{{ route('editsppd', $item->no_sppd) }}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('editsppd', $item->id_sppd) }}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{url('deletesppd', $item->no_sppd) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{url('deletesppd', $item->id_sppd) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
                     </form>
               </td>
           </tr>

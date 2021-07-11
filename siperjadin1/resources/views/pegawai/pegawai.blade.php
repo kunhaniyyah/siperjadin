@@ -59,14 +59,14 @@
               <td>{{ $item->nama}}</td>
               <td>{{ $item->fakultas}}</td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
-              <td>{{ $item->jabfung['jabfung']}}</td>
+              <td>{{ $item->jabfung_id}}</td>
               <td>
                   <form action="" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
-                            <a href="{{ url('editpegawai', $item->nip)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ url('editpegawai', $item->id_pegawai)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{ url('deletepegawai',$item->nip) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ url('deletepegawai',$item->id_pegawai) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
                     </form>
               </td>
           </tr>

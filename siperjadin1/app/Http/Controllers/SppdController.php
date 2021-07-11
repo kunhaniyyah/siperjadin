@@ -36,6 +36,7 @@ class SppdController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request,
         [
             'no_sppd'       => 'required',
@@ -43,22 +44,23 @@ class SppdController extends Controller
             'nama'          => 'required',
             'nip'           => 'required',
             'tingkat'       => 'required',
-            'tgl_sppd'      => 'required',
             'tgl_berangkat' => 'required',
             'tgl_pulang'    => 'required',
             'provinsi'      => 'required',
+            'kegiatan'      => 'required',
             'kota'          => 'required',
             'total_ajuan'   => 'required',
         ]);
         Sppd::create([
+            'id_sppd'       =>$request->id_sppd,
             'no_sppd'       =>$request->no_sppd,
             'no_st'         =>$request->no_st,
             'nama'          =>$request->nama,
             'nip'           =>$request->nip,
             'tingkat'       =>$request->tingkat,
-            'tgl_sppd'      =>$request->tgl_sppd,
             'tgl_berangkat' =>$request->tgl_berangkat,
             'tgl_pulang'    =>$request->tgl_pulang,
+            'kegiatan'      =>$request->kegiatan,
             'provinsi'      =>$request->provinsi,
             'kota'          =>$request->kota,
             'total_ajuan'   =>$request->total_ajuan,
@@ -83,9 +85,9 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($no_sppd)
+    public function edit($id_sppd)
     {
-        $dinas = Sppd::findordail($no_sppd);
+        $dinas = Sppd::findordail($id_sppd);
         return view ('sppd.editsppd', compact('dinas'));
     }
 
@@ -96,9 +98,9 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $no_sppd)
+    public function update(Request $request, $id_sppd)
     {
-        $dinas = Sppd::findordail($no_sppd);
+        $dinas = Sppd::findordail($id_sppd);
         $dinas->update($request->all());
         return redirect('sppd');
     }
@@ -109,9 +111,9 @@ class SppdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($no_sppd)
+    public function destroy($id_sppd)
     {
-        $sppd = Sppd::findorfail($no_sppd);
+        $sppd = Sppd::findorfail($id_sppd);
         $sppd->delete();
         return back()->with('success', 'Data Berhasil Dihapus');
     }

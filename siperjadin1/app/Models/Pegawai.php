@@ -13,7 +13,7 @@ class Pegawai extends Model
     // By making it to false it will override the default setting.
     public $timestamps = false;
     protected $table ="pegawai";
-    protected $primaryKey ="nip";
+    protected $primaryKey ="id_pegawai";
     protected $fillable = [
         'nip',
         'nama',
@@ -27,6 +27,6 @@ class Pegawai extends Model
     public function jabfung()
     {
         //belongsto , 1 jabfung memiliki banyak pegawai
-        return $this->belongsTo(Jabfung::class);
+        return $this->hasMany(Jabfung::class);
     }
 }

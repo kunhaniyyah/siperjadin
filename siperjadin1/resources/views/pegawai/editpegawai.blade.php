@@ -13,7 +13,7 @@
 @section('content')
 <section class="content">
 <h3> Form Edit Data Pegawai</h3>
-    <form action="{{ route('updatepegawai', $peg->nip) }}" method="post">
+    <form action="{{ route('updatepegawai', $peg->id_pegawai) }}" method="post">
     {{ csrf_field() }}
   <div class="form-group">
     <label for="exampleFormControlInput1">NIP</label>
@@ -70,7 +70,7 @@
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Jabatan Fungsional</label>
-    <select class="form-control" id="jabfung" name="jabfung" value="{{ $peg->jabfung}}"> 
+    <select class="form-control" id="jabfung" name="jabfung" value="{{ $peg->jabfung_id}}"> 
       <option>Lektor</option>
       <option>Lektor Kepala</option>
       <option>Fungsional Umum</option>

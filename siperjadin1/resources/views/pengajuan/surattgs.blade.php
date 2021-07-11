@@ -20,7 +20,10 @@
           <a href="{{route ('tambahst') }}" button class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
         </a>
       </div>
+      @foreach ($data as $item)
+      <tr>{{$item-> nip}}</tr>
   </div>
+  @endforeach
             </section>
 @endsection
 @include('sweetalert::alert')

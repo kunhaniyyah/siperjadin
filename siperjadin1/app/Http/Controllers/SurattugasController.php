@@ -39,6 +39,7 @@ class SurattugasController extends Controller
     {
         //dd($request->all());
         Surattugas::create([
+            'id_st'         =>$request->id_st,
             'no_st'         =>$request->no_st,
             'nip'           =>$request->nip,
             'nama'          =>$request->nama,
@@ -66,10 +67,10 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($no_st)
+    public function edit($id_st)
     {
         //$surat = Surattugas::findorfail($nip);
-        $st = Surattugas::findorfail($no_st);
+        $st = Surattugas::findorfail($id_st);
         return view('surattugas.editst', compact('st'));
     }
 
@@ -80,9 +81,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nip)
+    public function update(Request $request, $id_st)
     {
-        $surat = Surattugas::findorfail($nip);
+        $surat = Surattugas::findorfail($id_st);
         $surat->update($request->all());
         return redirect('surattugas')->with('status', 'Data berhasil diupdate');
     }
@@ -93,9 +94,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($no_st)
+    public function destroy($id_st)
     {
-        $st = Surattugas::findorfail($no_st);
+        $st = Surattugas::findorfail($id_st);
         $st->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }

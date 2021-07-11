@@ -28,7 +28,7 @@ class PegawaiController extends Controller
     public function index(Request $request)
     {
       
-        $datapegawai = Pegawai::with('jabfung')->paginate(5);
+        $datapegawai = Pegawai::paginate(5);
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
         return view('pegawai.pegawai', compact('datapegawai'));
     }
@@ -59,10 +59,10 @@ class PegawaiController extends Controller
         [
             'nip'       =>'required|max:18',
             'nama'      =>'required',
-            'fakultas'  =>'required|in:FMIPA,FP,FIB,FEB',
+            'fakultas'  =>'required|in:FMIPA,FP,FIB,FEB,FK,FKIP,FH,FSRD,FKOR,Sekolah Vokasi,PDD Madiun,UPT Kearsipan,UNS Pusat',
             'pangkat'   =>'required',
             'golongan'  =>'required',
-            'jabfung'   =>'required',
+            'jabfung_id' =>'required',
             'tingkat'   =>'required'
         ]);
         Pegawai::create([
@@ -71,8 +71,7 @@ class PegawaiController extends Controller
             'fakultas'  =>$request->fakultas,
             'pangkat'   =>$request->pangkat,
             'golongan'  =>$request->golongan,
-            'jabfung'   =>$request->jabfung,
-            'jabfung_id'   =>$request->jabfung_id,
+            'jabfung_id'=>$request->jabfung_id,
             'tingkat'   =>$request->tingkat,
         ]);
         return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');
@@ -95,9 +94,9 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($nip)
+    public function edit($id_pegawai)
     {
-        $peg = Pegawai::findorfail($nip);
+        $peg = Pegawai::findorfail($id_pegawai);
         return view('pegawai.editpegawai', compact('peg'));
     }
     
@@ -108,16 +107,16 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nip)
+    public function update(Request $request, $id_pegawai)
     {
-        $peg = Pegawai::findorfail($nip);
+        $peg = Pegawai::findorfail($id_pegawai);
         $peg->update($request->all());
         return redirect('pegawai')->with('status', 'Data berhasil diupdate');
     }
 
-    public function destroy($nip)
+    public function destroy($id_pegawai)
         {
-            $datapegawai = Pegawai::findorfail($nip);
+            $datapegawai = Pegawai::findorfail($id_pegawai);
             $datapegawai->delete();
             return back()->with('success', 'Data berhasil dihapus!');
         }

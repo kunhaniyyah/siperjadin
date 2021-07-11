@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Surattugas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class SurattgsController extends Controller
+class ModalController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nip)
+    public function index()
     {
-        $data = Surattugas::find($nip)->paginate(10);
-        return $data;
+        return view('pegawai.modal');
     }
 
     /**
@@ -26,7 +23,7 @@ class SurattgsController extends Controller
      */
     public function create()
     {
-        return view ('surattugas.tambahst');
+        //
     }
 
     /**
@@ -37,15 +34,7 @@ class SurattgsController extends Controller
      */
     public function store(Request $request)
     {
-        Surattugas::create([
-            'no_st'         =>$request->no_st,
-            'nip'           =>$request->nip,
-            'nama'          =>$request->nama,
-            'keperluan'     =>$request->keperluan,
-            'tanggal'       =>$request->tanggal,
-            'tempat'        =>$request->tempat,
-        ]);
-        return redirect('surattgs');
+        //
     }
 
     /**
@@ -56,7 +45,7 @@ class SurattgsController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -65,9 +54,9 @@ class SurattgsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($nip)
+    public function edit($id)
     {
-        return view ('surattugas.editst');
+        //
     }
 
     /**

@@ -12,7 +12,7 @@
 @section('content')
 <section class="content">
 <h3> Form Tambah Data Surat Tugas</h3>
-    <form action=" {{route('simpanst') }}" method="post">
+    <form action=" {{ url('simpanst') }}" method="post">
     {{ csrf_field() }}
   <div class="form-group">
     <label for="exampleFormControlInput1">No Surat Tugas</label>

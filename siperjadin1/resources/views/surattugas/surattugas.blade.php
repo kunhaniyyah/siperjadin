@@ -25,6 +25,7 @@
   <div class="card-body table-responsive">
       <table class="table table-bordered">
          <tr class="text-center">
+              <th scope="col">No</th>
               <th scope="col">No ST</th>
               <th scope="col">NIP</th>
               <th scope="col">Nama</th>
@@ -39,6 +40,7 @@
         @endif
           @foreach ($datast as $item)
           <tr class="text-center">
+              <td>{{ $loop->iteration}}</td>
               <td>{{ $item->no_st}}</td>
               <td>{{ $item->nip}}</td>
               <td>{{ $item->nama}}</td>
@@ -47,9 +49,9 @@
                   <form action="" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
-                            <a href="{{ url('editst', $item->no_st)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ url('editst', $item->id_st)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{ url('deletest',$item->no_st) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ url('deletest',$item->id_st) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
                     </form>
               </td>
           </tr>

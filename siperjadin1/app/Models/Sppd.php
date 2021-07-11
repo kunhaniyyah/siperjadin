@@ -10,10 +10,11 @@ class Sppd extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ="sppd";
-    protected $primaryKey ="no_sppd";
+    protected $primaryKey = "id_sppd";
     protected $fillable = [
-        'tgl_sppd',
+        'no_sppd',
         'no_st',
+        'nama',
         'nip',
         'tgl_berangkat',
         'tgl_pulang',
