@@ -28,7 +28,7 @@
       <form action="{{route('login')}}" method="post">
       @csrf
         <div class="input-group mb-3">
-          <input type="text" name="username" value="{{ old('username')}}" class="form-control @error('username')is-invalid @enderror" placeholder="{{ __('username') }}">
+          <input type="text" name="username" value="{{ old('username')}}" class="form-control @error('username')is-invalid @enderror" placeholder="{{ __('Username') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -66,11 +66,8 @@
         </div>
       </form>
 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
       <p class="mb-0">
-        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
+        <a href="{{ url('register')}}" class="text-center">Register</a>
       </p>
     </div>
     <!-- /.card-body -->

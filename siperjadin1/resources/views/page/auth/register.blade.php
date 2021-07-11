@@ -23,7 +23,7 @@
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Halaman Registrasi</p>
 
       <form action="{{ route('simpanregister') }}" method="post">
       {{ csrf_field() }}

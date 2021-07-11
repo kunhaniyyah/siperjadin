@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PegawaiDataTable;
 use App\Models\Pegawai;
 use App\Models\Jabfung;
 use Illuminate\Http\Request;

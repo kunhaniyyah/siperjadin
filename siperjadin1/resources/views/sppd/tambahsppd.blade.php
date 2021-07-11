@@ -11,8 +11,8 @@
 
 @section('content')
 <section class="content">
-<h3> Form Tambah Data Surat Tugas</h3>
-    <form action=" {{route('simpanst') }}" method="post">
+<h3> Form Tambah Data Surat SPPD</h3>
+    <form action=" {{route('simpansppd') }}" method="post">
     {{ csrf_field() }}
   <div class="form-group">
     <label for="exampleFormControlInput1">No SPPD</label>
@@ -50,30 +50,44 @@
       @enderror
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Keperluan</label>
-    <textarea class="form-control @error('keperluan') is-invalid @enderror" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan"></textarea>  
-    @error('keperluan')
-        <span class="text-danger">{{ $message }}</span>
-      @enderror
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Tanggal</label>
+    <label for="exampleFormControlInput1">Tanggal Berangkat</label>
     <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror" id="tgl_berangkat" name="tgl_berangkat" value="">
       @error('tgl_berangkat')
         <span class="text-danger">{{ $message }}</span>
       @enderror
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Tanggal</label>
+    <label for="exampleFormControlInput1">Tanggal Pulang</label>
     <input type="date" class="form-control @error('tgl_pulang') is-invalid @enderror" id="tgl_pulang" name="tgl_pulang" value="">
       @error('tgl_pulang')
         <span class="text-danger">{{ $message }}</span>
       @enderror
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Tempat</label>
-    <textarea class="form-control @error('tempat') is-invalid @enderror" id="tempat" name="tempat" placeholder="Masukkan Keperluan" value=""></textarea>  
-    @error('tempat')
+    <label for="exampleFormControlInput1">Kegiatan</label>
+    <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan"></textarea>  
+    @error('kegiatan')
+        <span class="text-danger">{{ $message }}</span>
+      @enderror
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Provinsi</label>
+    <textarea class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Masukkan Provinsi Tujuan" value=""></textarea>  
+    @error('provinsi')
+        <span class="text-danger">{{ $message }}</span>
+      @enderror
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Kota</label>
+    <textarea class="form-control @error('provinsi') is-invalid @enderror" id="kota" name="kota" placeholder="Masukkan Kota Tujuan" value=""></textarea>  
+    @error('kota')
+        <span class="text-danger">{{ $message }}</span>
+      @enderror
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Total Ajuan</label>
+    <input type="text" class="form-control @error('total_ajuan') is-invalid @enderror" id="total_ajuan" name="total_ajuan" value="">
+      @error('total_ajuan')
         <span class="text-danger">{{ $message }}</span>
       @enderror
   </div>
