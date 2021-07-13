@@ -15,8 +15,8 @@ class SurattgsController extends Controller
      */
     public function index($nip)
     {
-        $data = Surattugas::find($nip)->paginate(10);
-        return $data;
+        $data = Surattugas::where('nip', 91247913439164 )->paginate(10);
+        return view('pengajuan.surattgs', compact('data'));
     }
 
     /**

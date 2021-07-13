@@ -29,4 +29,8 @@ class Pegawai extends Model
         //belongsto , 1 jabfung memiliki banyak pegawai
         return $this->hasMany(Jabfung::class);
     }
+    public function user()
+    {
+       return $this->belongsTo(User::class);
+    }
 }

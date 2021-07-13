@@ -32,13 +32,13 @@ Route::view('/', 'page.auth.login');
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
-    Route::get('/pegawai', [App\Http\Controllers\PegawaiController::class, 'index'])->name('pegawai');
-    Route::get('/tambahpegawai', [App\Http\Controllers\PegawaiController::class, 'create'])->name('tambahpegawai');
-    Route::post('/simpanpegawai', [App\Http\Controllers\PegawaiController::class, 'store'])->name('simpanpegawai');
-    Route::get('/editpegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'edit'])->name('editpegawai');
-    Route::post('/updatepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'update'])->name('updatepegawai');
-    Route::get('/deletepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('deletepegawai');
-    
+    // Route::get('/pegawai', [App\Http\Controllers\PegawaiController::class, 'index'])->name('pegawai');
+    // Route::get('/tambahpegawai', [App\Http\Controllers\PegawaiController::class, 'create'])->name('tambahpegawai');
+    // Route::put('/simpanpegawai', [App\Http\Controllers\PegawaiController::class, 'store'])->name('simpanpegawai');
+    // Route::get('/editpegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'edit'])->name('editpegawai');
+    // Route::post('/updatepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'update'])->name('updatepegawai');
+    // Route::get('/deletepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('deletepegawai');
+    Route::resource('pegawai','PegawaiController');
     Route::get('/modal', [App\Http\Controllers\ModalController::class, 'index'])->name('modal');
     
     Route::get('/surattugas', [App\Http\Controllers\SurattugasController::class, 'index'])->name('surattugas');
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     Route::post('/updatesppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'update'])->name('updatesppd');
     
     //pengajuan
-    Route::get('/surattgs/{nip}', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
+    Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
 
     
 });

@@ -12,7 +12,6 @@ class Jabfung extends Model
     protected $table ="jabfung";
     protected $primaryKey ="jabfung_id";
     protected $fillable = [
-        'jabfung_id',
         'jabfung',
     ];
     public function pegawai()
