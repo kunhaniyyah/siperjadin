@@ -34,8 +34,8 @@
   <div class="card card-info card-outline">
   <div class="card-header">
       <div class="card-tools">
-          <a href="{{ route('tambahpegawai') }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
-          </a>
+          <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
+          </button>
       </div>
   </div>
 
@@ -63,15 +63,15 @@
               <td>{{ $item->nama}}</td>
               <td>{{ $item->fakultas}}</td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
-              <td>{{ $item->jabfung_id}}</td>
+              <td>{{ $item->jabfung->jabfung}}</td>
               <td>
-                  <form action="" method="POST" class="d-inline">
-                        @method('Delete')
-                        @csrf
+                <form action="" method="POST" class="d-inline">
+                  @method('Delete')
+                  @csrf
+                  <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
+                  <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
                             <!-- <a href="{{ url('editpegawai', $item->id_pegawai)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a> -->
-                            <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
-                            <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
-                            <a href="{{ url('deletepegawai',$item->id_pegawai) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('pegawai.destroy',$item->id_pegawai) }}" class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
                     </form>
               </td>
           </tr>
@@ -93,156 +93,190 @@
         </div>
       </div>
     </div>
-    
   </div><!-- /.container-fluid -->
   </div>
 
+<!-- modal tambah data -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pegawai</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="" method="post">
+                  {{ csrf_field() }}
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">NIP</label>
+                  <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{old('nip')}}">
+                    @error('nip')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nama</label>
+                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama Lengkap" value="{{old('nama')}}">
+                  @error('nip')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Jabatan Fungsional</label>
+                  <select class="form-control" id="jabfung_id" name="jabfung_id">
+                    <option value="">Pilih Jabatan</option>
+                    @foreach ($jab as $item)
+                    <option value="{{ $item->id }}">{{ $item->jabfung }}</option>
+                    @endforeach
+                  </select>
+              </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Pangkat</label>
+          <select class="form-control @error('pangkat') is-invalid @enderror" id="pangkat" name="pangkat">
+            <option>Lektor</option>
+            <option>Pembina</option>
+            <option>Pembina Utama</option>
+            <option>Pembina Utama Madya</option>
+            <option>Pembina Utama Muda</option>
+            <option>Pembina Tk.1</option>
+            <option>Penata</option>
+            <option>Penata Tk.1a</option>
+            <option>Penata Muda</option>
+            <option>Penata Muda Tk.1</option>
+            <option>Pengatur</option>
+            <option>Pengatur Muda</option>
+            <option>Juru</option>
+          </select>
+          @error('pangkat')
+              <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlSelect1">Golongan</label>
+          <select class="form-control" id="golongan" name="golongan" required>
+            <option>I/c</option>
+            <option>II/c</option>
+            <option>II/a</option>
+            <option>III/a</option>
+            <option>III/b</option>
+            <option>III/c</option>
+            <option>III/d</option>
+            <option>IV/a</option>
+            <option>IV/b</option>
+            <option>IV/c</option>
+            @error('golongan')
+              <span class="text-danger">{{ $message }}</span>
+            @enderror
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlSelect1">Tingkat</label>
+          <select class="form-control" id="tingkat" name="tingkat">
+            <option>B</option>
+            <option>C</option>
+            @error('tingkat')
+              <span class="text-danger">{{ $message }}</span>
+            @enderror
+          </select>
+        </div>
+      </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Fakultas</label>
+          <select class="form-control" id="fakultas" name="fakultas">
+            <option>Pilih Fakultas</option>
+            <option value="Sekolah Vokasi">Sekolah Vokasi</option>
+            <option>FMIPA</option>
+            <option>FP</option>
+            <option>FK</option>
+            <option>FKIP</option>
+            <option>FISIP</option>
+            <option>FH</option>
+            <option>FEB</option>
+            <option>FIB</option>
+            <option>FT</option>
+            <option>FSRD</option>
+            <option>FKOR</option>
+            <option>PDD Madiun</option>
+            <option>UNS Pusat</option>
+            <option>UPT Kearsipan</option>
+          </select>
+        </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-success">Simpan Data</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- selesai modal tambah data  -->
 
 
+<!-- modal detail data  -->
 @foreach($datapegawai as $data)
-<!-- Modal Edit -->
 <div class="modal fade" id="detailpegawai{{$data->id_pegawai}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detail Data Pegawai</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
       <div class="modal-body">
-        <form action="{{route('updatepegawai', $data->id_pegawai)}}" method="post">
-        {{ csrf_field() }}
-            @method('PUT')
-            <div class="form-group">
-                <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$data->nip}}">
-                  @error('nip')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Nama</label>
-                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama Lengkap" value="{{$data->nama}}">
-                @error('nama')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Pangkat</label>
-                <select class="form-control @error('pangkat') is-invalid @enderror" id="pangkat" name="pangkat" value=$data->pangkat>
-                  <option>Lektor</option>
-                  <option>Pembina</option>
-                  <option>Pembina Utama</option>
-                  <option>Pembina Utama Madya</option>
-                  <option>Pembina Utama Muda</option>
-                  <option>Pembina Tk.1</option>
-                  <option>Penata</option>
-                  <option>Penata Tk.1a</option>
-                  <option>Penata Muda</option>
-                  <option>Penata Muda Tk.1</option>
-                  <option>Pengatur</option>
-                  <option>Pengatur Muda</option>
-                  <option>Juru</option>
-                </select>
-                @error('pangkat')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Golongan</label>
-                <select class="form-control" id="golongan" name="golongan" value=$data->pangkat>
-                  <option>I/c</option>
-                  <option>II/c</option>
-                  <option>II/a</option>
-                  <option>III/a</option>
-                  <option>III/b</option>
-                  <option>III/c</option>
-                  <option>III/d</option>
-                  <option>IV/a</option>
-                  <option>IV/b</option>
-                  <option>IV/c</option>
-                  @error('golongan')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Jabatan Fungsional</label>
-                <select class="form-control" id="jabfung" name="jabfung" value=$data->jabfung> 
-                  <option>Lektor</option>
-                  <option>Lektor Kepala</option>
-                  <option>Fungsional Umum</option>
-                  <option>Tenaga Pengajar</option>
-                  <option>Asisten Ahli</option>
-                  <option>Guru Besar</option>
-                  <option>Arsiparis</option>
-                  <option>Tenaga Pendidik</option>
-                  <option>Pranata Laboratorium</option>
-                </select>
-                @error('jabfung')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Tingkat</label>
-                <select class="form-control" id="tingkat" name="tingkat" value=$data->tingkat>
-                  <option>B</option>
-                  <option>C</option>
-                  @error('tingkat')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Fakultas</label>
-                <select class="form-control" id="fakultas" name="fakultas">{{$data->fakultas}} 
-                  <option <?php if ($data['fakultas'] == "Sekolah Vokasi"): ?> selected="selected"<?php endif; ?>>Sekolah Vokasi</option>
-                  <option <?php if ($data['fakultas'] == "FP"): ?> selected="selected"<?php endif; ?>>FP</option>
-                  <option <?php if ($data['fakultas'] == "FMIP"): ?> selected="selected"<?php endif; ?>>FMIPA</option>
-                  <option <?php if ($data['fakultas'] == "FK"): ?> selected="selected"<?php endif; ?>>FK</option>
-                  <option <?php if ($data['fakultas'] == "FKIP"): ?> selected="selected"<?php endif; ?>>FKIP</option>
-                  <option <?php if ($data['fakultas'] == "FISIP"): ?> selected="selected"<?php endif; ?>>FISIP</option>
-                  <option <?php if ($data['fakultas'] == "FH"): ?> selected="selected"<?php endif; ?>>FH</option>
-                  <option <?php if ($data['fakultas'] == "FEB"): ?> selected="selected"<?php endif; ?>>FEB</option>
-                  <option <?php if ($data['fakultas'] == "FIB"): ?> selected="selected"<?php endif; ?>>FIB</option>
-                  <option <?php if ($data['fakultas'] == "FT"): ?> selected="selected"<?php endif; ?>>FT</option>
-                  <option <?php if ($data['fakultas'] == "FSRD"): ?> selected="selected"<?php endif; ?>>FSRD</option>
-                  <option <?php if ($data['fakultas'] == "FKOR"): ?> selected="selected"<?php endif; ?>>FKOR</option>
-                  <option <?php if ($data['fakultas'] == "PDD Madiun"): ?> selected="selected"<?php endif; ?>>PDD Madiun</option>
-                  <option <?php if ($data['fakultas'] == "UNS Pusat"): ?> selected="selected"<?php endif; ?>>UNS Pusat</option>
-                  <option <?php if ($data['fakultas'] == "UPT Kearsipan"): ?> selected="selected"<?php endif; ?>>UPT Kearsipan</option>
-                </select>
-                  @error('fakultas')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-                  </div>
-
+        <div class="row">
+          <div class="col md-8 offsite md-2">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="col">NIP</th>
+                  <td>{{$data->nip}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <td>{{$data->nama}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Fakultas</th>
+                  <td>{{$data->fakultas}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Jabatan Fungsional</th>
+                  <td>{{$data->jabfung_id}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Pangkat</th>
+                  <td>{{$data->pangkat}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Golongan</th>
+                  <td>{{$data->golongan}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Tingkat</th>
+                  <td>{{$data->tingkat}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+      
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
+            <!-- <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button> -->
         </div>
         </div>
-
-    </form>
+      </div>
     </div>
 </div>
 @endforeach
+<!-- selesai modal detail data  -->
 
 @include('sweetalert::alert')
 @include('layout.footer')
-@stack('custom-script')
-<!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.js"></script>
-@push('after-script')
-<script type="text/javascript">
-  $('.btn-sm edit').on('click', function(){
-    console.log($(this).data('id_pegawai'))
-    
-  })
-
-</script>
-@endpush
 </body>
 </html>

@@ -10,8 +10,9 @@ class Jabfung extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ="jabfung";
-    protected $primaryKey ="jabfung_id";
+    
     protected $fillable = [
+        'id',
         'jabfung',
     ];
     public function pegawai()

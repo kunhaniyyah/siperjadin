@@ -28,7 +28,7 @@
     <!-- Main content -->
     <section class="content">
     <h3> Form Input Data Pegawai</h3>
-    <form action="{{ route('simpanpegawai') }}" method="post">
+    <form action="{{ route('pegawai.store') }}" method="post">
     
     {{ csrf_field() }}
   <div class="form-group">
@@ -49,8 +49,8 @@
     <label for="exampleFormControlInput1">Jabatan Fungsional</label>
     <select class="form-control" id="jabfung_id" name="jabfung_id">
     <option disabled value="">Pilih Jabatan</option>
-        @foreach ($jab as $item)
-          <option value="{{ $item->jabfung_id }}">{{$item->jabfung}}</option>
+        @foreach ($datapegawai as $item)
+          <option value="{{ $item->jabfung_id }}">{{ $item->jabfung }}</option>
         @endforeach
     </select>
   </div>

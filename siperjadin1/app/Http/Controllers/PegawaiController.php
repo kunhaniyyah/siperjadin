@@ -28,9 +28,10 @@ class PegawaiController extends Controller
     public function index(Request $request)
     {
       
-        $datapegawai = Pegawai::paginate(5);
+        $datapegawai = Pegawai::with('jabfung')->paginate(5);
+        $jab = Jabfung::all();
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
-        return view('pegawai.pegawai', compact('datapegawai'));
+        return view('pegawai.pegawai', compact('datapegawai','jab'));
     }
 
     public function create()
@@ -83,9 +84,10 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_pegawai)
     {
-        //
+        $pegawai = Pegawai::find($id_pegawai);
+        return $pegawai;
     }
 
     /**
@@ -119,6 +121,7 @@ class PegawaiController extends Controller
             $datapegawai = Pegawai::findorfail($id_pegawai);
             $datapegawai->delete();
             return back()->with('success', 'Data berhasil dihapus!');
+            //return"hai";
         }
     public function export_excel()
         {

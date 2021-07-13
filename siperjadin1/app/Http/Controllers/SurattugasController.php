@@ -37,17 +37,17 @@ class SurattugasController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        Surattugas::create([
-            'id_st'         =>$request->id_st,
-            'no_st'         =>$request->no_st,
-            'nip'           =>$request->nip,
-            'nama'          =>$request->nama,
-            'keperluan'     =>$request->keperluan,
-            'tanggal'       =>$request->tanggal,
-            'tempat'        =>$request->tempat,
-        ]);
-        return redirect('surattugas');
+        dd($request->all());
+        // Surattugas::create([
+        //     'id_st'         =>$request->id_st,
+        //     'no_st'         =>$request->no_st,
+        //     'nip'           =>$request->nip,
+        //     'nama'          =>$request->nama,
+        //     'keperluan'     =>$request->keperluan,
+        //     'tanggal'       =>$request->tanggal,
+        //     'tempat'        =>$request->tempat,
+        // ]);
+        // return redirect('surattugas');
     }
 
     /**

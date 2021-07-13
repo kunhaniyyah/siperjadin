@@ -38,7 +38,7 @@
           </li>
           @if(auth()->user()->level_user == "admin")
           <li class="nav-item">
-            <a href="{{ route('pegawai')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
+            <a href="{{ route('pegawai.index')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Data Pegawai

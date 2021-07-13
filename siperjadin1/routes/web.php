@@ -38,7 +38,18 @@ Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     // Route::get('/editpegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'edit'])->name('editpegawai');
     // Route::post('/updatepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'update'])->name('updatepegawai');
     // Route::get('/deletepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('deletepegawai');
-    Route::resource('pegawai','PegawaiController');
+
+    // Route::resource('pegawai','App\Http\Controllers\PegawaiController')->names([
+        //     'index'=>'pegawai',
+        //     'create'=>'tambahpegawai',
+        //     'store'=>'simpanpegawai',
+        //     'edit'=>'editpegawai',
+        //     'update'=>'updatepegawai',
+        //     'destroy'=>'deletepegawai',
+        // ]);
+        
+        Route::resource('pegawai','App\Http\Controllers\PegawaiController');
+        
     Route::get('/modal', [App\Http\Controllers\ModalController::class, 'index'])->name('modal');
     
     Route::get('/surattugas', [App\Http\Controllers\SurattugasController::class, 'index'])->name('surattugas');
