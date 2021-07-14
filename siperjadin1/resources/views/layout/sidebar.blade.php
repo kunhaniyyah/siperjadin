@@ -47,7 +47,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="{{ route('surattugas') }}" class="nav-link {{ Request::path() === 'surattugas' ? 'bg-primary' : '' }}">
+            <a href="{{ route('surattugas.index') }}" class="nav-link {{ Request::path() === 'surattugas' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Data Surat Tugas
@@ -55,18 +55,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('sppd') }}" class="nav-link {{ Request::path() === 'sppd' ? 'bg-primary' : '' }}">
+            <a href="{{ route('sppd.index') }}" class="nav-link {{ Request::path() === 'sppd' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Data SPPD
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('modal') }}" class="nav-link {{ Request::path() === 'modal' ? 'bg-primary' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Data Modal
               </p>
             </a>
           </li>

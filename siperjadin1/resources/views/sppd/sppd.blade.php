@@ -9,9 +9,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
- 
   @stack('custom-css')
+  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+    <script src=" assets/plugins/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 </head>
@@ -37,7 +40,7 @@
   <div class="card card-info card-outline">
   <div class="card-header">
       <div class="card-tools">
-          <a href="{{ route('tambahsppd') }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+          <a href="{{ route('sppd.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#tambahmodal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </a>
       </div>
   </div>
@@ -46,8 +49,8 @@
           <tr class="text-center">
               <th scope="col">No</th>
               <th scope="col">No. SPPD</th>
+              <th scope="col">No. ST</th>
               <th scope="col">Nama</th>
-              <th scope="col">Fakultas</th>
               <th scope="col">Tanggal</th>
               <th scope="col">Aksi</th>
           </tr>
@@ -55,18 +58,18 @@
          @foreach ($sppd as $item)
           <tr class="text-center">
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $item->no_st}}</td>
-              <td>{{date('d-m-Y', strtotime($item->tgl_sppd)) }}</td>
               <td>{{ $item->no_sppd}}</td>
-              <td>{{ $item->tingkat}}</td>
+              <td>{{ $item->no_st}}</td>
+              <td>{{ $item->nama}}</td>
+              <td>{{date('d-m-Y', strtotime($item->tgl_sppd)) }}</td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
-                  <form action="" method="POST" class="d-inline">
-                        @method('Delete')
-                        @csrf
-                            <a href="{{ route('editsppd', $item->id_sppd) }}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{url('deletesppd', $item->id_sppd) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                <button onclick="$('#detailmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-eye"></i>  </button>
+                <button onclick="$('#editmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
+                <form action="{{route('sppd.destroy', $item->id_sppd) }}" method="POST" class="d-inline">
+                      @method('Delete')
+                      @csrf
+                        <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
                     </form>
               </td>
           </tr>
@@ -75,21 +78,293 @@
       </table>
   </div>
   </div>
+</div>
+</div><!-- /.container-fluid -->
+</section>
+
+
+
+
+<!-- modal tambah data -->
+
+<div class="modal fade" id="tambahmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data SPPD</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action=" {{ route('sppd.store') }}" method="post">
+            {{ csrf_field() }}
+          <div class="form-group">
+            <label for="exampleFormControlInput1">No SPPD</label>
+            <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{old('no_sppd')}}">
+              @error('no_st')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">No Surat Tugas</label>
+            <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{old('no_st')}}">
+              @error('no_st')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">NIP</label>
+            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{old('nip')}}">
+              @error('nip')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Nama</label>
+            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{old('nama')}}">
+              @error('nama')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Tingkat</label>
+            <textarea class="form-control @error('tingkat') is-invalid @enderror" id="tingkat" name="tingkat" placeholder="Masukkan Keperluan">{{old('keperluan')}}</textarea>  
+            @error('keperluan')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Tanggal Berangkat</label>
+            <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror" id="tgl_berangkat" name="tgl_berangkat" value="">
+              @error('tgl_berangkat')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Tanggal Pulang</label>
+            <input type="date" class="form-control @error('tgl_pulang') is-invalid @enderror" id="tgl_pulang" name="tgl_pulang" value="">
+              @error('tgl_pulang')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Kegiatan</label>
+            <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan">{{old('kegiatan')}}</textarea>  
+            @error('kegiatan')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Provinsi</label>
+            <textarea class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Masukkan Provinsi Tujuan" value="">{{old('provinsi')}}</textarea>  
+            @error('provinsi')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Kota</label>
+            <textarea class="form-control @error('provinsi') is-invalid @enderror" id="kota" name="kota" placeholder="Masukkan Kota Tujuan" value="">{{old('kota')}}</textarea>  
+            @error('kota')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Total Ajuan</label>
+            <input type="text" class="form-control @error('total_ajuan') is-invalid @enderror" id="total_ajuan" name="total_ajuan" value="{{old('total_ajuan')}}">
+              @error('total_ajuan')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success">Simpan Data</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  @include('sweetalert::alert')
+</form>
+<!-- selesai modal tambah data  -->
+
+
+
+
+<!-- modal detail -->
+@foreach ($sppd as $item)
+<div class="modal fade" id="detailmodal{{$item->id_sppd}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Data Surat Tugas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+          <div class="col md-8 offsite md-2">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="col">No. SPPD</th>
+                  <td>{{$item->no_sppd}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">No. ST</th>
+                  <td>{{$item->no_st}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">NIP</th>
+                  <td>{{$item->nip}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <td>{{$item->nama}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Tingkat</th>
+                  <td>{{$item->tingkat}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Tanggal Berangkat</th>
+                  <td>{{$item->tgl_berangkat}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Tanggal Pulang</th>
+                  <td>{{$item->tgl_pulang}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Kegiatan</th>
+                  <td>{{$item->Kegiatan}}</td>
+                </tr>
+              </tbody>
+            </table>
             </div>
-            </div><!-- /.container-fluid -->
-            </section>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<!-- end modal -->
+
+<!-- modal edit -->
+@foreach($sppd as $item)
+<div class="modal fade" id="editmodal{{$item->id_sppd}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <div class="modal-body">
+        <form action="{{route('sppd.update', $item->id_sppd)}}" method="post">
+          {{ csrf_field() }}
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No SPPD</label>
+              <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{$item->no_sppd}}">
+                @error('no_st')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No Surat Tugas</label>
+              <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{$item->no_st}}">
+                @error('no_st')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">NIP</label>
+              <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+                @error('nip')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama</label>
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->nama}}">
+                @error('nama')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Tingkat</label>
+              <textarea class="form-control @error('tingkat') is-invalid @enderror" id="tingkat" name="tingkat" placeholder="Masukkan Keperluan">{{old('keperluan')}}</textarea>  
+              @error('keperluan')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Tanggal Berangkat</label>
+              <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror" id="tgl_berangkat" name="tgl_berangkat" value="{{$item->tgl_berangkat}}">
+                @error('tgl_berangkat')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Tanggal Pulang</label>
+              <input type="date" class="form-control @error('tgl_pulang') is-invalid @enderror" id="tgl_pulang" name="tgl_pulang" value="{{$item->tgl_pulang}}">
+                @error('tgl_pulang')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kegiatan</label>
+              <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan">{{old('kegiatan')}}</textarea>  
+              @error('kegiatan')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Provinsi</label>
+              <textarea class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Masukkan Provinsi Tujuan" value="{{$item->provinsi}}">{{old('provinsi')}}</textarea>  
+              @error('provinsi')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kota</label>
+              <textarea class="form-control @error('provinsi') is-invalid @enderror" id="kota" name="kota" placeholder="Masukkan Kota Tujuan" value="{{$item->kota}}">{{old('kota')}}</textarea>  
+              @error('kota')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Total Ajuan</label>
+              <input type="text" class="form-control @error('total_ajuan') is-invalid @enderror" id="total_ajuan" name="total_ajuan" value="{{$item->total_ajuan}}">
+                @error('total_ajuan')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
+        </div>
+        </div>
+    </form>
+    </div>
+</div>
+@endforeach
+
+
+
+
 @include('layout.footer')
 
 
 <!-- jQuery -->
-<script src=" assets/plugins/jquery/jquery.min.js"></script>
+
 @stack('custom-script')
 
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="assets/dist/js/demo.js"></script> -->
-
-
 </body>
 </html>

@@ -32,39 +32,16 @@ Route::view('/', 'page.auth.login');
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
-    // Route::get('/pegawai', [App\Http\Controllers\PegawaiController::class, 'index'])->name('pegawai');
-    // Route::get('/tambahpegawai', [App\Http\Controllers\PegawaiController::class, 'create'])->name('tambahpegawai');
-    // Route::put('/simpanpegawai', [App\Http\Controllers\PegawaiController::class, 'store'])->name('simpanpegawai');
-    // Route::get('/editpegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'edit'])->name('editpegawai');
-    // Route::post('/updatepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'update'])->name('updatepegawai');
-    // Route::get('/deletepegawai/{nip}', [App\Http\Controllers\PegawaiController::class, 'destroy'])->name('deletepegawai');
-
-    // Route::resource('pegawai','App\Http\Controllers\PegawaiController')->names([
-        //     'index'=>'pegawai',
-        //     'create'=>'tambahpegawai',
-        //     'store'=>'simpanpegawai',
-        //     'edit'=>'editpegawai',
-        //     'update'=>'updatepegawai',
-        //     'destroy'=>'deletepegawai',
-        // ]);
-        
-        Route::resource('pegawai','App\Http\Controllers\PegawaiController');
-        
-    Route::get('/modal', [App\Http\Controllers\ModalController::class, 'index'])->name('modal');
+    Route::resource('pegawai','App\Http\Controllers\PegawaiController');
+    Route::resource('sppd','App\Http\Controllers\SppdController');
+    Route::resource('surattugas','App\Http\Controllers\SurattugasController');
     
-    Route::get('/surattugas', [App\Http\Controllers\SurattugasController::class, 'index'])->name('surattugas');
-    Route::get('/tambahst', [App\Http\Controllers\SurattugasController::class, 'create'])->name('tambahst');
-    Route::post('/simpanst', [App\Http\Controllers\SurattugasController::class, 'store'])->name('simpanst');
-    Route::get('/deletest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'destroy'])->name('deletest');
-    Route::get('/editst/{id_st}', [App\Http\Controllers\SurattugasController::class, 'edit'])->name('editst');
-    Route::post('/updatest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
-    
-    Route::get('/sppd', [App\Http\Controllers\SppdController::class, 'index'])->name('sppd');
-    Route::get('/tambahsppd', [App\Http\Controllers\SppdController::class, 'create'])->name('tambahsppd');
-    Route::post('/simpansppd', [App\Http\Controllers\SppdController::class, 'store'])->name('simpansppd');
-    Route::get('/deletesppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'destroy'])->name('deletesppd');
-    Route::get('/editsppd/{no_sppd}', [App\Http\Controllers\SppdController::class, 'edit'])->name('editsppd');
-    Route::post('/updatesppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'update'])->name('updatesppd');
+    // Route::get('/surattugas', [App\Http\Controllers\SurattugasController::class, 'index'])->name('surattugas');
+    // Route::get('/tambahst', [App\Http\Controllers\SurattugasController::class, 'create'])->name('tambahst');
+    // Route::post('/simpanst', [App\Http\Controllers\SurattugasController::class, 'store'])->name('simpanst');
+    // Route::get('/deletest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'destroy'])->name('deletest');
+    // Route::get('/editst/{id_st}', [App\Http\Controllers\SurattugasController::class, 'edit'])->name('editst');
+    // Route::post('/updatest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
     
     //pengajuan
     Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');

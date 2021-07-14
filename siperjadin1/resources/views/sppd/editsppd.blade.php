@@ -37,7 +37,7 @@
   <div class="card card-info card-outline">
   <div class="card-header">
       <div class="card-tools">
-          <a href="{{ route('tambahpegawai') }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+          <a href="{{ route('pegawai.store', $item->id_pegawai) }}" class="btn btn-primary" data-toggle="modal" data-target="#ruangModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </a>
       </div>
   </div>

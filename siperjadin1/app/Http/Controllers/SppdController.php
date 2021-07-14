@@ -87,7 +87,7 @@ class SppdController extends Controller
      */
     public function edit($id_sppd)
     {
-        $dinas = Sppd::findordail($id_sppd);
+        $dinas = Sppd::findorfail($id_sppd);
         return view ('sppd.editsppd', compact('dinas'));
     }
 
@@ -100,7 +100,7 @@ class SppdController extends Controller
      */
     public function update(Request $request, $id_sppd)
     {
-        $dinas = Sppd::findordail($id_sppd);
+        $dinas = Sppd::findorfail($id_sppd);
         $dinas->update($request->all());
         return redirect('sppd');
     }
@@ -113,8 +113,7 @@ class SppdController extends Controller
      */
     public function destroy($id_sppd)
     {
-        $sppd = Sppd::findorfail($id_sppd);
-        $sppd->delete();
+        Sppd::destroy($id_sppd);
         return back()->with('success', 'Data Berhasil Dihapus');
     }
 }

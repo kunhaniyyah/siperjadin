@@ -99,7 +99,8 @@ class PegawaiController extends Controller
     public function edit($id_pegawai)
     {
         $peg = Pegawai::findorfail($id_pegawai);
-        return view('pegawai.editpegawai', compact('peg'));
+        $jab = Jabfung::all();
+        return view('pegawai.editpegawai', compact('peg','jab'));
     }
     
     /**
@@ -112,14 +113,14 @@ class PegawaiController extends Controller
     public function update(Request $request, $id_pegawai)
     {
         $peg = Pegawai::findorfail($id_pegawai);
+        //$jab = Jabfung::all();
         $peg->update($request->all());
         return redirect('pegawai')->with('status', 'Data berhasil diupdate');
     }
 
     public function destroy($id_pegawai)
         {
-            $datapegawai = Pegawai::findorfail($id_pegawai);
-            $datapegawai->delete();
+            Pegawai::destroy($id_pegawai);
             return back()->with('success', 'Data berhasil dihapus!');
             //return"hai";
         }

@@ -22,8 +22,8 @@
   <div class="card card-info card-outline">
   <div class="card-header">
       <div class="card-tools">
-          <a href="" button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
-        </a>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+          </button>
       </div>
   </div>
 
@@ -51,12 +51,12 @@
               <td>{{ $item->nama}}</td>
               <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
               <td>
-                  <form action="" method="POST" class="d-inline">
+                <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_st}}"><i class="fas fa-pencil-alt"></i></button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_st}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
+                  <form action="{{ route('surattugas.destroy', $item->id_st) }}" method="POST" class="d-inline">
                         @method('Delete')
                         @csrf
-                            <a href="{{ url('editst', $item->id_st)}}" class="btn btn-primary btn-sm" title="Edit Data" ><i class="fas fa-pencil-alt"></i></a>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_st}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                            <a href="{{ url('deletest',$item->id_st) }}" class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></a>
+                            <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
                     </form>
               </td>
           </tr>
@@ -89,9 +89,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('pegawai.store')}}" method="POST">
       <div class="modal-body">
-      {{ csrf_field() }}
+          <form action="{{route('surattugas.store')}}" method="post">
+        {{ csrf_field() }}
               <div class="form-group">
                 <label for="exampleFormControlInput1">No Surat Tugas</label>
                 <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="">
@@ -137,18 +137,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-success">Simpan</button>
       </div>
       </form>
     </div>
   </div>
 </div>           
-
-          
-
-
-
-
 
 <!-- modal detail -->
 @foreach ($datast as $item)
@@ -180,7 +174,7 @@
                 </tr>
                 <tr>
                   <th scope="col">Tanggal</th>
-                  <td>{{$item->tanggal}}</td>
+                  <td>{{date('d-m-Y', strtotime($item->tanggal)) }}</td>
                 </tr>
                 <tr>
                   <th scope="col">Keperluan</th>
@@ -201,6 +195,74 @@
     </div>
   </div>
 </div>
+@endforeach
+<!-- end modal -->
+
+<!-- modal edit -->
+@foreach ($datast as $item)
+<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id_st}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Surat Tugas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('pegawai.store')}}" method="POST">
+      <div class="modal-body">
+      {{ csrf_field() }}
+              <div class="form-group">
+                <label for="exampleFormControlInput1">No Surat Tugas</label>
+                <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas"  value="{{$item->no_st}}">
+                  @error('no_st')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">NIP</label>
+                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+                  @error('nip')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Nama</label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->nama}}">
+                  @error('nama')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Keperluan</label>
+                <textarea class="form-control @error('keperluan') is-invalid @enderror" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan">{{$item->keperluan}}</textarea>  
+                @error('keperluan')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Tanggal</label>
+                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Masukkan Nama" value="{{$item->tanggal}}>
+                  @error('tanggal')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Tempat</label>
+                <textarea class="form-control @error('tempat') is-invalid @enderror" id="tempat" name="tempat" placeholder="Masukkan Tempat" value="">{{$item->tempat}}</textarea>  
+                @error('tempat')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>           
 @endforeach
 <!-- end modal -->
 
