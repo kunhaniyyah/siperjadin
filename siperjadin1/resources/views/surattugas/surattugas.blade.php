@@ -25,6 +25,8 @@
           <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </button>
       </div>
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>
+      </button>
   </div>
 
   <div class="card-body table-responsive">
@@ -77,6 +79,38 @@
         </div>
       </div>
             </section>
+
+
+<!-- cetak modal -->
+<div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cetak Data per tanggal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+          <label for="label">Tanggal Awal</label>
+          <input type="date" name="tglawal" id="tglawal" class="form-control">
+      </div>
+        <div class="form-group">
+          <label for="label">Tanggal Akhir</label>
+          <input type="date" name="tglakhir" id="tglakhir" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="" onclick="this.href='/cetakpertanggal/'+ document.getElementById('tglawal').value +
+        '/' + document.getElementById('tglakhir').value " target="_blank" class="btn btn-success">Cetak Data</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <!-- modal tambah data-->

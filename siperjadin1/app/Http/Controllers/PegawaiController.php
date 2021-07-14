@@ -34,6 +34,14 @@ class PegawaiController extends Controller
         return view('pegawai.pegawai', compact('datapegawai','jab'));
     }
 
+    public function cetakpegawai()
+    {
+        $datapegawai = Pegawai::with('jabfung')->paginate(5);
+        $jab = Jabfung::all();
+        return view('pegawai.cetakpegawai', compact('datapegawai','jab'));
+    }
+
+
     public function create()
     {
         $jab = Jabfung::all();

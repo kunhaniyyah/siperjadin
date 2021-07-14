@@ -17,7 +17,10 @@ class SppdController extends Controller
         $sppd = Sppd::paginate(5);
         return view('sppd.sppd', compact('sppd'));
     }
-
+    public function cetakpertanggalsppd($tglawal, $tglakhir){
+        $sppd = Sppd::whereBetween('created_at', [$tglawal, $tglakhir])->get();
+        return view('sppd.cetaksppd',compact('sppd'));
+    }
     /**
      * Show the form for creating a new resource.
      *

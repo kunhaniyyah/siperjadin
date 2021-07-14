@@ -37,6 +37,8 @@
           <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
           </button>
       </div>
+      <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>
+          </a>
   </div>
 
   <div class="card-body table-responsive">
@@ -65,9 +67,8 @@
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>{{ $item->jabfung->jabfung}}</td>
               <td>
-                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
                 <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
-                
+                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
                 <form action="{{ route('pegawai.destroy', $item->id_pegawai) }}" method="POST" class="d-inline">
                   @method('Delete')
                   @csrf

@@ -100,4 +100,9 @@ class SurattugasController extends Controller
         $st->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
+
+    public function cetakpertanggal($tglawal, $tglakhir){
+        $datast = Surattugas::whereBetween('tanggal', [$tglawal, $tglakhir])->get();
+        return view('surattugas.cetakst',compact('datast'));
+    }
 }

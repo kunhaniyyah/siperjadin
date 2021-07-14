@@ -40,7 +40,9 @@ Route::group(['middleware' => 'auth','ceklevel:admin,staff'], function(){
     // Route::get('/tambahst', [App\Http\Controllers\SurattugasController::class, 'create'])->name('tambahst');
     // Route::post('/simpanst', [App\Http\Controllers\SurattugasController::class, 'store'])->name('simpanst');
     // Route::get('/deletest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'destroy'])->name('deletest');
-    // Route::get('/editst/{id_st}', [App\Http\Controllers\SurattugasController::class, 'edit'])->name('editst');
+    Route::get('/cetakpertanggalsppd/{tglawal}/{tglakhir}', [App\Http\Controllers\SppdController::class, 'cetakpertanggalsppd'])->name('cetakpertanggalsppd');
+    Route::get('/cetakpegawai', [App\Http\Controllers\PegawaiController::class, 'cetakpegawai'])->name('cetakpegawai');
+    Route::get('/cetakpertanggal/{tglawal}/{tglakhir}', [App\Http\Controllers\SurattugasController::class, 'cetakpertanggal'])->name('cetakpertanggal');
     // Route::post('/updatest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
     
     //pengajuan

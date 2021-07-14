@@ -43,6 +43,8 @@
           <a href="{{ route('sppd.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#tambahmodal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </a>
       </div>
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>
+      </button>
   </div>
   <div class="card-body">
       <table class="table table-bordered">
@@ -61,11 +63,11 @@
               <td>{{ $item->no_sppd}}</td>
               <td>{{ $item->no_st}}</td>
               <td>{{ $item->nama}}</td>
-              <td>{{date('d-m-Y', strtotime($item->tgl_sppd)) }}</td>
+              <td>{{date('d-m-Y', strtotime($item->created_at)) }}</td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
-                <button onclick="$('#detailmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-eye"></i>  </button>
                 <button onclick="$('#editmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
+                <button onclick="$('#detailmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-eye"></i>  </button>
                 <form action="{{route('sppd.destroy', $item->id_sppd) }}" method="POST" class="d-inline">
                       @method('Delete')
                       @csrf
@@ -81,6 +83,37 @@
 </div>
 </div><!-- /.container-fluid -->
 </section>
+
+
+
+<!-- cetak modal -->
+<div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cetak Data per tanggal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+          <label for="label">Tanggal Awal</label>
+          <input type="date" name="tglawal" id="tglawal" class="form-control">
+      </div>
+        <div class="form-group">
+          <label for="label">Tanggal Akhir</label>
+          <input type="date" name="tglakhir" id="tglakhir" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="" onclick="this.href='/cetakpertanggalsppd/'+ document.getElementById('tglawal').value +
+        '/' + document.getElementById('tglakhir').value " target="_blank" class="btn btn-success">Cetak Data</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -238,7 +271,7 @@
                 </tr>
                 <tr>
                   <th scope="col">Kegiatan</th>
-                  <td>{{$item->Kegiatan}}</td>
+                  <td>{{$item->kegiatan}}</td>
                 </tr>
               </tbody>
             </table>
@@ -268,6 +301,7 @@
       <div class="modal-body">
         <form action="{{route('sppd.update', $item->id_sppd)}}" method="post">
           {{ csrf_field() }}
+          @method('PUT')
             <div class="form-group">
               <label for="exampleFormControlInput1">No SPPD</label>
               <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{$item->no_sppd}}">
@@ -353,8 +387,7 @@
     </div>
 </div>
 @endforeach
-
-
+<!-- end modal -->
 
 
 @include('layout.footer')
