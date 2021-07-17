@@ -25,7 +25,7 @@
           <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </button>
       </div>
-      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-warning"><i class="fa fa-print" aria-hidden="true"></i>
       </button>
   </div>
 
@@ -33,10 +33,12 @@
       <table class="table table-bordered">
          <tr class="text-center">
               <th scope="col">No</th>
+              <th scope="col">Status</th>
               <th scope="col">No ST</th>
-              <th scope="col">NIP</th>
+              <!-- <th scope="col">NIP</th> -->
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
+              <th scope="col">Status</th>
               <th scope="col">Aksi</th>
           </tr>
           <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
@@ -48,12 +50,21 @@
           @foreach ($datast as $item)
           <tr class="text-center">
               <td>{{ $loop->iteration}}</td>
+              <td>
+                @if($item->status==1)
+                  <a href="{{ route('status' , $item->id_st)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
+                @else 
+                  <a href="{{ route('status', $item->id_st)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
+                @endif
+              </td>
               <td>{{ $item->no_st}}</td>
-              <td>{{ $item->nip}}</td>
+              <!-- <td>{{ $item->nip}}</td> -->
               <td>{{ $item->nama}}</td>
               <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
+              <td><span class="badge {{ ($item->status == 1) ? 'badge-success' : 'badge-danger' }}">{{ ($item->status == 1) ? "Sudah diverifikasi" : "Belum diverifikasi" }}</span></td>
               <td>
                 <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_st}}"><i class="fas fa-pencil-alt"></i></button>
+                <a href="{{route('cetaksurat', $item->id_st)}}"><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_st}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
                   <form action="{{ route('surattugas.destroy', $item->id_st) }}" method="POST" class="d-inline">
                         @method('Delete')

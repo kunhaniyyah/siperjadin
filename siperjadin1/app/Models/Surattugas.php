@@ -18,5 +18,7 @@ class Surattugas extends Model
         'keperluan',
         'tanggal',
         'tempat',
+        'status',
+        'created_at',
     ];
 }

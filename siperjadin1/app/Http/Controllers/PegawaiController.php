@@ -28,7 +28,7 @@ class PegawaiController extends Controller
     public function index(Request $request)
     {
       
-        $datapegawai = Pegawai::with('jabfung')->paginate(5);
+        $datapegawai = Pegawai::with('jabfung')->paginate(10);
         $jab = Jabfung::all();
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
         return view('pegawai.pegawai', compact('datapegawai','jab'));
@@ -82,6 +82,7 @@ class PegawaiController extends Controller
             'golongan'  =>$request->golongan,
             'jabfung_id'=>$request->jabfung_id,
             'tingkat'   =>$request->tingkat,
+            'jabatan'   =>$request->jabatan,
         ]);
         return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');
     }

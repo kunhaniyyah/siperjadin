@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CekLevel
+class CekLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,11 +14,11 @@ class CekLevel
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$levels)
+    public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->level_user){
-            return $next($request);
+        if(!session('berhasil_login')){
+            return redirect('/');
         }
-        return redirect('/');
+        return $next($request);
     }
 }

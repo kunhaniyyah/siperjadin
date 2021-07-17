@@ -23,5 +23,6 @@ class Sppd extends Model
         'kegiatan',
         'total_ajuan',
         'tingkat',
+        'status',
     ];
 }

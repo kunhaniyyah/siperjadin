@@ -19,6 +19,7 @@ class Pegawai extends Model
         'nama',
         'fakultas',
         'pangkat',
+        'jabatan',
         'jabfung_id',
         'golongan',
         'tingkat',

@@ -48,7 +48,6 @@
               <th scope="col">NIP</th>
               <th scope="col">Nama</th>
               <th scope="col">Fakultas</th>
-              <th scope="col">Jabatan Fungsional</th>
               <th scope="col">Aksi</th>
           </tr>
           <tbody>
@@ -64,11 +63,9 @@
               <td>{{ $item->nip}}</td>
               <td>{{ $item->nama}}</td>
               <td>{{ $item->fakultas}}</td>
-              <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
-              <td>{{ $item->jabfung->jabfung}}</td>
               <td>
-                <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
-                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
+                <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
+                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
                 <form action="{{ route('pegawai.destroy', $item->id_pegawai) }}" method="POST" class="d-inline">
                   @method('Delete')
                   @csrf
@@ -177,6 +174,13 @@
                 </select>
               </div>
               <div class="form-group">
+            <label for="exampleFormControlInput1">Tingkat</label>
+            <textarea class="form-control @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" placeholder="Masukkan jabatan"></textarea>  
+            @error('jabatan')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+              <div class="form-group">
                 <label for="exampleFormControlSelect1">Tingkat</label>
                 <select class="form-control" id="tingkat" name="tingkat" value="">
                   <option>B</option>
@@ -260,7 +264,14 @@
                     <option value="{{ $item->id }}">{{ $item->jabfung }}</option>
                     @endforeach
                   </select>
-              </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Jabatan</label>
+                    <textarea class="form-control @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" placeholder="Masukkan jabatan"></textarea>  
+                    @error('jabatan')
+                        <span class="text-danger">{{ $message }}</span>
+                      @enderror
+                </div>
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pangkat</label>
           <select class="form-control @error('pangkat') is-invalid @enderror" id="pangkat" name="pangkat">

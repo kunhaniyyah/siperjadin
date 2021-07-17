@@ -17,7 +17,7 @@
         <div class="info">
           <a href="#" class="d-block">
           <span>
-          {{auth()->user()->name}}
+           
           </span>
           </a>
         </div>
@@ -36,7 +36,7 @@
               </p>
             </a>
           </li>
-          @if(auth()->user()->level_user == "admin")
+          
           <li class="nav-item">
             <a href="{{ route('pegawai.index')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
@@ -62,9 +62,7 @@
               </p>
             </a>
           </li>
-          @endif
-
-          @if(auth()->user()->level_user == "staff")
+         
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -86,7 +84,7 @@
                   <p>Pengajuan SPPD</p>
                 </a>
               </li>
-          @endif
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

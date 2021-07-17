@@ -119,4 +119,19 @@ class SppdController extends Controller
         Sppd::destroy($id_sppd);
         return back()->with('success', 'Data Berhasil Dihapus');
     }
+    public function statussppd($id_sppd){
+        $sppd = Sppd::where('id_sppd', $id_sppd)->first();
+        $status_sekarang= $sppd->status;
+        if($status_sekarang == 1)
+        {
+            Sppd::where('id_sppd',$id_sppd)->update([
+                    'status'=>0
+                ]); 
+        }else{
+            Sppd::where('id_sppd',$id_sppd)->update([
+                'status'=>1
+            ]); 
+        }
+        return back()->with('success', 'Status berhasil diubah!');
+    }
 }

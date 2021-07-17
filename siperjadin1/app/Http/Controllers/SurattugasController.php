@@ -105,4 +105,24 @@ class SurattugasController extends Controller
         $datast = Surattugas::whereBetween('tanggal', [$tglawal, $tglakhir])->get();
         return view('surattugas.cetakst',compact('datast'));
     }
+    public function status($id_st){
+        $datast = Surattugas::where('id_st', $id_st)->first();
+        $status_sekarang= $datast->status;
+        if($status_sekarang == 1)
+        {
+            Surattugas::where('id_st',$id_st)->update([
+                    'status'=>0
+                ]); 
+        }else{
+            Surattugas::where('id_st',$id_st)->update([
+                'status'=>1
+            ]); 
+        }
+        return back()->with('success', 'Data berhasil diubah!');
+    }
+    public function cetaksurat($id_st)
+    {
+        $datast = Surattugas::where('id_st', $id_st)->get();
+        return view('surattugas.cetaksurat', compact('datast'));
+    }
 }

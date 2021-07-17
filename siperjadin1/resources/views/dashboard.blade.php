@@ -25,8 +25,8 @@
     </br>
     </h2>
     <div class="image">
-          <img src="{{ asset('') }}assets/dist/img/uns2.png" width="110" class="img-circle" alt="UNS Logo">
-          <img src="{{ asset('') }}assets/dist/img/logosv.png" width="120" class="img-circle" alt="SV Logo">
+          <img src="{{ asset('assets/dist/img/uns2.png') }}" width="110" class="img-circle" alt="UNS Logo">
+          <img src="{{ asset('assets/dist/img/logosv.png') }}" width="120" class="img-circle" alt="SV Logo">
         </div>
   </center>
     </div>

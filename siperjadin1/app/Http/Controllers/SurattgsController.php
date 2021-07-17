@@ -13,9 +13,9 @@ class SurattgsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nip)
+    public function index()
     {
-        $data = Surattugas::where('nip', 91247913439164 )->paginate(10);
+        $data = Surattugas::paginate(10);
         return view('pengajuan.surattgs', compact('data'));
     }
 
@@ -26,7 +26,7 @@ class SurattgsController extends Controller
      */
     public function create()
     {
-        return view ('surattugas.tambahst');
+        //return view ('surattugas.tambahst');
     }
 
     /**

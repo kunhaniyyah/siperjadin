@@ -50,20 +50,30 @@
       <table class="table table-bordered">
           <tr class="text-center">
               <th scope="col">No</th>
+              <th scope="col">Status</th>
               <th scope="col">No. SPPD</th>
               <th scope="col">No. ST</th>
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
+              <th scope="col">Status</th>
               <th scope="col">Aksi</th>
           </tr>
           <tbody>
          @foreach ($sppd as $item)
           <tr class="text-center">
               <td>{{ $loop->iteration }}</td>
+              <td>
+                @if($item->status==1)
+                  <a href="{{ route('statussppd' , $item->id_sppd)}}" class="btn btn-xs btn-danger">Non Aktifkan</a>
+                @else 
+                  <a href="{{ route('statussppd', $item->id_sppd)}}" class="btn btn-xs btn-success">Aktifkan</a>
+                @endif
+              </td>
               <td>{{ $item->no_sppd}}</td>
               <td>{{ $item->no_st}}</td>
               <td>{{ $item->nama}}</td>
               <td>{{date('d-m-Y', strtotime($item->created_at)) }}</td>
+              <td><span class="badge {{ ($item->status == 1) ? 'badge-success' : 'badge-danger' }}">{{ ($item->status == 1) ? "Sudah diverifikasi" : "Belum diverifikasi" }}</span></td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
                 <button onclick="$('#editmodal{{$item->id_sppd}}').modal('show')" type="button" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
