@@ -35,7 +35,6 @@
               <th scope="col">No</th>
               <th scope="col">Status</th>
               <th scope="col">No ST</th>
-              <!-- <th scope="col">NIP</th> -->
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
               <th scope="col">Status</th>
@@ -47,7 +46,7 @@
             <td colspan="10">No data to display.</td>
         </tr>
         @endif
-          @foreach ($datast as $item)
+          @foreach ($datast as $item )
           <tr class="text-center">
               <td>{{ $loop->iteration}}</td>
               <td>
@@ -58,7 +57,6 @@
                 @endif
               </td>
               <td>{{ $item->no_st}}</td>
-              <!-- <td>{{ $item->nip}}</td> -->
               <td>{{ $item->nama}}</td>
               <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
               <td><span class="badge {{ ($item->status == 1) ? 'badge-success' : 'badge-danger' }}">{{ ($item->status == 1) ? "Sudah diverifikasi" : "Belum diverifikasi" }}</span></td>
@@ -92,7 +90,9 @@
             </section>
 
 
-<!-- cetak modal -->
+
+
+            <!-- cetak modal -->
 <div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -146,7 +146,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="">
+                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan nip" value="">
                   @error('nip')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
@@ -210,7 +210,7 @@
                   <td>{{$item->no_st}}</td>
                 </tr>
                 <tr>
-                  <th scope="col">NIP</th>
+                  <th scope="col">nip</th>
                   <td>{{$item->nip}}</td>
                 </tr>
                 <tr>
@@ -265,8 +265,8 @@
                   @enderror
               </div>
               <div class="form-group">
-                <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+                <label for="exampleFormControlInput1">nip</label>
+                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan nip" value="{{$item->nip}}">
                   @error('nip')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror

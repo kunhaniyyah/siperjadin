@@ -9,6 +9,10 @@ use PhpParser\Node\Expr\FuncCall;
 class DashboardController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request)
     {
@@ -16,13 +20,13 @@ class DashboardController extends Controller
         return view ('dashboard')->with('success', 'Login Berhasil!');
     }
 
-    public function tampilkanSession(Request $request) {
-		if($request->session()->has('nama')){
-			echo $request->session()->get('nama');
-		}else{
-			echo 'Tidak ada data dalam session.';
-		}
-	}
+    // public function tampilkanSession(Request $request) {
+	// 	if($request->session()->has('nama')){
+	// 		echo $request->session()->get('nama');
+	// 	}else{
+	// 		echo 'Tidak ada data dalam session.';
+	// 	}
+	// }
     public function dashboardstaff()
     {
             return view ('dashboardstaff');

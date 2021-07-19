@@ -13,7 +13,7 @@ class Surattugas extends Model
     protected $primaryKey ="id_st";
     protected $fillable = [
         'no_st',
-        'nip',
+        'user_nip',
         'nama',
         'keperluan',
         'tanggal',
@@ -21,4 +21,7 @@ class Surattugas extends Model
         'status',
         'created_at',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

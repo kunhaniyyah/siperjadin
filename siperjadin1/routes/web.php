@@ -17,22 +17,18 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-// Route::view('/dashboard', 'dashboard');
-//Route::view('/', 'page.auth.login');//biar yang ditampilin pertama itu halaman login
 
-
-//Auth::routes();
-Route::get( '/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-Route::post( '/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-Route::post( '/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get( '/register', [App\Http\Controllers\Auth\LoginController::class, 'registrasi'])->name('register');
-Route::post( '/simpanregister', [App\Http\Controllers\Auth\LoginController::class, 'simpanregistrasi'])->name('simpanregister');
+// Auth::routes();
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [App\Http\Controllers\Auth\LoginController::class, 'registrasi'])->name('register');
+Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class, 'simpanregistrasi'])->name('simpanregister');
 
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => 'auth'], function(){
-    //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
-    // Route::get('/dashboard2', [App\Http\Controllers\DashboardController::class, 'tampilkanSession']);
     Route::resource('dashboard','App\Http\Controllers\DashboardController');
+    //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
     Route::resource('pegawai','App\Http\Controllers\PegawaiController');
     Route::resource('sppd','App\Http\Controllers\SppdController');
     Route::resource('surattugas','App\Http\Controllers\SurattugasController');
@@ -43,15 +39,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/cetaksurat/{id_st}', [App\Http\Controllers\SurattugasController::class, 'cetaksurat'])->name('cetaksurat');
     Route::get('/status/{id_st}', [App\Http\Controllers\SurattugasController::class, 'status'])->name('status');
     Route::get('/statussppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'statussppd'])->name('statussppd');
-    // Route::post('/updatest/{id_st}', [App\Http\Controllers\SurattugasController::class, 'update'])->name('updatest');
-    
-    //pengajuan
-    
+    Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
+
     
 });
 
 Route::group(['middleware' => 'CekLevel=pegawai'], function(){
-    Route::get('/surattgs', [App\Http\Controllers\SurattgsController::class, 'index'])->name('surattgs');
 
 });
 
@@ -62,14 +55,6 @@ Route::get('auth/google/callback',[App\Http\Controllers\GoogleController::class,
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
   
-
-//showLoginForm ada di function di file LoginController
-// Route::get('/', [App\Http\Controllers\Auth\LoginController::class,'showLoginForm']);
-// Route::get('/dashboard', [App\Http\Controllers\DashboardController::class,'index']);
-
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-

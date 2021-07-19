@@ -17,7 +17,7 @@
         <div class="info">
           <a href="#" class="d-block">
           <span>
-           
+          {{auth()->user()->name}}
           </span>
           </a>
         </div>
@@ -36,7 +36,7 @@
               </p>
             </a>
           </li>
-          
+          @if(auth()->user()->level_user == "admin")
           <li class="nav-item">
             <a href="{{ route('pegawai.index')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
@@ -62,7 +62,8 @@
               </p>
             </a>
           </li>
-         
+         @endif
+         @if(auth()->user()->level_user == "staff")
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -84,7 +85,19 @@
                   <p>Pengajuan SPPD</p>
                 </a>
               </li>
-         
+         @endif
+         <li class="nav-item">
+        <a href="{{ route('logout') }}" class="nav-link"
+                onclick="
+                event.preventDefault();
+                document.getElementById('formLogout').submit();
+                " role="button">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Log Out</p>
+                  <form id="formLogout" action="{{ route('logout') }}" method="POST">@csrf</form>
+                </a>
+              </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

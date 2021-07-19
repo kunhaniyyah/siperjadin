@@ -6,6 +6,7 @@ use App\Models\Surattugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class SurattgsController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class SurattgsController extends Controller
      */
     public function index()
     {
-        $data = Surattugas::paginate(10);
+        $data = Surattugas::where('nip', Auth::user()->nip);
         return view('pengajuan.surattgs', compact('data'));
     }
 
@@ -39,7 +40,7 @@ class SurattgsController extends Controller
     {
         Surattugas::create([
             'no_st'         =>$request->no_st,
-            'nip'           =>$request->nip,
+            'user_nip'      =>$request->user_nip,
             'nama'          =>$request->nama,
             'keperluan'     =>$request->keperluan,
             'tanggal'       =>$request->tanggal,

@@ -20,19 +20,68 @@
 <section class="content">
 <div class="container-fluid">
     <section class="content">
-    <h2 class="mt-0"> Data Surat Tugas</h2>
+    <h2 class="mt-0"> Data Pengajuan Surat Tugas</h2>
   <div class="card card-info card-outline">
   <div class="card-header">
-  <div class="card-tools">
-          <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
+      <div class="card-tools">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </button>
       </div>
-      <a href="" target="_blank" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>
-          </a>
-      @foreach ($data as $item)
-      
-  @endforeach
-            </section>
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-warning"><i class="fa fa-print" aria-hidden="true"></i>
+      </button>
+  </div>
+
+  <div class="card-body table-responsive">
+      <table class="table table-bordered">
+         <tr class="text-center">
+              <th scope="col">No</th>
+              <th scope="col">Status</th>
+              <th scope="col">No ST</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Status</th>
+              <th scope="col">Aksi</th>
+          </tr>
+          <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
+          @if ($data->count() == 0)
+        <tr>
+            <td colspan="10">No data to display.</td>
+        </tr>
+        @endif
+          @foreach ($data as $item )
+          <tr class="text-center">
+              <td>{{ $loop->iteration}}</td>
+              <td>
+                @if($item->status==1)
+                  <a href="{{ route('status' , $item->id_st)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
+                @else 
+                  <a href="{{ route('status', $item->id_st)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
+                @endif
+              </td>
+              <td>{{ $item->no_st}}</td>
+              <td>{{ $item->nama}}</td>
+              <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
+              <td><span class="badge {{ ($item->status == 1) ? 'badge-success' : 'badge-danger' }}">{{ ($item->status == 1) ? "Sudah diverifikasi" : "Belum diverifikasi" }}</span></td>
+              <td>
+                <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_st}}"><i class="fas fa-pencil-alt"></i></button>
+                <a href="{{route('cetaksurat', $item->id_st)}}"><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_st}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
+                  <form action="{{ route('surattugas.destroy', $item->id_st) }}" method="POST" class="d-inline">
+                        @method('Delete')
+                        @csrf
+                            <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            @endforeach
+          </table>
+        <br>
+        </div><!-- /.card body table responsive -->
+      </div>
+    </div>
+</section>
+
 
 <!-- modal tambah data -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,9 +104,9 @@
               @enderror
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">NIP</label>
-            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="">
-              @error('nip')
+            <label for="exampleFormControlInput1">user_nip</label>
+            <input type="text" class="form-control @error('user_nip') is-invalid @enderror" id="user_nip" name="user_nip" placeholder="Masukkan user_nip" value="">
+              @error('user_nip')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
           </div>

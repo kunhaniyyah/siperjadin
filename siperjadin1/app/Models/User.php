@@ -12,11 +12,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    //protected $primaryKey = $id_user;
     protected $fillable = [
         'username',
         'nip',
@@ -47,6 +43,7 @@ class User extends Authenticatable
     ];
 
     public function surattugas(){
-        return $this->belongsToMany('surattugas');
+        
+        return $this->hasMany(Surattugas::class);
     }
 }

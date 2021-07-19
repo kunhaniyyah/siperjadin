@@ -15,7 +15,7 @@ class CreateUsersDetailTable extends Migration
     {
         Schema::create('users_detail', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->string('alamat')->nullable();
             $table->enum('jenis_kelamin',['L','P']);
 

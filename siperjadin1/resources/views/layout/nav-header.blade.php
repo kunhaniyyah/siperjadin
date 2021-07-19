@@ -15,7 +15,7 @@
         <a class="nav-link" data-widget="fullscreen" href="" role="button">
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="btn btn-block btn-danger" data-widget="control-sidebar" data-slide="true" href="{{ route('logout') }}" class="nav-link"
                 onclick="
                 event.preventDefault();
@@ -24,7 +24,7 @@
           <i></i>Log Out
           <form id="formLogout" action="{{ route('logout') }}" method="POST">@csrf</form>
         </a>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
