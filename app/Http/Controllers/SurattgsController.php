@@ -16,7 +16,8 @@ class SurattgsController extends Controller
      */
     public function index()
     {
-        $data = Surattugas::where('nip', Auth::user()->nip);
+        $data = Surattugas::where('nip', Auth::user()->nip)->get();
+        // dd($data);
         return view('pengajuan.surattgs', compact('data'));
     }
 
@@ -57,7 +58,7 @@ class SurattgsController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
