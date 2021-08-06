@@ -17,6 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -45,16 +46,19 @@
   </div>
 
   <div class="card-body table-responsive">
-      <table class="table table-bordered">
-         <tr class="text-center">
-              <th scope="col">No</th>
-              <th scope="col">#</th>
-              <th scope="col">No ST</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Tanggal</th>
-              <th scope="col">Status</th>
-              <th scope="col">Aksi</th>
-          </tr>
+      <table class="table table-bordered" id="datatables">
+        <thead>
+            <tr class="text-center">
+                  <th scope="col">No</th>
+                  <th scope="col">#</th>
+                  <th scope="col">No ST</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Tanggal</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Aksi</th>
+              </tr>
+          </thead>
+          <tbody>
           <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
           @if ($datast->count() == 0)
         <tr>
@@ -92,23 +96,12 @@
           </tr>
         </tbody>
         @endforeach
-      </table>
-      <br>
-      <div class="float-left">
-          Showing 
-          {!! $datast->firstItem() !!}
-          of 
-          {!! $datast->lastItem() !!}
-        </div>
-        <div class="float-right">
-            {!! $datast->links() !!}
-        </div>
-      </div><!-- /.card body table responsive -->
-        </div>
-      </div>
-            </section>
-
-
+      </tbody>
+    </table>
+  </div><!-- /.card body table responsive -->
+</div>
+</div>
+</section>
 
 
 <!-- cetak modal -->
@@ -327,18 +320,20 @@
 </div>           
 @endforeach
 <!-- end modal -->
-
 </section>
-
 
 @include('layout.footer')
 @include('sweetalert::alert')
-
-<!-- jQuery -->
 
 @stack('custom-script')
 
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.js"></script>
+<script src="assets/dataTables/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#datatables').DataTable();
+} );
+</script>
 </body>
 </html>

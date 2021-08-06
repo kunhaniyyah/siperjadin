@@ -17,6 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -44,7 +45,8 @@
       </button>
   </div>
   <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="datatables">
+        <thead>
           <tr class="text-center">
               <th scope="col">No</th>
               <th scope="col">#</th>
@@ -54,6 +56,7 @@
               <th scope="col">Status</th>
               <th scope="col">Aksi</th>
           </tr>
+          </thead>
           <tbody>
          @foreach ($sppd as $item)
           <tr class="text-center">
@@ -397,5 +400,11 @@
 
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.js"></script>
+<script src="assets/dataTables/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#datatables').DataTable();
+} );
+</script>
 </body>
 </html>
