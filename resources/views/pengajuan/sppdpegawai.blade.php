@@ -37,6 +37,7 @@
               <th scope="col">Tanggal Berangkat</th>
               <th scope="col">Tanggal Pulang</th>
               <th scope="col">Status</th>
+              <th scope="col">SPPD</th>
               <th scope="col">Aksi</th>
           </tr>
           <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
@@ -53,6 +54,14 @@
               <td>{{ date('d-m-Y', strtotime($item->tgl_berangkat)) }}</td>
               <td>{{ date('d-m-Y', strtotime($item->tgl_pulang)) }}</td>
               <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>
+              <td>
+              @if($item->status == 1)
+              <a class="btn btn-info btn-xs disabled" href=""><i class="fa fa-download"></i> Download<span class="caret"></span></a>
+              @endif
+              @if($item->status == 0)
+              <a href="" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
+              @endif
+              </td>
               <td>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_sppd}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
                 <form action="{{ route('sppdpegawai.destroy', $item->id_sppd) }}" method="POST" class="d-inline">

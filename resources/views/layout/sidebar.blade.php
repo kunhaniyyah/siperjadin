@@ -28,7 +28,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
           with font-awesome or any other icon font library -->
-          @if(auth()->user()->level_user == "admin")
+          
           <li class="nav-item">
             <a href="/dashboard" class="nav-link {{ Request::path() === 'dashboard' ? 'bg-primary' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -37,7 +37,7 @@
               </p>
             </a>
           </li>
-          @endif
+       
           @if(auth()->user()->level_user == "admin")
           <li class="nav-item">
             <a href="{{ route('pegawai.index')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
@@ -61,6 +61,14 @@
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Data SPPD
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('user.index') }}" class="nav-link {{ Request::path() === 'user' ? 'bg-primary' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Data User
               </p>
             </a>
           </li>

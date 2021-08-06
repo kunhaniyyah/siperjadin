@@ -31,11 +31,10 @@ Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
-    Route::resource('dashboard','App\Http\Controllers\DashboardController');
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
     Route::resource('pegawai','App\Http\Controllers\PegawaiController');
     Route::resource('sppd','App\Http\Controllers\SppdController');
     Route::resource('surattugas','App\Http\Controllers\SurattugasController');
+    Route::resource('user','App\Http\Controllers\UserController');
     Route::get('/cetakpertanggalsppd/{tglawal}/{tglakhir}', [App\Http\Controllers\SppdController::class, 'cetakpertanggalsppd'])->name('cetakpertanggalsppd');
     Route::get('/cetakpegawai', [App\Http\Controllers\PegawaiController::class, 'cetakpegawai'])->name('cetakpegawai');
     Route::get('/cetakpertanggal/{tglawal}/{tglakhir}', [App\Http\Controllers\SurattugasController::class, 'cetakpertanggal'])->name('cetakpertanggal');
@@ -46,14 +45,18 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'update'])->name('surattgs');
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'store'])->name('store');
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
-
+  
+    
     
 });
 
-Route::group(['middleware' => ['auth','ceklevel:staff']], function(){
-    Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
+Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
     Route::resource('sppdpegawai','App\Http\Controllers\SppdpegawaiController');
     Route::resource('surattgs','App\Http\Controllers\SurattgsController');
+});
+
+Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
+    Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
 });
 
 //Route::get('/pegawai/detail/{nip}', [App\Http\Controllers\PegawaiController::class, 'detail']);

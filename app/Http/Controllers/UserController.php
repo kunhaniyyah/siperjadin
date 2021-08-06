@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $user = User::paginate(10);
+        return view('user.user', compact('user'));
     }
 
     /**
@@ -79,8 +80,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $id)
     {
-        //
+        User::destroy($id);
+            return back()->with('success', 'Data berhasil dihapus!');
     }
 }

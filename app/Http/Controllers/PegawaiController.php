@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
+
 class PegawaiController extends Controller
 {
     /**
@@ -141,6 +142,9 @@ class PegawaiController extends Controller
     public function export_excel()
         {
             //return Excel::download(new Pegawai, 'pegawai.xlsx');
+        }
+        public function search(){
+            $search_text =$_GET['query'];
         }
 }
         

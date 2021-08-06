@@ -31,7 +31,7 @@ class LoginController extends Controller
            if(Hash::check($request->password , $data->password)){
             // dd($request->all());
             session(['berhasil_login' => true]);
-            return redirect('dashboard');
+            return redirect('halamandashboard');
            }
        }
        return redirect('/')->with('messages', 'email/pass salah');
