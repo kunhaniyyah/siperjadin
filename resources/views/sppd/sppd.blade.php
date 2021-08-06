@@ -30,10 +30,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-    
-   
-    <!-- /.content-header -->
-
+        
     <!-- Main content -->
     <section class="content">
     <h2 class="mt-0"> Data SPPD Pegawai</h2>

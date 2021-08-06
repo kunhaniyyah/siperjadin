@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Yajra\Datatables\Facades\Datatables;
 
 class UserController extends Controller
 {
@@ -13,6 +14,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function json(){
+        return Datatables::of(User::all())->make(true);
+    }
+
     public function index()
     {
         $user = User::paginate(10);

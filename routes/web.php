@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::resource('sppd','App\Http\Controllers\SppdController');
     Route::resource('surattugas','App\Http\Controllers\SurattugasController');
     Route::resource('user','App\Http\Controllers\UserController');
+    Route::get('user/json','UserController@json');
     Route::get('/cetakpertanggalsppd/{tglawal}/{tglakhir}', [App\Http\Controllers\SppdController::class, 'cetakpertanggalsppd'])->name('cetakpertanggalsppd');
     Route::get('/cetakpegawai', [App\Http\Controllers\PegawaiController::class, 'cetakpegawai'])->name('cetakpegawai');
     Route::get('/cetakpertanggal/{tglawal}/{tglakhir}', [App\Http\Controllers\SurattugasController::class, 'cetakpertanggal'])->name('cetakpertanggal');

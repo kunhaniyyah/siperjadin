@@ -28,9 +28,12 @@ class PegawaiController extends Controller
 
     public function index(Request $request)
     {
-      
+      if($request->has('cari')){
+          $datapegawai = Pegawai::where('nama', 'LIKE', '%'. $request->cari. '%')->paginate(10);
+      }else{
         $datapegawai = Pegawai::with('jabfung')->paginate(10);
         $jab = Jabfung::all();
+      }
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
         return view('pegawai.pegawai', compact('datapegawai','jab'));
     }
