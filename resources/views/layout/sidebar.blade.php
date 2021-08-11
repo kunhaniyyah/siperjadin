@@ -41,7 +41,7 @@
           @if(auth()->user()->level_user == "admin")
           <li class="nav-item">
             <a href="{{ route('pegawai.index')}}" class="nav-link {{ Request::path() === 'pegawai' ? 'bg-primary' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon 	fas fa-id-card-alt"></i>
               <p>
                 Data Pegawai
               </p>
@@ -50,7 +50,7 @@
           
           <li class="nav-item">
             <a href="{{ route('surattugas.index') }}" class="nav-link {{ Request::path() === 'surattugas' ? 'bg-primary' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fa fa-folder-open"></i>
               <p>
                 Data Surat Tugas
               </p>
@@ -58,7 +58,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('sppd.index') }}" class="nav-link {{ Request::path() === 'sppd' ? 'bg-primary' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-envelope-open-text"></i>
               <p>
                 Data SPPD
               </p>
@@ -66,7 +66,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('user.index') }}" class="nav-link {{ Request::path() === 'user' ? 'bg-primary' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Data User
               </p>
@@ -105,7 +105,7 @@
                 document.getElementById('formLogout').submit();
                 " role="button">
                 <ion-icon name="log-out-outline"></ion-icon>
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Log Out</p>
                   <form id="formLogout" action="{{ route('logout') }}" method="POST">@csrf</form>
                 </a>

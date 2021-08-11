@@ -42,7 +42,9 @@
         <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
         </button>
     </div>
-    <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Cetak Rekap Data
+    <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to PDF
+        </a>
+    <a href="{{ route('exportpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
         </a>
 </div>
 <div class="card-body table-responsive" >

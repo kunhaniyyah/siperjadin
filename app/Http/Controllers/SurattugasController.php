@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Surattugas;
 use Illuminate\Http\Request;
+use App\Exports\SurattugasExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SurattugasController extends Controller
 {
@@ -124,5 +126,10 @@ class SurattugasController extends Controller
     {
         $datast = Surattugas::where('id_st', $id_st)->get();
         return view('surattugas.cetaksurat', compact('datast'));
+    }
+    public function surattugasexport()
+    {
+        return Excel::download(new SurattugasExport , 'surattugas.xlsx');
+
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PegawaiDataTable;
+use App\Exports\PegawaiExport;
 use App\Models\Pegawai;
 use App\Models\Jabfung;
 use Illuminate\Http\Request;
@@ -142,12 +143,11 @@ class PegawaiController extends Controller
             return back()->with('success', 'Data berhasil dihapus!');
             //return"hai";
         }
-    public function export_excel()
-        {
-            //return Excel::download(new Pegawai, 'pegawai.xlsx');
-        }
-        public function search(){
-            $search_text =$_GET['query'];
-        }
+    public function pegawaiexport()
+    {
+        return Excel::download(new PegawaiExport , 'pegawai.xlsx');
+
+    }
+
 }
         

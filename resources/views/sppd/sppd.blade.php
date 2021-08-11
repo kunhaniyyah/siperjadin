@@ -43,6 +43,8 @@
       </div>
       <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i aria-hidden="true"></i>Cetak Rekap Data
       </button>
+      <a href="{{ route('exportsppd') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
+        </a>
   </div>
   <div class="card-body">
       <table class="table table-bordered" id="datatables">

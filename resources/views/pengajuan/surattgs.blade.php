@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
 @section('content')
 <section class="content">
 <div class="container-fluid">
@@ -30,7 +30,7 @@
   </div>
 
   <div class="card-body table-responsive">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="datatables">
          <tr class="text-center">
               <th scope="col">No</th>
               <th scope="col">Tanggal</th>
@@ -288,4 +288,10 @@
 @push('custom.script')
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+<script src="assets/dataTables/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#datatables').DataTable();
+} );
+</script>
 @endpush

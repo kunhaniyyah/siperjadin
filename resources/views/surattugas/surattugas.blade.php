@@ -41,8 +41,10 @@
           <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </button>
       </div>
-      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i aria-hidden="true"></i>Cetak Rekap Data<span class="caret"></span>
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i class="fas fa-file-pdf" aria-hidden="true"></i> Cetak Rekap Data<span class="caret"></span>
       </button>
+      <a href="{{ route('exportst') }}" target="_blank" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i>Export to Excel
+        </a>
   </div>
 
   <div class="card-body table-responsive">

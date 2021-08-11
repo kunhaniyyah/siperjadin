@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /*
@@ -29,13 +30,16 @@ Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class
 
 // Auth::routes(['verify'=> true]);
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
-Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
+Route::group(['middleware' => ['auth','ceklevel:admin', 'verified']], function(){
     Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
     Route::resource('pegawai','App\Http\Controllers\PegawaiController');
     Route::resource('sppd','App\Http\Controllers\SppdController');
     Route::resource('surattugas','App\Http\Controllers\SurattugasController');
     Route::resource('user','App\Http\Controllers\UserController');
     Route::get('user/json','UserController@json');
+    Route::get('/exportpegawai', [App\Http\Controllers\PegawaiController::class, 'pegawaiexport'])->name('exportpegawai');
+    Route::get('/exportst', [App\Http\Controllers\SurattugasController::class, 'surattugasexport'])->name('exportst');
+    Route::get('/exportsppd', [App\Http\Controllers\SppdController::class, 'sppdexport'])->name('exportsppd');
     Route::get('/cetakpertanggalsppd/{tglawal}/{tglakhir}', [App\Http\Controllers\SppdController::class, 'cetakpertanggalsppd'])->name('cetakpertanggalsppd');
     Route::get('/cetakpegawai', [App\Http\Controllers\PegawaiController::class, 'cetakpegawai'])->name('cetakpegawai');
     Route::get('/cetakpertanggal/{tglawal}/{tglakhir}', [App\Http\Controllers\SurattugasController::class, 'cetakpertanggal'])->name('cetakpertanggal');
@@ -46,10 +50,17 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'update'])->name('surattgs');
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'store'])->name('store');
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
-  
-    
+   
     
 });
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+
+//     return redirect('/dashboard');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
     Route::resource('sppdpegawai','App\Http\Controllers\SppdpegawaiController');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sppd;
+use App\Exports\SppdExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SppdController extends Controller
 {
@@ -135,5 +137,10 @@ class SppdController extends Controller
     {
         $sppd = Sppd::where('id_sppd', $id_sppd)->get();
         return view('sppd.cetakfilesppd', compact('sppd'));
+    }
+    public function sppdexport()
+    {
+        return Excel::download(new SppdExport , 'sppd.xlsx');
+
     }
 }
