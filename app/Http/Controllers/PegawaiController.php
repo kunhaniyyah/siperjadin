@@ -29,12 +29,8 @@ class PegawaiController extends Controller
 
     public function index(Request $request)
     {
-      if($request->has('cari')){
-          $datapegawai = Pegawai::where('nama', 'LIKE', '%'. $request->cari. '%')->paginate(10);
-      }else{
         $datapegawai = Pegawai::with('jabfung')->paginate(10);
         $jab = Jabfung::all();
-      }
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
         return view('pegawai.pegawai', compact('datapegawai','jab'));
     }
@@ -89,9 +85,9 @@ class PegawaiController extends Controller
             'jabfung_id'=>$request->jabfung_id,
             'tingkat'   =>$request->tingkat,
             'jabatan'   =>$request->jabatan,
-            'gambar'    =>$request->gambar,
+            'foto'      =>$request->foto,
         ]);
-        $nm = $request->gambar;
+        $nm = $request->foto;
         $namaFile = $nm->getClientOriginalName();
         $nm->move(public_path().'/img', $namaFile);
         return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');

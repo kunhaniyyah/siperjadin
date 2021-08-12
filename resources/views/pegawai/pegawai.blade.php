@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="shortcut icon" sizes="114x114" href="{{ asset('dist/img//logouns.jpg') }}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Halaman SPPD')</title>
+  <title>@yield('title', 'Halaman Pegawai')</title>
 
   @section('content')
   <!-- Google Font: Source Sans Pro -->
@@ -19,78 +20,71 @@
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
   @include('layout.nav-header')
   @include('layout.sidebar')
-
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        
-    <!-- Main content -->
-    <section class="content">
-    <h2 class="mt-0"> Data Pegawai</h2>
-
-<div class="card card-info card-outline">
-<div class="card-header">
-    <div class="card-tools">
-        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
-        </button>
-    </div>
-    <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to PDF
-        </a>
-    <a href="{{ route('exportpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
-        </a>
-</div>
-<div class="card-body table-responsive" >
-    <table class="table table-bordered" id="datatables">
-      <thead>
-       <tr class="text-center">
-            <th scope="col">No</th>
-            <th scope="col">NIP</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Fakultas</th>
-            <th scope="col">Aksi</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
-        @if ($datapegawai->count() == 0)
-      <tr>
-          <td colspan="10">No data to display.</td>
-      </tr>
-      @endif
-       @foreach ($datapegawai as $item)
-        <tr class="text-center">
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->nip}}</td>
-            <td>{{ $item->nama}}</td>
-            <td>{{ $item->fakultas}}</td>
-            <td>
-              <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
-              <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
-              <form action="{{ route('pegawai.destroy', $item->id_pegawai) }}" method="POST" class="d-inline">
-                @method('Delete')
-                @csrf
-                <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
-              </form>
-            </td>
-        </tr>
-        @endforeach
-      </table>
-    </tbody>
-        </div><!-- /.card body table responsive -->
+        <section class="content">
+        <h2 class="mt-0"> Data Pegawai</h2>
+          <div class="card card-info card-outline">
+            <div class="card-header">
+                <div class="card-tools">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
+                    </button>
+                </div>
+                <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to PDF
+                    </a>
+                <a href="{{ route('exportpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
+                    </a>
+            </div>
+            <div class="card-body table-responsive" >
+                <table class="table table-bordered" id="datatables">
+                  <thead>
+                    <tr class="text-center">
+                          <th scope="col">No</th>
+                          <th scope="col">NIP</th>
+                          <th scope="col">Nama</th>
+                          <th scope="col">Fakultas</th>
+                          <th scope="col">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
+                      @if ($datapegawai->count() == 0)
+                      <tr>
+                          <td colspan="10">No data to display.</td>
+                      </tr>
+                      @endif
+                        @foreach ($datapegawai as $item)
+                          <tr class="text-center">
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $item->nip}}</td>
+                              <td>{{ $item->nama}}</td>
+                              <td>{{ $item->fakultas}}</td>
+                              <td>
+                                <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
+                                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
+                                <form action="{{ route('pegawai.destroy', $item->id_pegawai) }}" method="POST" class="d-inline">
+                                  @method('Delete')
+                                  @csrf
+                                  <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                              </td>
+                          </tr>
+                          @endforeach
+                  </table>
+                </tbody>
+              </div><!-- /.card body table responsive -->
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
-  </div>
-</div><!-- /.container-fluid -->
+  </div><!-- /.container-fluid -->
 </div>
-</section>
 
 
 
@@ -345,7 +339,7 @@
         <div class="form-group">
                   <label for="exampleFormControlInput1">Foto</label>
                   <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto" placeholder="Masukkan Nama Lengkap" value="{{old('foto')}}">
-                </div>
+          </div>
       </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

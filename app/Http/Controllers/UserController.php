@@ -14,9 +14,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function json(){
-        return Datatables::of(User::all())->make(true);
-    }
 
     public function index()
     {
@@ -85,9 +82,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $id)
+    public function destroy(User $nip)
     {
-        User::destroy($id);
+        User::destroy($nip);
             return back()->with('success', 'Data berhasil dihapus!');
     }
 }

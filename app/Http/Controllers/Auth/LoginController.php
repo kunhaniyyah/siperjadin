@@ -76,6 +76,6 @@ class LoginController extends Controller
             'password'          =>bcrypt($request->password),
             'remember_token'    => Str::random(60),
         ]);
-        return redirect('/');
+        return redirect('/login');
     }
 }

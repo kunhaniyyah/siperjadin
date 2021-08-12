@@ -91,9 +91,9 @@
                     @endif
               </td>
           </tr>
-        </tbody>
-        @endforeach
-      </table>
+          @endforeach
+        </table>
+      </tbody>
   </div>
   </div>
 </div>
@@ -282,6 +282,14 @@
                 <tr>
                   <th scope="col">Kegiatan</th>
                   <td>{{$item->kegiatan}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Kota</th>
+                  <td>{{$item->kota}}</td>
+                </tr>
+                <tr>
+                  <th scope="col">Provinsi</th>
+                  <td>{{$item->provinsi}}</td>
                 </tr>
               </tbody>
             </table>

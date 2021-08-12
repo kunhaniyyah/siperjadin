@@ -98,6 +98,17 @@
               </li>
               </ul>
          @endif
+
+         <li class="nav-item">
+            <a href="{{ route('akun.index')}}" class="nav-link {{ Request::path() === 'akun' ? 'bg-primary' : '' }}">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Akun
+              </p>
+            </a>
+          </li>
+         
+
          <li class="nav-item">
         <a href="{{ route('logout') }}" class="nav-link"
                 onclick="

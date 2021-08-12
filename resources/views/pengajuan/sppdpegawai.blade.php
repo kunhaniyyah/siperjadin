@@ -1,85 +1,97 @@
-@extends('layout.master')
-@section('title', 'Halaman Pengajuan SPPD')
-@push('custom-css')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" sizes="114x114" href="{{ asset('dist/img//logouns.jpg') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@yield('title', 'Halaman Pengajuan SPPD')</title>
+
+  @section('content')
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-@endpush
-@stack('custom-css')
-    <!-- Theme style -->
-    <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
-    <script src=" assets/plugins/jquery/jquery.min.js"></script>
+  @stack('custom-css')
+  <link rel="stylesheet" href=" {{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <script src=" {{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-@section('content')
-<section class="content">
-<div class="container-fluid">
-    <section class="content">
-    <h2 class="mt-0"> Data Pengajuan SPPD</h2>
-  <div class="card card-info card-outline">
-  <div class="card-header">
-      <div class="card-tools">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
-          </button>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/DataTables/datatables.min.css') }}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  @include('layout.nav-header')
+  @include('layout.sidebar')
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+      <section class="content">
+      <h2 class="mt-0"> Data Pengajuan SPPD</h2>
+        <div class="card card-info card-outline">
+              <div class="card-header">
+                  <div class="card-tools">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+                      </button>
+                  </div>
+              </div>
+              <div class="card-body table-responsive">
+                      <table class="table table-bordered" id="datatables">
+                        <thead>
+                        <tr class="text-center">
+                              <th scope="col">No</th>
+                              <th scope="col">No ST</th>
+                              <th scope="col">Nama</th>
+                              <th scope="col">Tanggal Berangkat</th>
+                              <th scope="col">Tanggal Pulang</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">SPPD</th>
+                              <th scope="col">Aksi</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
+                              @if ($data->count() == 0)
+                              <tr>
+                                  <td colspan="10">No data to display.</td>
+                              </tr>
+                          @endif
+                          @foreach ($data as $item )
+                              <tr class="text-center">
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{ $item->no_st}}</td>
+                                    <td>{{ $item->nama}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($item->tgl_berangkat)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($item->tgl_pulang)) }}</td>
+                                    <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>
+                                    <td>
+                                      @if($item->status == 1)
+                                      <a class="btn btn-info btn-xs disabled" href=""><i class="fa fa-download"></i> Download<span class="caret"></span></a>
+                                      @endif
+                                      @if($item->status == 0)
+                                      <a href="" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
+                                      @endif
+                                    </td>
+                                    <td>
+                                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_sppd}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
+                                        <form action="{{ route('sppdpegawai.destroy', $item->id_sppd) }}" method="POST" class="d-inline">
+                                                @method('Delete')
+                                                @csrf
+                                                    <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
+                                          </form>    
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              </table>
+                          </tbody>
+                      </div><!-- /.card body table responsive -->
+                    </div>
+                </section>
+            </div>
       </div>
   </div>
-  <div class="card-body table-responsive">
-      <table class="table table-bordered">
-         <tr class="text-center">
-              <th scope="col">No</th>
-              <th scope="col">No ST</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Tanggal Berangkat</th>
-              <th scope="col">Tanggal Pulang</th>
-              <th scope="col">Status</th>
-              <th scope="col">SPPD</th>
-              <th scope="col">Aksi</th>
-          </tr>
-          <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
-          @if ($data->count() == 0)
-        <tr>
-            <td colspan="10">No data to display.</td>
-        </tr>
-        @endif
-          @foreach ($data as $item )
-          <tr class="text-center">
-              <td>{{ $loop->iteration}}</td>
-              <td>{{ $item->no_st}}</td>
-              <td>{{ $item->nama}}</td>
-              <td>{{ date('d-m-Y', strtotime($item->tgl_berangkat)) }}</td>
-              <td>{{ date('d-m-Y', strtotime($item->tgl_pulang)) }}</td>
-              <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>
-              <td>
-              @if($item->status == 1)
-              <a class="btn btn-info btn-xs disabled" href=""><i class="fa fa-download"></i> Download<span class="caret"></span></a>
-              @endif
-              @if($item->status == 0)
-              <a href="" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
-              @endif
-              </td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_sppd}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                <form action="{{ route('sppdpegawai.destroy', $item->id_sppd) }}" method="POST" class="d-inline">
-                        @method('Delete')
-                        @csrf
-                            <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
-                    </form>    
-              </td>
-                </tr>
-              </tbody>
-            @endforeach
-          </table>
-        <br>
-        </div><!-- /.card body table responsive -->
-      </div>
-    </div>
-</section>
-
+</div>
 
 <!-- modal tambah data -->
 
@@ -177,10 +189,6 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <th scope="col">No. SPPD</th>
-                  <td>{{$item->no_sppd}}</td>
-                </tr>
-                <tr>
                   <th scope="col">No. ST</th>
                   <td>{{$item->no_st}}</td>
                 </tr>
@@ -222,11 +230,26 @@
 @endforeach
 <!-- end modal -->
 
-
-
-@endsection
+@include('layout.footer')
 @include('sweetalert::alert')
-@push('custom.script')
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
-@endpush
+
+<!-- jQuery -->
+
+@stack('custom-script')
+
+<!-- AdminLTE App -->
+<script src=" {{ asset('assets/dist/js/adminlte.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('assets/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready( function () {
+    $('#datatables').DataTable();
+} );
+</script>
+</body>
+</html>
