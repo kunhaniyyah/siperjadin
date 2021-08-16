@@ -82,9 +82,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $nip)
+    public function destroy(User $id)
     {
-        User::destroy($nip);
+        User::destroy($id);
             return back()->with('success', 'Data berhasil dihapus!');
     }
 }

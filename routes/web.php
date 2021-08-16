@@ -50,12 +50,13 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'update'])->name('surattgs');
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'store'])->name('store');
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
-   
+    
     
 });
 
 
 Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
+    Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
     Route::resource('sppdpegawai','App\Http\Controllers\SppdpegawaiController');
     Route::resource('surattgs','App\Http\Controllers\SurattgsController');
     Route::resource('akun','App\Http\Controllers\AkunController');

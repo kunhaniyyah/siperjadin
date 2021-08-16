@@ -524,7 +524,7 @@
 /* End Mobile Menu Area */
 /* Start Slider Area
 ==================================================*/
-.slider-bg-1 {background: url(../img/slide_01.jpg);}
+.slider-bg-1 {background: url(../img/uns.jpg);}
 .slider-bg-2 {background: url(../img/slide_02.jpg);}
 .slider-bg-3 {background: url(../img/slide_03.jpg);}
 
@@ -535,6 +535,7 @@
     background-color: #cccccc;
     display: table;
     width: 100%;
+    opacity: 50;
 }
 
 .slider-inner {

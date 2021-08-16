@@ -72,7 +72,7 @@
             <td>{{ $item->email}}</td>
             <td>{{ $item->level_user}}</td>
             <td>
-              <form action="{{ route('user.destroy', $item->nip) }}" method="POST" class="d-inline">
+              <form action="{{ route('user.destroy', $item->id) }}" method="POST" class="d-inline">
                 @method('Delete')
                 @csrf
                 <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>

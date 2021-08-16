@@ -549,8 +549,8 @@
     </tbody>
 </table>
 </center>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
             window.print();
-        </script> -->
+        </script>
 </body>
 </html>

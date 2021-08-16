@@ -7,6 +7,8 @@
   <title>@yield('title', 'Halaman Pengajuan SPPD')</title>
 
   @section('content')
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assetss/img/logouns.ico">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -70,7 +72,7 @@
                                       <a class="btn btn-info btn-xs disabled" href=""><i class="fa fa-download"></i> Download<span class="caret"></span></a>
                                       @endif
                                       @if($item->status == 0)
-                                      <a href="" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
+                                      <a href="{{route('cetaksppd', $item->id_sppd)}}" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
                                       @endif
                                     </td>
                                     <td>

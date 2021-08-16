@@ -11,34 +11,34 @@
 <title>Siperjadin</title>
 
 <!-- Favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="assetss/img/logouns.ico">
 
 
 <!-- CSS Here -->
    <!-- MagnificPopup.css -->
-   <link rel="stylesheet" href="assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/magnific-popup.css') }}">
    <!-- SlickNav.css -->
-   <link rel="stylesheet" href="assets/css/slicknav.min.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/slicknav.min.css') }}">
    <!-- Owl.carousel.css -->
-   <link rel="stylesheet" href="assets/css/owl.carousel-2.3.4.min.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/owl.carousel-2.3.4.min.css') }}">
    <!-- Fontawesome.css -->
-   <link rel="stylesheet" href="assets/css/fontawesome-free-5.12.0.min.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/fontawesome-free-5.12.0.min.css') }}">
    <!-- Bootstrap.css -->
-   <link rel="stylesheet" href="assets/css/bootstrap-4.3.1.min.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/bootstrap-4.3.1.min.css') }}">
    <!-- Default.css -->
-   <link rel="stylesheet" href="assets/css/default.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/default.css') }}">
    <!-- Style.css -->
-   <link rel="stylesheet" href="assets/css/style.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/style.css') }}">
    <!-- Responsive.css -->
-   <link rel="stylesheet" href="assets/css/responsive.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/responsive.css') }}">
 
    <!-- ColorNip.css -->
-   <link rel="stylesheet" href="assets/css/colornip.min.css">
-   <link id="theme" rel="stylesheet" href="assets/css/theme-colors/theme-default.css">
+   <link rel="stylesheet" href="{{ asset('assetss/css/colornip.min.css') }}">
+   <link id="theme" rel="stylesheet" href="{{ asset('assetss/css/theme-colors/theme-default.css') }}">
 
 
    <!-- Jquery -->
-   <script src="assets/js/jquery-3.4.1.min.js"></script>
+   <script src="{{ asset('assetss/js/jquery-3.4.1.min.js') }}"></script>
 
 </head>
 <body>
@@ -48,7 +48,7 @@
         <i class="fas fa-cogs"></i>
     </button>
     <h5 style="margin-bottom: 5px">Change Color</h5>
-    <ul id="colors" data-dir="assets/css/theme-colors/">
+    <ul id="colors" data-dir="assetss/css/theme-colors/">
         <li data-scheme="theme-default" data-color="#4272d7" style="background-color:#4272d7"></li>
         <li data-scheme="theme-red" data-color="#fa4251" style="background-color:#fa4251"></li>
         <li data-scheme="theme-green" data-color="#63c76a" style="background-color:#63c76a"></li>
@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-6">
                         <div class="site-logo">
-							<h2>BE-ONE</h2>
+							<h2>SIPERJADIN</h2>
                             <a data-toggle="tooltip" title="Be-one" href="index.html"></a>
                         </div>
                     </div>
@@ -87,12 +87,8 @@
                     <div class="col-lg-9 text-right d-none d-lg-block">
                         <nav class="menu-wrapper">
                             <ul class="main-menu" id="mobile-menu">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#feature">Features</a></li>
-                                <li><a href="#portfolio">Portfolio</a></li>
-                                <li><a href="#page">Pages</a></li>
-                                <li><a href="#blog">Blog</a></li>
-                                <li><a href="#contact-us">Contact Us</a></li>
+                                <li><a href="/">Login</a></li>
+                                <li><a href="/register">Register</a></li>
                                 <li class="search-trigger d-none d-lg-inline-block"><a href="javascript:void(0)"><i class="fas fa-search"></i></a>
                                 </li>
                             </ul>
@@ -111,9 +107,8 @@
                     <div class="slider-carousel owl-carousel">
                         <div class="single-slider slider-bg-1 text-center">
                             <div class="slider-inner">
-                                <h1>WELCOME TO BE-ONE</h1>
-                                ><h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociic</h5>
-                                <a class="btn get-started-btn" href="#">Get Started</a>
+                                <h1>WELCOME TO SIPERJADIN</h1>
+                                <h5>Sistem Informasi Perjalanan Dinas Pegawai Sekolah Vokasi Universitas Sebelas Maret Surakarta</h5>
                             </div>
                         </div>
                         <div class="single-slider slider-bg-2 text-center">
@@ -137,20 +132,6 @@
     </div>
     <!-- End Slider Area -->
     <!-- Start Hire Us Area -->
-    <div class="hire-us-area theme-bg js--sticky-menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-9 col-12">
-                    <div class="hire-us-content">
-                        <h6>We’ve completed more than <span>100+</span> project for our amazing clients, If you interested?</h6> 
-                    </div>  
-                </div>
-                <div class="col-lg-3 col-md-3  offset-lg-2 col-12 text-right">
-                    <a class="btn hire-us-button" href="#">Hire Us</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- End Hire Us Area -->
     <!-- Start Icon Box Area -->
     <div class="icon-box-area pt-70 pb-70" id="feature">
@@ -159,9 +140,12 @@
                 <div class="col-lg-4">
                     <div class="single-icon-box icon-box-img-1">
                         <div class="icon-box-content">
-                            <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i> Top Investment Advisors</h6>
+                            <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i>Profil Sekolah Vokasi UNS</h6>
                             <div class="iconbox-content-body">
-                                <p>Mauris scelerisque ut ipsum id vulputate. Nulla laoreet, ligula vel congue ultricies, nibh ipsum egestas nunc, id porta nibh nunc non felis. Vestibulum nibh urna, lobortis ut euismod sed, dignissim non neque</p>
+                                <p>
+                                Sekolah Vokasi Universitas Sebelas Maret Surakarta mengelola Program Studi Diploma. Kantor manajemen Sekolah Vokasi UNS terletak di Kampus Tirtomoyo, Jalan Kolonel Sutarto 150K,  Jebres, Surakarta, sedangkan perkuliahan program studi diselenggarakan selain di 
+                                Kampus Tirtomoyo juga diselenggarakan di Kampus Kentingan, Jalan Ir. Sutami 36 A Surakarta.
+                                </p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
@@ -170,9 +154,11 @@
                 <div class="col-lg-4">
                     <div class="single-icon-box icon-box-img-2">
                         <div class="icon-box-content">
-                            <h6 class="iconbox-content-heading"><i class="fas fa-cogs"></i> Business Performance</h6>
+                            <h6 class="iconbox-content-heading"><i class="fas fa-cogs"></i>Program Studi</h6>
                             <div class="iconbox-content-body">
-                                <p>Mauris scelerisque ut ipsum id vulputate. Nulla laoreet, ligula vel congue ultricies, nibh ipsum egestas nunc, id porta nibh nunc non felis. Vestibulum nibh urna, lobortis ut euismod sed, dignissim non neque</p>
+                                <p>
+                               
+                                </p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
@@ -384,7 +370,7 @@
                 </div>
                 <div class="col-md-6 d-none d-md-block">
                     <div class="hire-us-img">
-                        <img src="assets/img/hire_us.png" alt="">
+                        <img src="assetss/img/hire_us.png" alt="">
                     </div>
                 </div>
             </div>
@@ -402,7 +388,7 @@
                     <div class="blog-carousel owl-carousel">
                         <div class="single-blog-item">
                             <div class="single-blog-img">
-                                <img src="assets/img/blog_01.jpg" alt="">
+                                <img src="assetss/img/blog_01.jpg" alt="">
                                 <span>October 25, 2017</span>
                             </div>
                             <div class="blog-content">
@@ -420,7 +406,7 @@
                         </div>
                         <div class="single-blog-item">
                             <div class="single-blog-img">
-                                <img src="assets/img/blog_02.jpg" alt="">
+                                <img src="assetss/img/blog_02.jpg" alt="">
                                 <span>October 25, 2017</span>
                             </div>
                             <div class="blog-content">
@@ -438,7 +424,7 @@
                         </div>
                         <div class="single-blog-item">
                             <div class="single-blog-img">
-                                <img src="assets/img/blog_03.jpg" alt="">
+                                <img src="assetss/img/blog_03.jpg" alt="">
                                 <span>October 25, 2017</span>
                             </div>
                             <div class="blog-content">
@@ -456,7 +442,7 @@
                         </div>
                         <div class="single-blog-item">
                             <div class="single-blog-img">
-                                <img src="assets/img/blog_04.jpg" alt="">
+                                <img src="assetss/img/blog_04.jpg" alt="">
                                 <span>October 25, 2017</span>
                             </div>
                             <div class="blog-content">
@@ -486,7 +472,7 @@
                             </div>
                             <div class="author-details d-flex">
                                 <div class="author-img">
-                                    <img src="assets/img/user_01.png" alt="">
+                                    <img src="assetss/img/user_01.png" alt="">
                                 </div>
                                 <div class="author-content">
                                    <a href="#">Michael Green</a>
@@ -501,7 +487,7 @@
                             </div>
                             <div class="author-details d-flex">
                                 <div class="author-img">
-                                    <img src="assets/img/user_02.png" alt="">
+                                    <img src="assetss/img/user_02.png" alt="">
                                 </div>
                                 <div class="author-content">
                                    <a href="#">Michael Green</a>
@@ -516,7 +502,7 @@
                             </div>
                             <div class="author-details d-flex">
                                 <div class="author-img">
-                                    <img src="assets/img/user_03.png" alt="">
+                                    <img src="assetss/img/user_03.png" alt="">
                                 </div>
                                 <div class="author-content">
                                    <a href="#">Michael Green</a>
@@ -536,32 +522,32 @@
             <div class="brand-carousel owl-carousel">
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/1.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/1.png" alt=""></a>
                     </div>
                 </div>
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/2.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/2.png" alt=""></a>
                     </div>
                 </div>
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/3.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/3.png" alt=""></a>
                     </div>
                 </div>
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/4.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/4.png" alt=""></a>
                     </div>
                 </div>
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/5.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/5.png" alt=""></a>
                     </div>
                 </div>
                 <div class="brand-item">
                     <div class="brand-item-inner">
-                        <a href="#"><img src="assets/img/brands/6.png" alt=""></a>
+                        <a href="#"><img src="assetss/img/brands/6.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -608,10 +594,10 @@
                             <h6>Contact us</h6>
                         </div>
                         <div class="address-line">
-                            <p>Address: 379 5th Ave  New York, NYC 10018, United States</p>
-                            <p>Phone: <a href="tel:+112345 6999">+(112) 345 6999</a></p>
+                            <p>Alamat: Jalan Kolonel Sutarto Nomor 150K, Jebres, Surakarta City, Central Java 57126</p>
+                            <p>Phone: <a href="tel:+112345 6999">(0271) 662622</a></p>
                             <p>Fax: +(112) 345 8999</p>
-                            <p>Email: <a href="mailto:contact@be-one.com">contact@be-one.com</a></p>
+                            <p>Email: <a href="mailto:contact@be-one.com">campus@mail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -648,26 +634,26 @@
     <!-- End Copyright Area -->
 <!-- JS -->
    <!-- Popper.js -->
-   <script src="assets/js/popper.min.js"></script>
+   <script src="{{ asset('assetss/js/popper.min.js') }}"></script>
    <!-- Bootstrap.js -->
-   <script src="assets/js/bootstrap-4.3.1.min.js"></script>
+   <script src="{{ asset('assetss/js/bootstrap-4.3.1.min.js') }}"></script>
    <!-- Modernizr.js -->
-   <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/modernizr-3.5.0.min.js') }}"></script>
    <!-- Owl.Carousel.js -->
-   <script src="assets/js/vendor/owl.carousel-2.3.4.min.js"></script>
-   <script src="assets/js/vendor/owl.carousel2.thumbs.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/owl.carousel-2.3.4.min.js') }}"></script>
+   <script src="{{ asset('assetss/js/vendor/owl.carousel2.thumbs.min.js') }}"></script>
    <!-- Waypoints.js -->
-   <script src="assets/js/vendor/waypoints-4.0.1.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/waypoints-4.0.1.min.js') }}"></script>
    <!-- ColorNip.js -->
-   <script src="assets/js/vendor/colornip.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/colornip.min.jss') }}"></script>
    <!-- SlickNav.js -->
-   <script src="assets/js/vendor/slicknav.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/slicknav.min.js') }}"></script>
    <!-- ScrollUp.js -->
-   <script src="assets/js/vendor/jquery.scrollUp.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/jquery.scrollUp.min.js') }}"></script>
    <!-- MagnificPopup.js -->
-   <script src="assets/js/vendor/magnific-popup.min.js"></script>
+   <script src="{{ asset('assetss/js/vendor/magnific-popup.min.js') }}"></script>
 
    <!-- Main.js -->
-   <script src="assets/js/main.js"></script>
+   <script src="{{ asset('assetss/js/main.js') }}"></script>
 </body>
 </html>

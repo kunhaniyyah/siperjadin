@@ -39,7 +39,7 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect('/');
+        return redirect('/home');
     }
     public function registrasi(){
         return view('page.auth.register');

@@ -1,5 +1,7 @@
 @extends('layout.master')
 @section('title', 'Dashboard')
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="assetss/img/logouns.ico">
 @push('custom-css')
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
