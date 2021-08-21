@@ -26,7 +26,7 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="{{ route('login')}}" method="POST">
+      <form action="{{ url('login')}}" method="POST">
       @csrf
         <div class="input-group mb-3">
           <input type="text" id="username" name="username" value="{{ old('username')}}" class="form-control @error('username')is-invalid @enderror" placeholder="{{ __('Username') }}">

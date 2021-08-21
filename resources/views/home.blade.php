@@ -43,19 +43,7 @@
 </head>
 <body>
     <!-- Color Nip -->
-    <div class="Switcher">
-    <button id="Switcher__control" class="Switcher__control">
-        <i class="fas fa-cogs"></i>
-    </button>
-    <h5 style="margin-bottom: 5px">Change Color</h5>
-    <ul id="colors" data-dir="assetss/css/theme-colors/">
-        <li data-scheme="theme-default" data-color="#4272d7" style="background-color:#4272d7"></li>
-        <li data-scheme="theme-red" data-color="#fa4251" style="background-color:#fa4251"></li>
-        <li data-scheme="theme-green" data-color="#63c76a" style="background-color:#63c76a"></li>
-        <li data-scheme="theme-yellow" data-color="#ffe048" style="background-color:#ffe048"></li>
-        <li data-scheme="theme-orange" data-color="#f39c12" style="background-color:#f39c12"></li>
-    </ul>
-    </div>
+    
     <!-- End Color Nip -->
     <div class="search-overlay"></div>
     <!-- Search Modal -->
@@ -113,16 +101,14 @@
                         </div>
                         <div class="single-slider slider-bg-2 text-center">
                             <div class="slider-inner">
-                                <h1>Free MULTIPURPSE TEMPLATE</h1>
-								<h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis n</h5
+								<h5>
+                                    Sistem Informasi Perjalanan Dinas Pegawai Sekolah Vokasi UNS 
+                                    merupakan sarana 
+                                    pengajuan Surat Tugas dan Surat Perintah Perjalanan Dinas
+                                    berbasis web untuk mempermudah dalam 
+                                    melakukan prosedur pengajuan secara efektif dan efisien
+                                </h5
 >                                <a class="btn get-started-btn" href="#">Get Started</a>
-                            </div>
-                        </div>
-                        <div class="single-slider slider-bg-3 text-center">
-                            <div class="slider-inner">
-                                <h1>WE PROMOTE YOUR BUSINESS</h1>
-								<h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis n</h5>
-                                <a class="btn get-started-btn" href="#">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -157,7 +143,8 @@
                             <h6 class="iconbox-content-heading"><i class="fas fa-cogs"></i>Program Studi</h6>
                             <div class="iconbox-content-body">
                                 <p>
-                               
+                                    Sekolah Vokasi UNS memiliki sekitar 29 Program Studi baik dari 
+                                    program Diploma 3 maupun Diploma 4.
                                 </p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
@@ -167,9 +154,11 @@
                 <div class="col-lg-4">
                     <div class="single-icon-box icon-box-img-3">
                         <div class="icon-box-content">
-                            <h6 class="iconbox-content-heading"><i class="fas fa-chart-line"></i> Growth Hacking and Success</h6>
+                            <h6 class="iconbox-content-heading"><i class="fas fa-chart-line"></i>Visi dan Misi</h6>
                             <div class="iconbox-content-body">
-                                <p>Mauris scelerisque ut ipsum id vulputate. Nulla laoreet, ligula vel congue ultricies, nibh ipsum egestas nunc, id porta nibh nunc non felis. Vestibulum nibh urna, lobortis ut euismod sed, dignissim non neque</p>
+                                <p>
+                                “Menjadi pusat pengembangan kualitas sumber daya manusia yang berkelanjutan dan unggul di tingkat internasional dengan berlandaskan pada nilai luhur budaya nasional pada tahun 2045.”
+                                </p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
@@ -185,7 +174,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center mb-70">
                     <div class="section-title">
-                        <h4>We are Be-One</h4>
+                        <h4>Sistem Informasi Perjalanan Dinas Pegawai</h4>
                     </div>
                 </div>
             </div>
@@ -321,40 +310,7 @@
         </div>
     </div>
     <!-- End Latest Project Area -->
-    <!-- Start Why Choose Us Area -->
-    <div class="choose-us-area pt-70 pb-70" id="page">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center mb-70">
-                    <div class="section-title">
-                        <h4>Why Choose Us</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="video-img-thumbnail text-center">
-                        <a class="video-play" href="https://www.youtube.com/watch?v=SGo1i4BEBL4"><i class="far fa-play-circle"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-choose-item">
-                        <h6><a href="#"><i class="fas fa-cogs"></i> Awesome Design</a></h6>
-                        <p>Morbi vehicula a nibh in commodo. Aliquam quis dolor eget lectus pulvinar malesuada. Suspendisse eu rhoncus ligula.</p>
-                    </div>
-                    <div class="single-choose-item">
-                        <h6><a href="#"><i class="fas fa-gem"></i> Flexible Layouts </a></h6>
-                        <p>Nam orci metus, varius at nisl at, tempor facilisis magna. Ut maximus felis et tincidunt lacinia. Nulla malesuada ipsum at magna condimentum pharetra.</p>
-                    </div>
-                    <div class="single-choose-item">
-                        <h6><a href="#"><i class="fas fa-briefcase"></i> Easy to Use</a></h6>
-                        <p>Fusce viverra risus diam, in luctus nulla porta vel. Etiam nunc lorem, dapibus id augue vitae, lacinia pharetra eros. Fusce ac egestas purus, non porta est.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Why Choose Us Area -->
+
     <!-- Start Working With Us Area -->
     <div class="working-with-us-area gray-bg">
         <div class="container"> 
@@ -516,44 +472,7 @@
         </div>
     </div>
     <!-- End Carousel Area -->
-    <!-- Start Brands Area -->
-    <div class="brand-area gray-bg pt-70 pb-70">
-        <div class="container">
-            <div class="brand-carousel owl-carousel">
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/1.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/2.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/3.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/4.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/5.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="brand-item">
-                    <div class="brand-item-inner">
-                        <a href="#"><img src="assetss/img/brands/6.png" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Brands Area -->
+
     <!-- Start Footer Area -->
     <footer class="footer-area pt-60 pb-60 black-bg" id="contact-us">
         <div class="container">
@@ -561,7 +480,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="index.html">Be-One </a>
+                            <a href="index.html">SIPERJADIN </a>
                         </div>
                         <div class="footer-dec">
                             <p>Be-one is a clean PSD theme suitable for corporate, You can customize it very easy to fit your needs, semper suscipit metus accumsan at. Nam luctus ac tortor eu</p>
@@ -588,7 +507,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-12">
                     <div class="footer-widget">
                         <div class="widget-title">
                             <h6>Contact us</h6>
@@ -596,23 +515,9 @@
                         <div class="address-line">
                             <p>Alamat: Jalan Kolonel Sutarto Nomor 150K, Jebres, Surakarta City, Central Java 57126</p>
                             <p>Phone: <a href="tel:+112345 6999">(0271) 662622</a></p>
-                            <p>Fax: +(112) 345 8999</p>
+                            <p>Fax: 0271-646655</p>
                             <p>Email: <a href="mailto:contact@be-one.com">campus@mail.com</a></p>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <div class="widget-title">
-                            <h6>Newsletter</h6>
-                        </div>
-                        <div class="newsletter-text">
-                            <p>Subscribe to Newsletters and Stay informed about our news and events</p>
-                        </div>
-                        <form action="index.html" class="newsletter-form">
-                            <input type="email" placeholder="Your email">
-                            <input class="btn newsletter-btn" type="submit" value="Subscribe">
-                        </form>
                     </div>
                 </div>
             </div>
@@ -625,7 +530,7 @@
             <div class="row ">
                 <div class="col-12 text-center">
                     <div class="copyright-area ">
-                        <p>Copyright © 2021 Designed by <a href="https://www.wpfreecloud.com">wpfreecloud.com</a>. All rights reserved.</p>
+                        <p>Copyright © 2021</a>. Sekolah Vokasi Universitas Sebelas Maret Surakarta.</p>
                     </div>
                 </div>
             </div>

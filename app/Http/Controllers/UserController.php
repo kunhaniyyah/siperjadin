@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Yajra\Datatables\Facades\Datatables;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
     /**
      * Display a listing of the resource.
