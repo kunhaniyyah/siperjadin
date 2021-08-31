@@ -73,9 +73,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::findorfail($id);
+        $user->update($request->all());
+        return redirect('user')->with('status', 'Data berhasil diupdate');
     }
 
     /**
@@ -87,6 +89,21 @@ class UserController extends Controller
     public function destroy(User $id)
     {
         User::destroy($id);
-            return back()->with('success', 'Data berhasil dihapus!');
+        return back()->with('success', 'Data berhasil dihapus!');
+    }
+    public function statususer($id){
+        $user = User::where('id', $id)->first();
+        $status_sekarang= $user->status;
+        if($status_sekarang == 1)
+        {
+            User::where('id',$id)->update([
+                    'status'=>0
+                ]); 
+        }else{
+            User::where('id',$id)->update([
+                'status'=>1
+            ]); 
+        }
+        return back()->with('success', 'Status berhasil diubah!');
     }
 }

@@ -188,7 +188,7 @@
       <div class="modal-body">
       <div class="row">
           <div class="col md-8 offsite md-2">
-            <table class="table">
+            <table class="table table-striped">
               <tbody>
                 <tr>
                   <th scope="col">No. ST</th>
@@ -208,11 +208,11 @@
                 </tr>
                 <tr>
                   <th scope="col">Tanggal Berangkat</th>
-                  <td>{{$item->tgl_berangkat}}</td>
+                  <td>{{ date('d-m-Y', strtotime($item->tgl_berangkat)) }}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tanggal Pulang</th>
-                  <td>{{$item->tgl_pulang}}</td>
+                  <td>{{ date('d-m-Y', strtotime($item->tgl_pulang)) }}</td>
                 </tr>
                 <tr>
                   <th scope="col">Kegiatan</th>

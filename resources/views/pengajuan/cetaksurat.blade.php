@@ -9,7 +9,7 @@
 <style>
     table.tr.td{
         position: relative;
-        border: 1px solid #543535;
+        border: solid #543535;
         font-size:13;
     }
     .bold_text {

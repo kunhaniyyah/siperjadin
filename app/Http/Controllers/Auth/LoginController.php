@@ -43,6 +43,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    // protected function credentials(Request $request)
+    // {
+    //     $credentials = $request->only($this->username(), 'password');
+    //     return array_add($credentials, 'status',0);
+    // }
     public function showLoginForm()
     {
         return view('page.auth.login');
@@ -73,6 +78,7 @@ class LoginController extends Controller
             'level_user'        => 'staff',
             'name'              =>$request->name,
             'email'             =>$request->email,
+            'status'            =>$request->status,
             'password'          =>bcrypt($request->password),
             'remember_token'    => Str::random(60),
         ]);

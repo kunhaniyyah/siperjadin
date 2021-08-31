@@ -43,7 +43,7 @@
           <a href="{{ route('sppd.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#tambahmodal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
           </a>
       </div>
-      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i aria-hidden="true"></i>Cetak Rekap Data
+      <button type="button" data-toggle="modal" data-target="#cetakmodal" class="btn btn-success"><i class="fas fa-file-pdf" aria-hidden="true"></i> Export to PDF
       </button>
       <a href="{{ route('exportsppd') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
         </a>
@@ -223,6 +223,14 @@
                 <span class="text-danger">{{ $message }}</span>
               @enderror
           </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">File Surat Tugas</label>
+            <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" value="{{old('file')}}">
+              @error('file')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+          </div>
+         
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

@@ -38,7 +38,7 @@
                     <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
                     </button>
                 </div>
-                <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to PDF
+                <a href="{{ route('cetakpegawai') }}" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf" aria-hidden="true"></i> Export to PDF
                     </a>
                 <a href="{{ route('exportpegawai') }}" target="_blank" class="btn btn-success"><i aria-hidden="true"></i>Export to Excel
                     </a>
@@ -338,10 +338,6 @@
             <option>UPT Kearsipan</option>
           </select>
         </div>
-        <div class="form-group">
-                  <label for="exampleFormControlInput1">Foto</label>
-                  <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto" placeholder="Masukkan Nama Lengkap" value="{{old('foto')}}">
-          </div>
       </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

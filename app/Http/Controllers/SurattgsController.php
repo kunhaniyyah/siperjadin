@@ -29,7 +29,9 @@ class SurattgsController extends Controller
      */
     public function create()
     {
-        //return view ('surattugas.tambahst');
+        $datast = Surattugas::all();
+        $data = Surattugas::where('nip', Auth::user())->first();
+        $surattgs = Surattugas::where('id');
     }
 
     /**

@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Halaman SPPD')</title>
+  <title>@yield('title', 'Halaman Akun')</title>
 
   @section('content')
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assetss/img/logouns.ico">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -30,67 +32,117 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        
-    <!-- Main content -->
-    <section class="content">
-    <h2 class="mt-0"> Data Pegawai</h2>
+      <div class="container-fluid"> 
+        <!-- Main content -->
+        <section class="content">
+        <h2 class="mt-0">Akun</h2>
 
-<div class="card card-info card-outline">
-<div class="card-header">
-    <div class="card-tools">
-        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
-        </button>
-    </div>
+          <div class="card card-info card-outline">
+            <div class="card-header"></div>
+              <div class="card-body table-responsive" >
+                <div class="row">
+                          <div class="col md-8 offsite md-2">
+                                <table class="table table-striped">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="col">NIP</th>
+                                      @foreach ($user as $item)
+                                      <td>:     {{$item->nip}}</td>
+                                      @endforeach
+                                    </tr>
+                                    <tr>
+                                      <th scope="col">Nama</th>
+                                      @foreach ($user as $item)
+                                      <td>:     {{$item->name}}</td>
+                                      @endforeach
+                                    </tr>
+                                    <tr>
+                                      <th scope="col">Username</th>
+                                      @foreach ($user as $item)
+                                      <td>:     {{$item->username}}</td>
+                                      @endforeach
+                                    </tr>
+                                    <tr>
+                                      <th scope="col">Email</th>
+                                      @foreach ($user as $item)
+                                      <td>: {{$item->email}}</td>
+                                      @endforeach
+                                    </tr>
+                                    <tr>
+                                      <th scope="col">Level</th>
+                                      @foreach ($user as $item)
+                                      <td>: {{$item->level_user}}</td>
+                                      @endforeach
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                  <div class="modal-footer">
+                                  @foreach ($user as $item)
+                                    <button onclick="$('#editmodal').modal('show')" type="button" class="btn btn-primary">Edit</button>
+                                  @endforeach
+                                  </div>
+                            </div><!-- /.card body table responsive -->
+                        </div>
+                      </div>
+                    </div>
+                    </section>
+                  </div>
+                </div><!-- /.container-fluid -->
+              </div>
 </div>
-<div class="card-body table-responsive" >
-    <table class="table table-bordered" id="datatables">
-      <thead>
-       <tr class="text-center">
-            <th scope="col">No</th>
-            <th scope="col">NIP</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Level</th>
-            <th scope="col">Aksi</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- kalo tidak ada data maka akan menampilkan pesan no data to display -->
-        @if ($user->count() == 0)
-      <tr>
-          <td colspan="10">No data to display.</td>
-      </tr>
-      @endif
-       @foreach ($user as $item)
-        <tr class="text-center">
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->nip}}</td>
-            <td>{{ $item->name}}</td>
-            <td>{{ $item->username}}</td>
-            <td>{{ $item->email}}</td>
-            <td>{{ $item->level_user}}</td>
-            <td>
-              <form action="{{ route('user.destroy', $item->nip) }}" method="POST" class="d-inline">
-                @method('Delete')
-                @csrf
-                <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
-              </form>
-            </td>
-        </tr>
-        @endforeach
-      </table>
-    </tbody>
-        </div><!-- /.card body table responsive -->
-      </div>
+
+<!-- modal edit -->
+@foreach($user as $item)
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          {{ csrf_field() }}
+          @method('PUT')
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No SPPD</label>
+              <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{$item->no_sppd}}">
+                @error('no_st')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No Surat Tugas</label>
+              <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{$item->no_st}}">
+                @error('no_st')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">NIP</label>
+              <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+                @error('nip')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama</label>
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->nama}}">
+                @error('nama')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
+          </form>
+        </div>
     </div>
   </div>
-</div><!-- /.container-fluid -->
 </div>
-</section>
-
-
+@endforeach
+<!-- end modal -->
 
 @include('layout.footer')
 @include('sweetalert::alert')
@@ -100,8 +152,14 @@
 @stack('custom-script')
 
 <!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.js"></script>
-<script src="assets/dataTables/datatables.min.js"></script>
+<script src=" {{ asset('assets/dist/js/adminlte.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('assets/dataTables/datatables.min.js') }}"></script>
 <script>
   $(document).ready( function () {
     $('#datatables').DataTable();

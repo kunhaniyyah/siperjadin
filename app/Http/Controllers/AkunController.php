@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Facades\Datatables;
+
 
 class AkunController extends Controller
 {
@@ -17,7 +18,7 @@ class AkunController extends Controller
 
     public function index()
     {
-        $user = User::paginate(10);
+        $user = User::where('nip', Auth::user()->nip,)->get();
         return view('user.akun', compact('user'));
     }
 

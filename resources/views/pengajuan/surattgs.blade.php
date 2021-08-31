@@ -154,7 +154,7 @@
       <div class="modal-body">
       <div class="row">
           <div class="col md-8 offsite md-2">
-            <table class="table">
+            <table class="table table-striped">
               <tbody>
                 <tr>
                   <th scope="col">No. ST</th>

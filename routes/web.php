@@ -28,7 +28,7 @@ Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Auth::routes(['verify'=> true]);
+Auth::routes(['verify'=> true]);
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
     Route::resource('sppd','App\Http\Controllers\SppdController');
     Route::resource('surattugas','App\Http\Controllers\SurattugasController');
     Route::resource('user','App\Http\Controllers\UserController');
-    Route::get('user/json','UserController@json');
+    Route::get('/statususer/{id}', [App\Http\Controllers\UserController::class, 'statususer'])->name('statususer');
     Route::get('/exportpegawai', [App\Http\Controllers\PegawaiController::class, 'pegawaiexport'])->name('exportpegawai');
     Route::get('/exportst', [App\Http\Controllers\SurattugasController::class, 'surattugasexport'])->name('exportst');
     Route::get('/exportsppd', [App\Http\Controllers\SppdController::class, 'sppdexport'])->name('exportsppd');

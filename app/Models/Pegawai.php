@@ -23,7 +23,6 @@ class Pegawai extends Model
         'jabfung_id',
         'golongan',
         'tingkat',
-        'foto',
     ];
 
     public function jabfung()

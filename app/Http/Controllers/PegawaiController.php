@@ -85,11 +85,8 @@ class PegawaiController extends Controller
             'jabfung_id'=>$request->jabfung_id,
             'tingkat'   =>$request->tingkat,
             'jabatan'   =>$request->jabatan,
-            'foto'      =>$request->foto,
+           
         ]);
-        $nm = $request->foto;
-        $namaFile = $nm->getClientOriginalName();
-        $nm->move(public_path().'/img', $namaFile);
         return redirect('pegawai')->with('toast_success', 'Data berhasil ditambahkan!');
     }
 

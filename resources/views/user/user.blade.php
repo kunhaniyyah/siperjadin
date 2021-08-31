@@ -49,10 +49,12 @@
        <tr class="text-center">
             <th scope="col">No</th>
             <th scope="col">NIP</th>
+            <th scope="col">NIP</th>
             <th scope="col">Nama</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Level</th>
+            <th scope="col">Status</th>
             <th scope="col">Aksi</th>
         </tr>
         </thead>
@@ -66,13 +68,22 @@
        @foreach ($user as $item)
         <tr class="text-center">
             <td>{{ $loop->iteration }}</td>
+            <td>
+                @if($item->status==0)
+                  <a href="{{ route('statususer', $item->id)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
+                @else 
+                  <a href="{{ route('statususer' , $item->id)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
+                @endif
+            </td>
             <td>{{ $item->nip}}</td>
             <td>{{ $item->name}}</td>
             <td>{{ $item->username}}</td>
             <td>{{ $item->email}}</td>
             <td>{{ $item->level_user}}</td>
+            <td><span class="badge {{ ($item->status == 0) ? 'badge-danger' : 'badge-success'   }}">{{ ($item->status == 0) ?   "Non Aktif" : "Aktif" }}</span></td>
             <td>
-              <form action="{{ route('user.destroy', $item->id) }}" method="POST" class="d-inline">
+            <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id}}"><i class="fas fa-pencil-alt"></i></button>
+              <form action="{{ route('user.destroy', $item->nip) }}" method="POST" class="d-inline">
                 @method('Delete')
                 @csrf
                 <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
@@ -90,6 +101,54 @@
 </div>
 </section>
 
+<!-- modal edit -->
+@foreach ($user as $item)
+<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('user.update' , $item->id)}}" method="post">
+      <div class="modal-body">
+      {{ csrf_field() }}
+      @method('PUT')
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Nama</label>
+                <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="name" name="name" placeholder="Masukkan No Surat Tugas"  value="{{$item->name}}">
+                  @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Username</label>
+                <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="username" name="username" placeholder="Masukkan No Surat Tugas"  value="{{$item->username}}">
+                  @error('username')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="email" name="email" placeholder="Masukkan No Surat Tugas"  value="{{$item->email}}">
+                  @error('email')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>           
+@endforeach
+<!-- end modal -->
+</section>
 
 
 @include('layout.footer')
