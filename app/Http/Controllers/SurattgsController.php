@@ -19,7 +19,10 @@ class SurattgsController extends Controller
     {
         $data = Surattugas::where('nip', Auth::user()->nip)->get();
         $user = User::where('nip', Auth::user()->nip)->get();
-        return view('pengajuan.surattgs', compact('data', 'user'));
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
+        $cek = Surattugas::where('tanggal_st', $tgl) -> first();
+        return view('pengajuan.surattgs', compact('data', 'user', 'cek'));
     }
 
     /**
@@ -30,6 +33,7 @@ class SurattgsController extends Controller
     public function create()
     {
         $datast = Surattugas::all();
+        
         $data = Surattugas::where('nip', Auth::user())->first();
         $surattgs = Surattugas::where('id');
     }
@@ -43,12 +47,15 @@ class SurattgsController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
         Surattugas::create([
             'nip'           =>Auth::user()->nip,
             'nama'          =>Auth::user()->name,
             'keperluan'     =>$request->keperluan,
             'tanggal'       =>$request->tanggal,
             'tempat'        =>$request->tempat,
+            'tanggal_st'    =>$tgl,
         ]);
         return redirect('surattgs');
     }

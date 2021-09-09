@@ -19,6 +19,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
@@ -30,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes(['verify'=> true]);
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
-Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
+Route::group(['middleware' => ['ceklevel:admin']], function(){
     Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
     Route::resource('pegawai','App\Http\Controllers\PegawaiController');
     Route::resource('sppd','App\Http\Controllers\SppdController');
@@ -55,10 +56,10 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function(){
 });
 
 
+Route::resource('surattgs','App\Http\Controllers\SurattgsController');
 Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
     Route::resource('sppdpegawai','App\Http\Controllers\SppdpegawaiController');
-    Route::resource('surattgs','App\Http\Controllers\SurattgsController');
     Route::resource('akun','App\Http\Controllers\AkunController');
 });
 
@@ -75,4 +76,6 @@ Route::get('auth/google/callback',[App\Http\Controllers\GoogleController::class,
   
 // Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

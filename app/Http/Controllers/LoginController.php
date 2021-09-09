@@ -54,6 +54,7 @@ class LoginController extends Controller
             'level_user'        => 'staff',
             'name'              =>$request->name,
             'email'             =>$request->email,
+            'status'             =>"1",
             'password'          =>bcrypt($request->password),
             'remember_token'    => Str::random(60),
         ]);

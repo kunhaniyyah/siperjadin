@@ -40,7 +40,8 @@ class SurattugasController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
         Surattugas::create([
             'no_st'         =>$request->no_st,
             'nip'           =>$request->nip,
@@ -48,6 +49,7 @@ class SurattugasController extends Controller
             'keperluan'     =>$request->keperluan,
             'tanggal'       =>$request->tanggal,
             'tempat'        =>$request->tempat,
+            'tanggal_st'    =>$tgl,
         ]);
         return redirect('surattugas');
     }

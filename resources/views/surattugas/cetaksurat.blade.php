@@ -19,7 +19,7 @@
 </head>
 <body>
     <center>
-    <table style="width: 85%;" border="1">
+    <table style="width: 85%;">
         <tr>
             <!-- <td><img src="{{ asset('assets/dist/img/uns2.png') }}" float="right" margin="15px" width="95" height="95"></td> -->
             <td>

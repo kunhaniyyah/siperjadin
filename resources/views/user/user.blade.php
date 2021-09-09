@@ -34,14 +34,14 @@
         
     <!-- Main content -->
     <section class="content">
-    <h2 class="mt-0"> Data Pegawai</h2>
+    <h2 class="mt-0"> Data User</h2>
 
 <div class="card card-info card-outline">
 <div class="card-header">
-    <div class="card-tools">
-        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah Data 
+    <!-- <div class="card-tools">
+        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"  data-toggle="modal" data-target="#exampleModal"></i> Tambah User
         </button>
-    </div>
+    </div> -->
 </div>
 <div class="card-body table-responsive" >
     <table class="table table-bordered" id="datatables">
@@ -83,7 +83,7 @@
             <td><span class="badge {{ ($item->status == 0) ? 'badge-danger' : 'badge-success'   }}">{{ ($item->status == 0) ?   "Non Aktif" : "Aktif" }}</span></td>
             <td>
             <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id}}"><i class="fas fa-pencil-alt"></i></button>
-              <form action="{{ route('user.destroy', $item->nip) }}" method="POST" class="d-inline">
+              <form action="{{ route('user.destroy', $item->id) }}" method="POST" class="d-inline">
                 @method('Delete')
                 @csrf
                 <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
@@ -149,6 +149,63 @@
 @endforeach
 <!-- end modal -->
 </section>
+
+
+<!-- modal tambah data -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('user.store')}}" method="post">
+          {{ csrf_field() }}
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">NIP</label>
+                  <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{old('nip')}}">
+                    @error('nip')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nama</label>
+                  <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan Nama Lengkap" value="{{old('name')}}">
+                  @error('nip')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Username</label>
+                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukkan Nama Lengkap" value="{{old('username')}}">
+                  @error('nip')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Level User</label>
+                  <select class="form-control @error('pangkat') is-invalid @enderror" id="level_user" name="level_user">
+                    <option>admin</option>
+                    <option>staff</option>
+                  </select>
+                  @error('pangkat')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      <button type="submit" class="btn btn-success">Simpan Data</button>
+                    </div>
+                  </div>
+      </div>
+    </div>
+  </div>
+  @include('sweetalert::alert')
+</form>
+<!-- selesai modal tambah data  -->
 
 
 @include('layout.footer')

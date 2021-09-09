@@ -19,6 +19,7 @@ class Surattugas extends Model
         'tanggal',
         'tempat',
         'status',
+        'tanggal_st',
         'created_at',
     ];
     public function user(){

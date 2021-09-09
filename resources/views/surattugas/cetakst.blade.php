@@ -18,7 +18,7 @@
 <body>
 <div class="form-group">
     <p align="center"><b>Rekap Data Surat Tugas</b></p>
-    <table class="static" align="center" rules="all" border="1px" style="width: 95%;">
+    <table class="static" align="center" rules="all" style="width: 95%;">
         <tr>
             <th>No. Surat Tugas</th>
             <th>NIP</th>

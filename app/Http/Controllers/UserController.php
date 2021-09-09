@@ -41,7 +41,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        // $request->validate([
+        //     'name'              => 'required',
+        //     'username'          => 'required',
+        //     'email'             => 'required',
+        //     'nip'               => 'required',
+        //     'level_user'        => 'required',
+        // ]);
+
+        // //insert ke tabel user
+        // User::create([
+        //     'nama'          =>$request->name,
+        //     'nip'           =>$request->nip,
+        //     'username'      =>$request->username,
+        //     'level_user'    =>$request->level_user,
+        // ]);
+
+        // return redirect('user')->with('success', 'Data Pengguna Berhasil Ditambahkan!');
     }
 
     /**
@@ -86,11 +103,12 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $id)
-    {
-        User::destroy($id);
-        return back()->with('success', 'Data berhasil dihapus!');
-    }
+        public function destroy(User $user)
+        {
+            User::destroy($user->id);
+            return redirect('/user')->with('success', 'Data Pengguna Berhasil Dihapus!');
+        }
+
     public function statususer($id){
         $user = User::where('id', $id)->first();
         $status_sekarang= $user->status;
