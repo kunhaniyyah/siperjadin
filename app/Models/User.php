@@ -9,20 +9,21 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Events\Registered;
 
 
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
     //protected $primaryKey = $id_user;
     protected $fillable = [
+           
+        'name',
         'username',
         'nip',
-        'name',
         'email',
-        'level_user',
-        'password',
         'status',
-        'google_id',
+        'password',
+        'level_user',
+        'status'
     ];
 
     /**
@@ -43,12 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function handle(Registered $event)
-    {
-        if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
-            $event->user->sendEmailVerificationNotification();
-        }
-    }
+    // public function handle(Registered $event)
+    // {
+    //     if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
+    //         $event->user->sendEmailVerificationNotification();
+    //     }
+    // }
 
     public function surattugas(){
         

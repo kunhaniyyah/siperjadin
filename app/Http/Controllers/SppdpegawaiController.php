@@ -18,7 +18,10 @@ class SppdpegawaiController extends Controller
     {
         $data = Sppd::where('nip', Auth::user()->nip)->get();
         // $datast = Surattugas::where('no_st', Auth::surattugas()->no_st)->get();
-        return view('pengajuan.sppdpegawai', compact('data'));
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
+        $cek = Sppd::where('tanggal_sppd', $tgl) -> first();
+        return view('pengajuan.sppdpegawai', compact('data','cek'));
     }
 
     /**
@@ -28,7 +31,10 @@ class SppdpegawaiController extends Controller
      */
     public function create()
     {
-        //
+        $datast = Sppd::all();
+        
+        $data = Sppd::where('nip', Auth::user())->first();
+        $sppd = Sppd::where('id');
     }
 
     /**
@@ -39,6 +45,8 @@ class SppdpegawaiController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
         Sppd::create([
             'no_sppd'       =>$request->no_sppd,
             'no_st'         =>$request->no_st,
@@ -50,6 +58,7 @@ class SppdpegawaiController extends Controller
             'kegiatan'      =>$request->kegiatan,
             'provinsi'      =>$request->provinsi,
             'kota'          =>$request->kota,
+            'tanggal_sppd'  =>$tgl,
         ]);
         return back();
     }

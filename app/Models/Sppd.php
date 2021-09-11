@@ -23,6 +23,7 @@ class Sppd extends Model
         'kegiatan',
         'tingkat',
         'status',
+        'tanggal_sppd',
     ];
     public function user(){
         return $this->belongsTo(User::class);

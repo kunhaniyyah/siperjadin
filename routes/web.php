@@ -19,17 +19,18 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::routes();
+Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('/register', [App\Http\Controllers\Auth\LoginController::class, 'registrasi'])->name('register');
-Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class, 'simpanregistrasi'])->name('simpanregister');
+// Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+// Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+//Route::get('/register', [App\Http\Controllers\Auth\LoginController::class, 'registrasi'])->name('register');
+// Route::post('/simpanregister', [App\Http\Controllers\Auth\LoginController::class, 'simpanregistrasi'])->name('simpanregister');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(['verify'=> true]);
+
 //dipake biar kalo mau akses halaman member / halaman dashboard harus login dulu 
 Route::group(['middleware' => ['ceklevel:admin']], function(){
     Route::resource('dashboard','App\Http\Controllers\DashboardController')->middleware('verified');
@@ -51,16 +52,17 @@ Route::group(['middleware' => ['ceklevel:admin']], function(){
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'update'])->name('surattgs');
     Route::post('/surattgs', [App\Http\Controllers\SurattgsController::class, 'store'])->name('store');
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
-    
+    Route::post('profile', 'AkunController@update_avatar');
     
 });
 
 
-Route::resource('surattgs','App\Http\Controllers\SurattgsController');
 Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
     Route::get('/cetaksppd/{id_sppd}', [App\Http\Controllers\SppdController::class, 'cetaksppd'])->name('cetaksppd');
+    Route::resource('surattgs','App\Http\Controllers\SurattgsController');
     Route::resource('sppdpegawai','App\Http\Controllers\SppdpegawaiController');
     Route::resource('akun','App\Http\Controllers\AkunController');
+    Route::post('profile', 'AkunController@update_avatar');
 });
 
 Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
@@ -71,11 +73,3 @@ Route::group(['middleware' => ['auth','ceklevel:staff,admin']], function(){
 
 Route::get('auth/google',[App\Http\Controllers\GoogleController::class,'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback',[App\Http\Controllers\GoogleController::class,'handleGoogleCallback'])->name('google.callback');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-  
-// Auth::routes();
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -34,8 +34,13 @@
         <div class="card card-info card-outline">
               <div class="card-header">
                   <div class="card-tools">
+                  @if($cek) 
+                  <button disabled class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+                      </button>
+                  @else
                       <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
                       </button>
+                  @endif
                   </div>
               </div>
               <div class="card-body table-responsive">

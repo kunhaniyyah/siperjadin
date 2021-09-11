@@ -69,7 +69,7 @@
                                       @endforeach
                                     </tr>
                                     <tr>
-                                      <th scope="col">Level</th>
+                                      <th scope="col">Level User</th>
                                       @foreach ($user as $item)
                                       <td>: {{$item->level_user}}</td>
                                       @endforeach
@@ -80,7 +80,7 @@
                                   @foreach ($user as $item)
                                     <button onclick="$('#editmodal').modal('show')" type="button" class="btn btn-primary">Edit</button>
                                   @endforeach
-                                  </div>
+                                </div>
                             </div><!-- /.card body table responsive -->
                         </div>
                       </div>

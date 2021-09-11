@@ -19,14 +19,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{ url('/') }}"><b>SIPERJADIN</b></a>
+    <a><b>SIPERJADIN</b></a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Halaman Registrasi</p>
 
-      <form action="{{ route('simpanregister') }}" method="post">
+      <form action="{{ url('register') }}" method="post">
       {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="nip" placeholder="NIP">
