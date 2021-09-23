@@ -115,11 +115,11 @@ class UserController extends Controller
         if($status_sekarang == 1)
         {
             User::where('id',$id)->update([
-                    'status'=>0
+                    'status'=>'0'
                 ]); 
-        }else{
+        }else {
             User::where('id',$id)->update([
-                'status'=>1
+                'status'=>'1'
             ]); 
         }
         return back()->with('success', 'Status berhasil diubah!');

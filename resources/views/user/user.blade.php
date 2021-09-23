@@ -200,11 +200,11 @@
                       <button type="submit" class="btn btn-success">Simpan Data</button>
                     </div>
                   </div>
-      </div>
-    </div>
-  </div>
-  @include('sweetalert::alert')
-</form>
+              </div>
+            </div>
+          </div>
+          @include('sweetalert::alert')
+        </form>
 <!-- selesai modal tambah data  -->
 
 
