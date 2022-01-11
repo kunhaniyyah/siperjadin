@@ -75,7 +75,7 @@
             <tr>
                 <td>Tanggal </td>
                 @foreach ($datast as $item)
-                <td>: {{date('d-m-Y', strtotime($item->tanggal))}}</td>
+                <td>: {{date('d F Y', strtotime($item->created_at)) }}</td>
                 @endforeach
             </tr>
             <tr>
@@ -101,7 +101,7 @@
                 <tr>
                     @foreach ($datast as $item)
                     <td width="100">
-                        Surakarta, {{date('d-m-Y', strtotime($item->tanggal))}}
+                        Surakarta, {{date('d F Y', strtotime($item->created_at)) }}
                     </td>
                     @endforeach
                   <tr>

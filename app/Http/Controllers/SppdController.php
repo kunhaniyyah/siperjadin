@@ -45,6 +45,8 @@ class SppdController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = date('Y-m-d');
         $this->validate($request,
         [
             'no_sppd'       => 'required',
@@ -143,8 +145,20 @@ class SppdController extends Controller
         return Excel::download(new SppdExport , 'sppd.xlsx');
 
     }
-    public function getCreatedAtAttribute(){
+    public function getCreatedAtAttribute()
+    {
         return Carbon::parse($this->attributes['created_at'])
         ->translatedFormat('l, d F Y');
+        return Carbon::now()->settings(
+            [
+                'locale'    => 'id_ID',
+                'timezone'  => 'Asia/Jakarta'
+            ]
+            );
+        // return \Carbon\Carbon::parse($this->attributes['created_at'])
+        // ->diffForHumans();
+        // $mytime = Carbon::now();
+        // echo $mytime->toDateTimeString();
+        
     }
 }

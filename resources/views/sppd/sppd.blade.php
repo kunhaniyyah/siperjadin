@@ -59,7 +59,7 @@
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
               <th scope="col">Status</th>
-              <th scope="col">Tanggal</th>
+              <th scope="col">Status</th>
               <th scope="col">Aksi</th>
           </tr>
           </thead>
@@ -76,8 +76,9 @@
               </td>
               <td>{{ $item->no_sppd}}</td>
               <td>{{ $item->surattugas['no_st']}}</td>
-              <td>{{ $item->nama}}</td>
-              <td>{{date('d-m-Y', strtotime($item->created_at)) }}</td>
+              <td>{{ $item->pegawai['nama'] }}</td>
+              <td>{{date('l, d F Y', strtotime($item->created_at)) }}</td>
+              <!-- <td> {{date('d-m-Y', strtotime($item->tanggal_sppd))}} </td> -->
               <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success'  }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi"  }}</span></td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
@@ -94,7 +95,7 @@
                     <a href="#"><button class="btn btn-warning btn-sm disabled" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                     @endif
               </td>
-              <td> {{ $item->created_at }} </td>
+              
           </tr>
           @endforeach
         </table>

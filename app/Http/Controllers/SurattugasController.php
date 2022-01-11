@@ -8,6 +8,7 @@ use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Exports\SurattugasExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Carbon;
 
 class SurattugasController extends Controller
 {
@@ -137,5 +138,10 @@ class SurattugasController extends Controller
     {
         return Excel::download(new SurattugasExport , 'surattugas.xlsx');
 
+    }
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])
+        ->translatedFormat('l, d F Y');
     }
 }
