@@ -87,7 +87,8 @@ class AkunController extends Controller
             
         ];
 
-        if($request->name != Auth::user()->name || $request->exp_reminder != Auth::user()->exp_reminder){
+        if(
+            $request->name != Auth::user()->name || $request->exp_reminder != Auth::user()->exp_reminder){
             $update = DB::table('users')->where("id", Auth::user()->id)->update($data);
 
             if($update){

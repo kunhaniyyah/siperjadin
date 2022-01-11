@@ -10,22 +10,26 @@ class Surattugas extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ="surattugas";
-    protected $primaryKey ="id_st";
+    protected $primaryKey ="id_surattugas";
     protected $fillable = [
         'no_st',
-        'nip',
-        'nama',
         'keperluan',
         'tanggal',
         'tempat',
         'status',
         'tanggal_st',
         'created_at',
+        'pegawai_id_pegawai',
     ];
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class);
+    }
     public function sppd(){
-        return $this->hasMany('sppd');
+        return $this->hasOne(Sppd::class);
     }
 }

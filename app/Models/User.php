@@ -59,4 +59,8 @@ class User extends Authenticatable implements MustVerifyEmail
         
         return $this->hasMany(Sppd::class);
     }
+    public function pegawai(){
+        
+        return $this->hasOne(Pegawai::class);
+    }
 }

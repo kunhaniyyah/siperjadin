@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.js"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/DataTables/datatables.min.css') }}">
@@ -50,6 +51,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">No ST</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">NIP</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
@@ -67,25 +69,26 @@
                                 <td>{{ $loop->iteration}}</td>
                                 <td>
                                   @if($item->status==1)
-                                  <a href="{{ route('status', $item->id_st)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
+                                  <a href="{{ route('status', $item->id_surattugas)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
                                   @else 
-                                  <a href="{{ route('status' , $item->id_st)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
+                                  <a href="{{ route('status' , $item->id_surattugas)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
                                   @endif
                                 </td>
                                 <td>{{ $item->no_st}}</td>
-                                <td>{{ $item->nama}}</td>
+                                <td>{{ $item->pegawai['nama'] }}</td>
+                                <td>{{ $item->pegawai['nip'] }}</td>
                                 <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
                                 <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success'   }}">{{ ($item->status == 1) ?   "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>
                                 <td>
-                                  <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_st}}"><i class="fas fa-pencil-alt"></i></button>
-                                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_st}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                                  <form action="{{ route('surattugas.destroy', $item->id_st) }}" method="POST" class="d-inline">
+                                  <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_surattugas}}"><i class="fas fa-pencil-alt"></i></button>
+                                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_surattugas}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
+                                  <form action="{{ route('surattugas.destroy', $item->id_surattugas) }}" method="POST" class="d-inline">
                                     @method('Delete')
                                     @csrf
                                     <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
                                   </form>
                                   @if($item->status==0)
-                                  <a href="{{route('cetaksurat', $item->id_st)}}" target="_blank" ><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
+                                  <a href="{{route('cetaksurat', $item->id_surattugas)}}" target="_blank" ><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                                   @else
                                   <a href="#"><button class="btn btn-warning btn-sm disabled" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                                   @endif
@@ -95,7 +98,7 @@
                         </table>
                       </tbody>
                     </div><!-- /.card body table responsive -->
-          </div>
+              </div>
         </section>
     </div>
   </div><!-- /.card body table responsive -->
@@ -153,19 +156,31 @@
                   @enderror
               </div>
               <div class="form-group">
+                  <label for="exampleFormControlInput1">Nama</label>
+                  <select class="form-control" id="pegawai_id_pegawai" name="pegawai_id_pegawai">
+                    <option value="">Pilih Pegawai</option>
+                    @foreach ($pegawai as $item)
+                    <option value="{{ $item->id_pegawai }}">{{ $item->nama }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              <!-- <div class="form-group">
                 <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="">
+                @foreach ($pegawai as $item)
+                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="pegawai_id_pegawai" name="pegawai_id_pegawai" placeholder="Masukkan NIP" 
+                value="{{ $item->id_pegawai }}">
+                @endforeach
                   @error('nip')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
-              </div>
-              <div class="form-group">
+              </div> -->
+              <!-- <div class="form-group">
                 <label for="exampleFormControlInput1">Nama</label>
                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="">
                   @error('nama')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="exampleFormControlInput1">Keperluan</label>
                 <textarea class="form-control @error('keperluan') is-invalid @enderror" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan"></textarea>  
@@ -199,7 +214,7 @@
 
 <!-- modal detail -->
 @foreach ($datast as $item)
-<div class="modal fade" id="detailmodal{{$item->id_st}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailmodal{{$item->id_surattugas}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -219,11 +234,11 @@
                 </tr>
                 <tr>
                   <th scope="col">NIP</th>
-                  <td>{{$item->nip}}</td>
+                  <td>{{ $item->pegawai['nip']}}</td></td>
                 </tr>
                 <tr>
                   <th scope="col">Nama</th>
-                  <td>{{$item->nama}}</td>
+                  <td>{{$item->pegawai['nama']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tanggal</th>
@@ -253,7 +268,7 @@
 
 <!-- modal edit -->
 @foreach ($datast as $item)
-<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id_st}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id_surattugas}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -262,7 +277,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('surattugas.update' , $item->id_st)}}" method="post">
+      <form action="{{route('surattugas.update' , $item->id_surattugas)}}" method="post">
       <div class="modal-body">
       {{ csrf_field() }}
       @method('PUT')
@@ -275,14 +290,14 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->pegawai['nip']}}">
                   @error('nip')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Nama</label>
-                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->nama}}">
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->pegawai['nama']}}">
                   @error('nama')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror

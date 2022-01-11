@@ -71,7 +71,7 @@
 
                             <div class="col-md-6">
                             <select class="form-control" id="level_user" name="level_user">
-                                <option value="">Pilih Jabatan</option>
+                                <option value="">Pilih Level</option>
                                 <option value="staff">Staff</option>
                                 <option value="admin">Admin</option>
                             </select>

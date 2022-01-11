@@ -12,7 +12,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
 
 class PegawaiController extends Controller
 {
@@ -31,8 +31,9 @@ class PegawaiController extends Controller
     {
         $datapegawai = Pegawai::with('jabfung')->paginate(10);
         $jab = Jabfung::all();
+        $user = User::all();
         //$datapegawai = Pegawai::with('pegawai')->pagination(5);
-        return view('pegawai.pegawai', compact('datapegawai','jab'));
+        return view('pegawai.pegawai', compact('datapegawai','jab','user'));
     }
 
     public function cetakpegawai()

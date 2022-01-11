@@ -52,6 +52,7 @@
                           <th scope="col">Nama</th>
                           <th scope="col">Fakultas</th>
                           <th scope="col">Aksi</th>
+                          <th scope="col">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -67,6 +68,8 @@
                               <td>{{ $item->nip}}</td>
                               <td>{{ $item->nama}}</td>
                               <td>{{ $item->fakultas}}</td>
+                              <td>{{$item->users['username']}}</td>
+
                               <td>
                                 <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
                                 <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
@@ -208,8 +211,8 @@
               </div>
             </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-success" onclick="countWord()">Simpan Data</button>
         </div>
         </div>
     </form>

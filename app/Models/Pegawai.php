@@ -17,11 +17,11 @@ class Pegawai extends Model
     protected $fillable = [
         'nip',
         'nama',
-        'fakultas',
-        'pangkat',
+        'fakultas_id',
+        'pangkat_id',
         'jabatan',
         'jabfung_id',
-        'golongan',
+        'golongan_id',
         'tingkat',
     ];
 
@@ -30,8 +30,27 @@ class Pegawai extends Model
         //belongsto , 1 jabfung memiliki banyak pegawai
         return $this->belongsTo (Jabfung::class);
     }
+    public function fakultas()
+    {
+        //belongsto , 1 jabfung memiliki banyak pegawai
+        return $this->belongsTo (Fakultas::class);
+    }
+    public function pangkat()
+    {
+        //belongsto , 1 jabfung memiliki banyak pegawai
+        return $this->belongsTo (Pangkat::class);
+    }
+    public function golongan()
+    {
+        //belongsto , 1 jabfung memiliki banyak pegawai
+        return $this->belongsTo (Golongan::class);
+    }
     public function user()
     {
-       return $this->belongsTo(User::class);
+       return $this->hasOne(User::class);
+    }
+    public function surattugas()
+    {
+       return $this->hasMany(Surattugas::class);
     }
 }

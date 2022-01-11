@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Sppd extends Model
 {
@@ -13,22 +14,22 @@ class Sppd extends Model
     protected $primaryKey = "id_sppd";
     protected $fillable = [
         'no_sppd',
-        'no_st',
-        'nama',
-        'nip',
+        'surattugas_id_surattugas',
         'tgl_berangkat',
         'tgl_pulang',
         'provinsi',
         'kota',
         'kegiatan',
-        'tingkat',
         'status',
         'tanggal_sppd',
     ];
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function pegawai(){
+        return $this->belongsTo(Pegawai::class);
+    }
     public function surattugas(){
-        return $this->hasMany('surattugas');
+        return $this->belongsTo(Surattugas::class);
     }
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sppd;
+use App\Models\Surattugas;
 use App\Exports\SppdExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Carbon;
 
 class SppdController extends Controller
 {
@@ -16,8 +18,9 @@ class SppdController extends Controller
      */
     public function index()
     {
-        $sppd = Sppd::paginate(10);
-        return view('sppd.sppd', compact('sppd'));
+        $sppd = Sppd::paginate(100);
+        $surattugas = Surattugas::all();
+        return view('sppd.sppd', compact('sppd','surattugas'));
     }
     public function cetakpertanggalsppd($tglawal, $tglakhir){
         $sppd = Sppd::whereBetween('created_at', [$tglawal, $tglakhir])->get();
@@ -45,27 +48,24 @@ class SppdController extends Controller
         $this->validate($request,
         [
             'no_sppd'       => 'required',
-            'no_st'         => 'required',
-            'nama'          => 'required',
-            'nip'           => 'required',
-            'tingkat'       => 'required',
             'tgl_berangkat' => 'required',
             'tgl_pulang'    => 'required',
             'provinsi'      => 'required',
             'kegiatan'      => 'required',
             'kota'          => 'required',
+            'tanggal_sppd'  => 'required',
+            'surattugas_id_surattugas'  => 'required',
         ]);
         Sppd::create([
             'no_sppd'       =>$request->no_sppd,
-            'no_st'         =>$request->no_st,
-            'nama'          =>$request->nama,
-            'nip'           =>$request->nip,
             'tingkat'       =>$request->tingkat,
             'tgl_berangkat' =>$request->tgl_berangkat,
             'tgl_pulang'    =>$request->tgl_pulang,
             'kegiatan'      =>$request->kegiatan,
             'provinsi'      =>$request->provinsi,
             'kota'          =>$request->kota,
+            'tanggal_sppd'  =>$request->tanggal_sppd,
+            'surattugas_id_surattugas'  =>$request->surattugas_id_surattugas,
         ]);
         return redirect('sppd')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
@@ -142,5 +142,9 @@ class SppdController extends Controller
     {
         return Excel::download(new SppdExport , 'sppd.xlsx');
 
+    }
+    public function getCreatedAtAttribute(){
+        return Carbon::parse($this->attributes['created_at'])
+        ->translatedFormat('l, d F Y');
     }
 }

@@ -178,7 +178,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-bemax-item d-flex">
                         <div class="item-icon">
@@ -245,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- End We are Bemax Area -->
@@ -255,7 +255,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center mb-70">
                     <div class="section-title">
-                        <h4>Latest Projects</h4>
+                        <h4>Sekolah Vokasi</h4>
                     </div>
                 </div>
             </div>
@@ -264,44 +264,44 @@
                     <div class="project-carousel owl-carousel text-center">
                         <div class="single-project project-bg-1">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-2">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-3">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-4">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"> </a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-5">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-6">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                         <div class="single-project project-bg-7">
                             <div class="project-inner">
-                                <h5><a href="#">Business Growth Solutions</a></h5>
-                                <p><a href="#">Finance</a>,<a href="#"> Marketing</a></p>
+                                <h5><a href="#"></a></h5>
+                                <p><a href="#"></a>,<a href="#"></a></p>
                             </div>
                         </div>
                     </div>
@@ -311,50 +311,29 @@
     </div>
     <!-- End Latest Project Area -->
 
-    <!-- Start Working With Us Area -->
-    <div class="working-with-us-area gray-bg">
-        <div class="container"> 
-            <div class="row">
-                <div class="col-md-6 col-12 text-center d-flex align-items-center">
-                    <div class="hire-us-content">
-                        <div class="section-title">
-                            <h4>Working With Us</h4>
-                        </div>
-                        <p>We’ve completed more than <span>100+</span>project for our am azing clients, If you interested?</p>
-                        <a href="#" class="btn hire-us-btn">Hire Us</a>
-                    </div>
-                </div>
-                <div class="col-md-6 d-none d-md-block">
-                    <div class="hire-us-img">
-                        <img src="assetss/img/hire_us.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Working With Us Area -->
+
     <!-- Start Carousel Area -->
     <div class="carousel-area pt-80 pb-80" id="blog">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title">
-                        <h4>Latest blog Posts</h4>
+                        <h4>Surat Tugas</h4>
                     </div>
                     <div class="blog-carousel owl-carousel">
                         <div class="single-blog-item">
                             <div class="single-blog-img">
                                 <img src="assetss/img/blog_01.jpg" alt="">
-                                <span>October 25, 2017</span>
+                                <span>September 29, 2021</span>
                             </div>
                             <div class="blog-content">
-                                <h5 class="post-heading"><a href="#">10 Tips for a Business Strong Start</a> </h5>
-                                <p class="post-content-text">Donec sit amet neque lectus. Ut vitae turpis justo. Nullam a sodales est, at viverra sem. Mauris vitae pellentesque nisi, sit amet viverra orci.</p>
+                                <h5 class="post-heading"><a href="#">Surat Tugas</a> </h5>
+                                <p class="post-content-text">Surat Tugas adalah surat resmi yang dikeluarkan oleh atasan kepada bawahan dalam suatu instansi untuk melaksanakan tugas tertentu.</p>
                                 <div class="blog-btn">
                                     <div class="blog-tags">
                                         <i class="fas fa-tags"></i>
-                                        <a href="#">Development</a>,
-                                        <a href="#">Maketing</a>
+                                        <!-- <a href="#">Development</a>,
+                                        <a href="#">Maketing</a> -->
                                     </div>
                                     <a href="#" class="btn btn-inline read-more-btn"><i class="fas fa-plus-square"></i>Read More</a>
                                 </div>
@@ -363,9 +342,9 @@
                         <div class="single-blog-item">
                             <div class="single-blog-img">
                                 <img src="assetss/img/blog_02.jpg" alt="">
-                                <span>October 25, 2017</span>
+                                <span>September 29, 2021</span>
                             </div>
-                            <div class="blog-content">
+                            <!-- <div class="blog-content">
                                 <h5 class="post-heading"><a href="#">10 Tips for a Business Strong Start</a> </h5>
                                 <p class="post-content-text">Donec sit amet neque lectus. Ut vitae turpis justo. Nullam a sodales est, at viverra sem. Mauris vitae pellentesque nisi, sit amet viverra orci.</p>
                                 <div class="blog-btn">
@@ -376,32 +355,20 @@
                                     </div>
                                     <a href="#" class="btn btn-inline read-more-btn"><i class="fas fa-plus-square"></i>Read More</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="single-blog-item">
                             <div class="single-blog-img">
                                 <img src="assetss/img/blog_03.jpg" alt="">
-                                <span>October 25, 2017</span>
-                            </div>
-                            <div class="blog-content">
-                                <h5 class="post-heading"><a href="#">10 Tips for a Business Strong Start</a> </h5>
-                                <p class="post-content-text">Donec sit amet neque lectus. Ut vitae turpis justo. Nullam a sodales est, at viverra sem. Mauris vitae pellentesque nisi, sit amet viverra orci.</p>
-                                <div class="blog-btn">
-                                    <div class="blog-tags">
-                                        <i class="fas fa-tags"></i>
-                                        <a href="#">Development</a>,
-                                        <a href="#">Maketing</a>
-                                    </div>
-                                    <a href="#" class="btn btn-inline read-more-btn"><i class="fas fa-plus-square"></i>Read More</a>
-                                </div>
+                                <span>September 29, 2021</span>
                             </div>
                         </div>
                         <div class="single-blog-item">
                             <div class="single-blog-img">
                                 <img src="assetss/img/blog_04.jpg" alt="">
-                                <span>October 25, 2017</span>
+                                <span>September 29, 2021</span>
                             </div>
-                            <div class="blog-content">
+                            <!-- <div class="blog-content">
                                 <h5 class="post-heading"><a href="#">10 Tips for a Business Strong Start</a> </h5>
                                 <p class="post-content-text">Donec sit amet neque lectus. Ut vitae turpis justo. Nullam a sodales est, at viverra sem. Mauris vitae pellentesque nisi, sit amet viverra orci.</p>
                                 <div class="blog-btn">
@@ -412,58 +379,49 @@
                                     </div>
                                     <a href="#" class="btn btn-inline read-more-btn"><i class="fas fa-plus-square"></i>Read More</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="section-title">
-                        <h4>Testimonials</h4>
+                        <h4>SPPD</h4>
                     </div>
                     <div class="testimonial-carousel owl-carousel">
                         <div class="single-testimonial-item ">
                             <div class="testimonial-content d-flex">
                                 <i class="fas fa-quote-left"></i>
-                                <p> Nullam faucibus, magna non fringilla ullamcorper, mi libero tempus arcu, fermentum lacinia sapien lacus eget dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam tincidunt odio dolor</p>
+                                <p>Surat Perintah Perjalanan Dinas (SPPD) adalah surat perintah kepada Pejabat Negara, Pegawai Negeri, Pegawai Tidak Tetap, dan Pihak Lain untuk melaksanakan Perjalanan Dinas.</p>
                             </div>
                             <div class="author-details d-flex">
-                                <div class="author-img">
+                                <!-- <div class="author-img">
                                     <img src="assetss/img/user_01.png" alt="">
-                                </div>
-                                <div class="author-content">
+                                </div> -->
+                                <!-- <div class="author-content">
                                    <a href="#">Michael Green</a>
                                    <span>Product Manager</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="single-testimonial-item ">
                             <div class="testimonial-content d-flex">
                                 <i class="fas fa-quote-left"></i>
-                                <p> Nullam faucibus, magna non fringilla ullamcorper, mi libero tempus arcu, fermentum lacinia sapien lacus eget dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam tincidunt odio dolor</p>
+                                <p>Surat ini dikeluarkan oleh instansi terkait digunakan ketika pegawai / staff melakukan perjalanan dinas.</p>
                             </div>
                             <div class="author-details d-flex">
-                                <div class="author-img">
+                                <!-- <div class="author-img">
                                     <img src="assetss/img/user_02.png" alt="">
                                 </div>
                                 <div class="author-content">
                                    <a href="#">Michael Green</a>
                                    <span>Product Manager</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="single-testimonial-item ">
                             <div class="testimonial-content d-flex">
                                 <i class="fas fa-quote-left"></i>
                                 <p> Nullam faucibus, magna non fringilla ullamcorper, mi libero tempus arcu, fermentum lacinia sapien lacus eget dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam tincidunt odio dolor</p>
-                            </div>
-                            <div class="author-details d-flex">
-                                <div class="author-img">
-                                    <img src="assetss/img/user_03.png" alt="">
-                                </div>
-                                <div class="author-content">
-                                   <a href="#">Michael Green</a>
-                                   <span>Product Manager</span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -483,7 +441,7 @@
                             <a href="index.html">SIPERJADIN </a>
                         </div>
                         <div class="footer-dec">
-                            <p>Be-one is a clean PSD theme suitable for corporate, You can customize it very easy to fit your needs, semper suscipit metus accumsan at. Nam luctus ac tortor eu</p>
+                            <!-- <p>Be-one is a clean PSD theme suitable for corporate, You can customize it very easy to fit your needs, semper suscipit metus accumsan at. Nam luctus ac tortor eu</p> -->
                         </div>
                         <ul class="social-links">
                             <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -496,14 +454,10 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget">
                         <div class="widget-title">
-                            <h6>Features</h6>
+                           
                         </div>
                         <ul class="footer-menu">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Our Story</a></li>
-                            <li><a href="#">Terms &and; Condition</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Site Map</a></li>
+                            
                         </ul>
                     </div>
                 </div>

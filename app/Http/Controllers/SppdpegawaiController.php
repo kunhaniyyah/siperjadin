@@ -17,6 +17,7 @@ class SppdpegawaiController extends Controller
     public function index()
     {
         $data = Sppd::where('nip', Auth::user()->nip)->get();
+        $surattugas = Surattugas::all();
         // $datast = Surattugas::where('no_st', Auth::surattugas()->no_st)->get();
         date_default_timezone_set("Asia/Jakarta");
         $tgl = date('Y-m-d');
@@ -32,7 +33,6 @@ class SppdpegawaiController extends Controller
     public function create()
     {
         $datast = Sppd::all();
-        
         $data = Sppd::where('nip', Auth::user())->first();
         $sppd = Sppd::where('id');
     }

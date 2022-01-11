@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Halaman SPPD')</title>
+  <title>@yield('title', 'Halaman User')</title>
 
   @section('content')
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/x-icon" href="assetss/img/logouns.ico">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -139,8 +141,8 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-success">Simpan Data</button>
       </div>
       </form>
     </div>

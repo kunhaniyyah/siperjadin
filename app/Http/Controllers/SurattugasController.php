@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surattugas;
+use App\Models\User;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Exports\SurattugasExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,7 +19,9 @@ class SurattugasController extends Controller
     public function index()
     {
         $datast = Surattugas::paginate(10);
-        return view('surattugas.surattugas', compact('datast'));
+        $user = User::all();
+        $pegawai = Pegawai::all();
+        return view('surattugas.surattugas', compact('datast','user','pegawai'));
     }
 
     /**
@@ -44,12 +48,12 @@ class SurattugasController extends Controller
         $tgl = date('Y-m-d');
         Surattugas::create([
             'no_st'         =>$request->no_st,
-            'nip'           =>$request->nip,
-            'nama'          =>$request->nama,
             'keperluan'     =>$request->keperluan,
             'tanggal'       =>$request->tanggal,
             'tempat'        =>$request->tempat,
             'tanggal_st'    =>$tgl,
+            'pegawai_id_pegawai'    =>$request->pegawai_id_pegawai,
+            'user_id'       =>$request->user_id,
         ]);
         return redirect('surattugas');
     }
@@ -71,10 +75,10 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id_st)
+    public function edit($id_surattugas)
     {
         //$surat = Surattugas::findorfail($nip);
-        $st = Surattugas::findorfail($id_st);
+        $st = Surattugas::findorfail($id_surattugas);
         return view('surattugas.editst', compact('st'));
     }
 
@@ -85,9 +89,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_st)
+    public function update(Request $request, $id_surattugas)
     {
-        $st = Surattugas::findorfail($id_st);
+        $st = Surattugas::findorfail($id_surattugas);
         $st->update($request->all());
         return redirect('surattugas')->with('status', 'Data berhasil diupdate');
     }
@@ -98,9 +102,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_st)
+    public function destroy($id_surattugas)
     {
-        $st = Surattugas::findorfail($id_st);
+        $st = Surattugas::findorfail($id_surattugas);
         $st->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
@@ -109,24 +113,24 @@ class SurattugasController extends Controller
         $datast = Surattugas::whereBetween('tanggal', [$tglawal, $tglakhir])->get();
         return view('surattugas.cetakst',compact('datast'));
     }
-    public function status($id_st){
-        $datast = Surattugas::where('id_st', $id_st)->first();
+    public function status($id_surattugas){
+        $datast = Surattugas::where('id_surattugas', $id_surattugas)->first();
         $status_sekarang= $datast->status;
         if($status_sekarang == 1)
         {
-            Surattugas::where('id_st',$id_st)->update([
+            Surattugas::where('id_surattugas',$id_surattugas)->update([
                     'status'=>0
                 ]); 
         }else{
-            Surattugas::where('id_st',$id_st)->update([
+            Surattugas::where('id_surattugas',$id_surattugas)->update([
                 'status'=>1
             ]); 
         }
-        return back()->with('success', 'Data berhasil diubah!');
+        return back()->with('success', 'Status berhasil diubah!');
     }
-    public function cetaksurat($id_st)
+    public function cetaksurat($id_surattugas)
     {
-        $datast = Surattugas::where('id_st', $id_st)->get();
+        $datast = Surattugas::where('id_surattugas', $id_surattugas)->get();
         return view('surattugas.cetaksurat', compact('datast'));
     }
     public function surattugasexport()

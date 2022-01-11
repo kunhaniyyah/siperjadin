@@ -21,7 +21,7 @@
     <center>
     <table style="width: 85%;">
         <tr>
-            <!-- <td><img src="{{ asset('assets/dist/img/uns2.png') }}" float="right" margin="15px" width="95" height="95"></td> -->
+            <td><img src="{{ asset('assets/dist/img/uns2.png') }}" float="right" margin="15px" width="95" height="95"></td>
             <td>
                 <center> 
                     <font size="4px" font-family="Times New Roman">KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN</font><br>
@@ -58,9 +58,9 @@
         @foreach ($datast as $item)
         <tr>
             <th>{{ $loop->iteration}}</th>
-            <th>{{$item->nama}}</th>
-            <th>{{$item->nip}}</th>
-            <th>{{$item->jabatan}}</th>
+            <th>{{$item->pegawai['nama']}}</th>
+            <th>{{$item->pegawai['nip']}}</th>
+            <th>{{$item->pegawai['jabatan']}}</th>
         </tr>
         @endforeach
         </table>
@@ -101,7 +101,7 @@
                 <tr>
                     @foreach ($datast as $item)
                     <td width="100">
-                        Surakarta, {{ $item->created_at}}
+                        Surakarta, {{date('d-m-Y', strtotime($item->tanggal))}}
                     </td>
                     @endforeach
                   <tr>
@@ -117,7 +117,7 @@
         <br>
         <br>
             <tr>
-                <td>Drs. Sarwoso Tri Hananto, M.Acc., Ak</td>
+                <td>Drs. Santoso Tri Hananto, M.Acc.,Ak</td>
             </tr>
             <tr>
                 <td>NIP. 196909241994021001</td>

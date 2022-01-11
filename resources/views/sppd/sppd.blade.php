@@ -55,9 +55,11 @@
               <th scope="col">No</th>
               <th scope="col">#</th>
               <th scope="col">No. SPPD</th>
+              <th scope="col">NO ST</th>
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
               <th scope="col">Status</th>
+              <th scope="col">Tanggal</th>
               <th scope="col">Aksi</th>
           </tr>
           </thead>
@@ -73,7 +75,7 @@
                 @endif
               </td>
               <td>{{ $item->no_sppd}}</td>
-              <!-- <td>{{ $item->no_st}}</td> -->
+              <td>{{ $item->surattugas['no_st']}}</td>
               <td>{{ $item->nama}}</td>
               <td>{{date('d-m-Y', strtotime($item->created_at)) }}</td>
               <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success'  }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi"  }}</span></td>
@@ -92,6 +94,7 @@
                     <a href="#"><button class="btn btn-warning btn-sm disabled" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                     @endif
               </td>
+              <td> {{ $item->created_at }} </td>
           </tr>
           @endforeach
         </table>
@@ -157,36 +160,21 @@
                 <span class="text-danger">{{ $message }}</span>
               @enderror
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="exampleFormControlInput1">No Surat Tugas</label>
             <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{old('no_st')}}">
               @error('no_st')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
-          </div>
+          </div> -->
           <div class="form-group">
-            <label for="exampleFormControlInput1">NIP</label>
-            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{old('nip')}}">
-              @error('nip')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Nama</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{old('nama')}}">
-              @error('nama')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Tingkat</label>
-            <select class="form-control" id="tingkat" name="tingkat" value="">
-                  <option>B</option>
-                  <option>C</option>
-                  @error('tingkat')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-                </select>
+                  <label for="exampleFormControlInput1">No Surat Tugas</label>
+                  <select class="form-control" id="surattugas_id_surattugas" name="surattugas_id_surattugas">
+                      <option value="">Masukkan No Surat Tugas</option>
+                      @foreach ($surattugas as $item)
+                        <option value="{{ $item->id_surattugas }}">{{ $item->no_st }}</option>
+                      @endforeach
+                  </select>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Tanggal Berangkat</label>
@@ -223,14 +211,6 @@
                 <span class="text-danger">{{ $message }}</span>
               @enderror
           </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">File Surat Tugas</label>
-            <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" value="{{old('file')}}">
-              @error('file')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-         
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -400,8 +380,9 @@
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-success" onclick="countWord()">Simpan Data</button>
         </div>
         </div>
     </form>

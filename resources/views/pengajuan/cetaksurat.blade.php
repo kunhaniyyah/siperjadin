@@ -101,7 +101,7 @@
                 <tr>
                     @foreach ($datast as $item)
                     <td width="100">
-                        Surakarta, {{ $item->created_at}}
+                        Surakarta, {{date('d-m-Y', strtotime($item->tanggal))}}
                     </td>
                     @endforeach
                   <tr>
@@ -117,7 +117,7 @@
         <br>
         <br>
             <tr>
-                <td>Drs. Sarwoso Tri Hananto, M.Acc., Ak</td>
+                <td>Drs. Santoso Tri Hananto, M.Acc.,Ak</td>
             </tr>
             <tr>
                 <td>NIP. 196909241994021001</td>
