@@ -22,13 +22,6 @@
       @enderror
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">NIP</label>
-    <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="">
-      @error('nip')
-        <span class="text-danger">{{ $message }}</span>
-      @enderror
-  </div>
-  <div class="form-group">
     <label for="exampleFormControlInput1">Nama</label>
     <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="">
       @error('nama')

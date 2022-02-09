@@ -67,8 +67,8 @@
                           @foreach ($data as $item )
                               <tr class="text-center">
                                     <td>{{ $loop->iteration}}</td>
-                                    <td>{{ $item->no_st}}</td>
-                                    <td>{{ $item->nama}}</td>
+                                    <td>{{ $item->surattugas['no_st']}}</td>
+                                    <td>{{ $item->surattugas['pegawai']['nama']}}</td>
                                     <td>{{ date('d-m-Y', strtotime($item->tgl_berangkat)) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($item->tgl_pulang)) }}</td>
                                     <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>

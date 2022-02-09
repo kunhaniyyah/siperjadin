@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Sppd;
 use App\Models\Surattugas;
+use App\Models\User;
 
 class SppdpegawaiController extends Controller
 {
@@ -16,7 +17,10 @@ class SppdpegawaiController extends Controller
      */
     public function index()
     {
-        $data = Sppd::where('nip', Auth::user()->nip)->get();
+        $data = Sppd::whereHas('surattugas.pegawai', function($query){
+            $query->where('nip', '=', Auth::user()->nip);
+        })->get();
+        $user = User::where('nip', Auth::user()->nip)->get();
         $surattugas = Surattugas::all();
         // $datast = Surattugas::where('no_st', Auth::surattugas()->no_st)->get();
         date_default_timezone_set("Asia/Jakarta");

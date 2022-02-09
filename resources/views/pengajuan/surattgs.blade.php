@@ -35,7 +35,7 @@
           <div class="card-header">
               <div class="card-tools">
                   @if($cek) 
-                  <button disabled class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#tambahdata"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data 
                       </button>
                   @else
                   
@@ -76,12 +76,12 @@
                                   <a class="btn btn-info btn-xs disabled" href=""><i class="fa fa-download"></i> Download<span class="caret"></span></a>
                                   @endif
                                   @if($item->status == 0)
-                                  <a href="{{route('cetaksurat', $item->id_st)}}" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
+                                  <a href="{{route('cetaksurat', $item->id_surattugas)}}" target="_blank" class="btn btn-info btn-xs" href=""><i class="fa fa-download"></i> Download</a>
                                   @endif
                                   </td>
                                   <td>
-                                    <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#detailmodal{{$item->id_st}}"><i class="fas fa-eye"></i></button>
-                                      <form action="{{ route('surattgs.destroy', $item->id_st) }}" method="POST" class="d-inline">
+                                    <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#detailmodal{{$item->id_surattugas}}"><i class="fas fa-eye"></i></button>
+                                      <form action="{{ route('surattgs.destroy', $item->id_surattugas) }}" method="POST" class="d-inline">
                                             @method('Delete')
                                             @csrf
                                                 <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
@@ -148,7 +148,7 @@
 
 <!-- modal detail -->
 @foreach ($data as $item)
-<div class="modal fade" id="detailmodal{{$item->id_st}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailmodal{{$item->id_surattugas}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -167,12 +167,8 @@
                   <td>{{$item->no_st}}</td>
                 </tr>
                 <tr>
-                  <th scope="col">NIP</th>
-                  <td>{{$item->nip}}</td>
-                </tr>
-                <tr>
                   <th scope="col">Nama</th>
-                  <td>{{$item->nama}}</td>
+                  <td>{{$item->pegawai['nama']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tanggal</th>

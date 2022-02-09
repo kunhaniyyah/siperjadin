@@ -55,16 +55,16 @@
               <th scope="col">No</th>
               <th scope="col">#</th>
               <th scope="col">No. SPPD</th>
-              <th scope="col">NO ST</th>
+              <th scope="col">No. ST</th>
               <th scope="col">Nama</th>
               <th scope="col">Tanggal</th>
-              <th scope="col">Status</th>
               <th scope="col">Status</th>
               <th scope="col">Aksi</th>
           </tr>
           </thead>
           <tbody>
          @foreach ($sppd as $item)
+        
           <tr class="text-center">
               <td>{{ $loop->iteration }}</td>
               <td>
@@ -75,10 +75,9 @@
                 @endif
               </td>
               <td>{{ $item->no_sppd}}</td>
-              <td>{{ $item->surattugas['no_st']}}</td>
-              <td>{{ $item->pegawai['nama'] }}</td>
-              <td>{{date('l, d F Y', strtotime($item->created_at)) }}</td>
-              <!-- <td> {{date('d-m-Y', strtotime($item->tanggal_sppd))}} </td> -->
+              <td>{{ $item->surattugas['no_st'] }}</td>
+              <td>{{ $item->surattugas['pegawai']['nama']}}</td>
+              <td>{{date('d-m-Y', strtotime($item->created_at)) }}</td>
               <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success'  }}">{{ ($item->status == 1) ?  "Belum diverifikasi" : "Sudah diverifikasi"  }}</span></td>
               <!-- jabatan yg ke 2 itu nama field di tabel jabfung -->
               <td>
@@ -95,9 +94,9 @@
                     <a href="#"><button class="btn btn-warning btn-sm disabled" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                     @endif
               </td>
-              
           </tr>
           @endforeach
+        
         </table>
       </tbody>
   </div>
@@ -154,21 +153,7 @@
       <div class="modal-body">
             <form action=" {{ route('sppd.store') }}" method="post">
             {{ csrf_field() }}
-          <div class="form-group">
-            <label for="exampleFormControlInput1">No SPPD</label>
-            <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{old('no_sppd')}}">
-              @error('no_st')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-          <!-- <div class="form-group">
-            <label for="exampleFormControlInput1">No Surat Tugas</label>
-            <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{old('no_st')}}">
-              @error('no_st')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div> -->
-          <div class="form-group">
+            <div class="form-group">
                   <label for="exampleFormControlInput1">No Surat Tugas</label>
                   <select class="form-control" id="surattugas_id_surattugas" name="surattugas_id_surattugas">
                       <option value="">Masukkan No Surat Tugas</option>
@@ -176,6 +161,13 @@
                         <option value="{{ $item->id_surattugas }}">{{ $item->no_st }}</option>
                       @endforeach
                   </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">No SPPD</label>
+            <input type="text" class="form-control @error('no_sppd') is-invalid @enderror" id="no_sppd" name="no_sppd" placeholder="Masukkan No SPPD" value="{{old('no_sppd')}}">
+              @error('no_st')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Tanggal Berangkat</label>
@@ -248,19 +240,19 @@
                 </tr>
                 <tr>
                   <th scope="col">No. ST</th>
-                  <td>{{$item->no_st}}</td>
+                  <td>{{$item->surattugas['no_st']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">NIP</th>
-                  <td>{{$item->nip}}</td>
+                  <td>{{$item->surattugas['pegawai']['nip']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Nama</th>
-                  <td>{{$item->nama}}</td>
+                  <td>{{$item->surattugas['pegawai']['nama']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tingkat</th>
-                  <td>{{$item->tingkat}}</td>
+                  <td>{{$item->surattugas['pegawai']['tingkat']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tanggal Berangkat</th>
@@ -319,33 +311,35 @@
                 @enderror
             </div>
             <div class="form-group">
-              <label for="exampleFormControlInput1">No Surat Tugas</label>
-              <input type="text" class="form-control @error('no_st') is-invalid @enderror" id="no_st" name="no_st" placeholder="Masukkan No Surat Tugas" value="{{$item->no_st}}">
-                @error('no_st')
-                  <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group">
+                  <label for="exampleFormControlInput1">No Surat Tugas</label>
+                  <select class="form-control" id="surattugas_id_surattugas" name="surattugas_id_surattugas">
+                      <option value="">{{$item->surattugas['no_st']}}</option>
+                      @foreach ($surattugas as $thing)
+                        <option value="{{ $thing->id_surattugas }}">{{ $thing->no_st }}</option>
+                      @endforeach
+                  </select>
+          </div>
+            <!-- <div class="form-group">
               <label for="exampleFormControlInput1">NIP</label>
-              <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->nip}}">
+              <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->surattugas['pegawai']['nip']}}">
                 @error('nip')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
               <label for="exampleFormControlInput1">Nama</label>
-              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->nama}}">
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->surattugas['pegawai']['nama']}}">
                 @error('nama')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
               <label for="exampleFormControlInput1">Tingkat</label>
-              <textarea class="form-control @error('tingkat') is-invalid @enderror" id="tingkat" name="tingkat" placeholder="Masukkan Keperluan">{{$item->tingkat}}</textarea>  
+              <textarea class="form-control @error('tingkat') is-invalid @enderror" id="tingkat" name="tingkat" placeholder="Masukkan Tingkat">{{$item->surattugas['pegawai']['tingkat']}}</textarea>  
               @error('keperluan')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="exampleFormControlInput1">Tanggal Berangkat</label>
               <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror" id="tgl_berangkat" name="tgl_berangkat" value="{{$item->tgl_berangkat}}">
@@ -381,9 +375,8 @@
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            <button type="submit" class="btn btn-success" onclick="countWord()">Simpan Data</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="countWord()">Save changes</button>
         </div>
         </div>
     </form>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sppd;
 use App\Models\Surattugas;
 use App\Exports\SppdExport;
+use App\Models\Pegawai;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
 
@@ -18,9 +19,15 @@ class SppdController extends Controller
      */
     public function index()
     {
-        $sppd = Sppd::paginate(100);
+        //$goals = $pegawai->goals()->get();
+        $sppd = Sppd::with('surattugas.pegawai')->get();
         $surattugas = Surattugas::all();
-        return view('sppd.sppd', compact('sppd','surattugas'));
+        $pegawai = Pegawai::all();
+
+        // header('Content-Type: application/json');
+        // echo json_encode($sppd);
+
+        return view('sppd.sppd', compact('sppd','surattugas','pegawai'));
     }
     public function cetakpertanggalsppd($tglawal, $tglakhir){
         $sppd = Sppd::whereBetween('created_at', [$tglawal, $tglakhir])->get();
@@ -60,7 +67,6 @@ class SppdController extends Controller
         ]);
         Sppd::create([
             'no_sppd'       =>$request->no_sppd,
-            'tingkat'       =>$request->tingkat,
             'tgl_berangkat' =>$request->tgl_berangkat,
             'tgl_pulang'    =>$request->tgl_pulang,
             'kegiatan'      =>$request->kegiatan,

@@ -30,27 +30,13 @@ class Pegawai extends Model
         //belongsto , 1 jabfung memiliki banyak pegawai
         return $this->belongsTo (Jabfung::class);
     }
-    public function fakultas()
-    {
-        //belongsto , 1 jabfung memiliki banyak pegawai
-        return $this->belongsTo (Fakultas::class);
-    }
-    public function pangkat()
-    {
-        //belongsto , 1 jabfung memiliki banyak pegawai
-        return $this->belongsTo (Pangkat::class);
-    }
-    public function golongan()
-    {
-        //belongsto , 1 jabfung memiliki banyak pegawai
-        return $this->belongsTo (Golongan::class);
-    }
     public function user()
     {
        return $this->hasOne(User::class);
     }
     public function surattugas()
     {
-       return $this->hasMany(Surattugas::class);
+       return $this->hasManyThrough(Surattugas::class, Sppd::class);
     }
+   
 }

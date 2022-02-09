@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use App\Models\Surattugas;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,11 +18,14 @@ class SurattgsController extends Controller
      */
     public function index()
     {
-        $data = Surattugas::where('nip', Auth::user()->nip)->get();
+        $data = Surattugas::whereHas('pegawai', function($query){
+            $query->where('nip', '=', Auth::user()->nip);
+        })->get();
         $user = User::where('nip', Auth::user()->nip)->get();
         date_default_timezone_set("Asia/Jakarta");
         $tgl = date('Y-m-d');
         $cek = Surattugas::where('tanggal_st', $tgl) -> first();
+
         return view('pengajuan.surattgs', compact('data', 'user', 'cek'));
     }
 
@@ -34,8 +38,8 @@ class SurattgsController extends Controller
     {
         $datast = Surattugas::all();
         
-        $data = Surattugas::where('nip', Auth::user())->first();
-        $surattgs = Surattugas::where('id');
+        $data = Surattugas::where('nip',Auth::user())->first();
+        $surattgs = Surattugas::where('pegawai_id_pegawai');
     }
 
     /**
@@ -93,11 +97,11 @@ class SurattgsController extends Controller
     {
         $surat = Surattugas::findorfail($id_st);
         $surattgs = [
-            'nip' =>  $request->get(Auth::user()->nip),
-            'nama' => Auth::user()->nama,
-            'keperluan' => $request->get('keperluan'),
-            'tanggal' => $request->get('tanggal'),
-            'tempat' => $request->get('tempat'),
+            'nip'           =>  $request->get(Auth::user()->nip),
+            'nama'          => Auth::user()->nama,
+            'keperluan'     => $request->get('keperluan'),
+            'tanggal'       => $request->get('tanggal'),
+            'tempat'        => $request->get('tempat'),
         ];
         $surat->update(
 

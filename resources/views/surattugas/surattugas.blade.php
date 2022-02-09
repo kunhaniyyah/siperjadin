@@ -289,25 +289,17 @@
                   @enderror
               </div>
               <div class="form-group">
-                <label for="exampleFormControlInput1">NIP</label>
-                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" placeholder="Masukkan NIP" value="{{$item->pegawai['nip']}}">
-                  @error('nip')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Nama</label>
-                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{$item->pegawai['nama']}}">
-                  @error('nama')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
-              </div>
+                  <label for="exampleFormControlInput1">Nama</label>
+                  <select class="form-control" id="pegawai_id_pegawai" name="pegawai_id_pegawai">
+                    <option value="">{{$item->pegawai['nama']}}</option>
+                    @foreach ($pegawai as $thing)
+                    <option value="{{ $thing->id_pegawai }}">{{ $thing->nama }}</option>
+                    @endforeach
+                  </select>
+                </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Keperluan</label>
-                <textarea class="form-control @error('keperluan') is-invalid @enderror" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan">{{$item->keperluan}}</textarea>  
-                @error('keperluan')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                <textarea class="form-control" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan">{{$item->keperluan}}</textarea>  
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Tanggal</label>
