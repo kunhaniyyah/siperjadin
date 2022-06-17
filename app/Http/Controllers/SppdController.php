@@ -54,26 +54,25 @@ class SppdController extends Controller
         //dd($request->all());
         date_default_timezone_set("Asia/Jakarta");
         $tgl = date('Y-m-d');
-        $this->validate($request,
-        [
-            'no_sppd'       => 'required',
-            'tgl_berangkat' => 'required',
-            'tgl_pulang'    => 'required',
-            'provinsi'      => 'required',
-            'kegiatan'      => 'required',
-            'kota'          => 'required',
-            'tanggal_sppd'  => 'required',
-            'surattugas_id_surattugas'  => 'required',
-        ]);
+        // $this->validate($request,
+        // [
+        //     'surattugas_id_surattugas'  => 'required',
+        //     'id_sppd'       => 'required',
+        //     'no_sppd'       => 'required',
+        //     'tgl_berangkat' => 'required',
+        //     'tgl_pulang'    => 'required',
+        //     'provinsi'      => 'required',
+        //     'kota'          => 'required',
+        //     'tanggal_sppd'  => 'required',
+        // ]);
         Sppd::create([
-            'no_sppd'       =>$request->no_sppd,
-            'tgl_berangkat' =>$request->tgl_berangkat,
-            'tgl_pulang'    =>$request->tgl_pulang,
-            'kegiatan'      =>$request->kegiatan,
-            'provinsi'      =>$request->provinsi,
-            'kota'          =>$request->kota,
-            'tanggal_sppd'  =>$request->tanggal_sppd,
             'surattugas_id_surattugas'  =>$request->surattugas_id_surattugas,
+            'no_sppd'                   =>$request->no_sppd,
+            'tgl_berangkat'             =>$request->tgl_berangkat,
+            'tgl_pulang'                =>$request->tgl_pulang,
+            'provinsi'                  =>$request->provinsi,
+            'kota'                      =>$request->kota,
+            'tanggal_sppd'              =>$request->tanggal_sppd,
         ]);
         return redirect('sppd')->with('toast_success', 'Data Berhasil Ditambahkan');
     }

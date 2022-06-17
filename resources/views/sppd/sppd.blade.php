@@ -184,13 +184,6 @@
               @enderror
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">Kegiatan</label>
-            <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan">{{old('kegiatan')}}</textarea>  
-            @error('kegiatan')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-          <div class="form-group">
             <label for="exampleFormControlInput1">Provinsi</label>
             <textarea class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Masukkan Provinsi Tujuan" value="">{{old('provinsi')}}</textarea>  
             @error('provinsi')
@@ -263,8 +256,8 @@
                   <td>{{$item->tgl_pulang}}</td>
                 </tr>
                 <tr>
-                  <th scope="col">Kegiatan</th>
-                  <td>{{$item->kegiatan}}</td>
+                  <th scope="col">Keperluan</th>
+                  <td>{{$item->surattugas['keperluan']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Kota</th>
@@ -351,13 +344,6 @@
               <label for="exampleFormControlInput1">Tanggal Pulang</label>
               <input type="date" class="form-control @error('tgl_pulang') is-invalid @enderror" id="tgl_pulang" name="tgl_pulang" value="{{$item->tgl_pulang}}">
                 @error('tgl_pulang')
-                  <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlInput1">Kegiatan</label>
-              <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan">{{$item->kegiatan}}</textarea>  
-              @error('kegiatan')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>

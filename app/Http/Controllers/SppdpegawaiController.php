@@ -59,7 +59,6 @@ class SppdpegawaiController extends Controller
             'tingkat'       =>$request->tingkat,
             'tgl_berangkat' =>$request->tgl_berangkat,
             'tgl_pulang'    =>$request->tgl_pulang,
-            'kegiatan'      =>$request->kegiatan,
             'provinsi'      =>$request->provinsi,
             'kota'          =>$request->kota,
             'tanggal_sppd'  =>$tgl,

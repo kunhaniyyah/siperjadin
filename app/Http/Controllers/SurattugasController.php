@@ -48,13 +48,13 @@ class SurattugasController extends Controller
         date_default_timezone_set("Asia/Jakarta");
         $tgl = date('Y-m-d');
         Surattugas::create([
-            'no_st'         =>$request->no_st,
-            'keperluan'     =>$request->keperluan,
-            'tanggal'       =>$request->tanggal,
-            'tempat'        =>$request->tempat,
-            'tanggal_st'    =>$tgl,
-            'pegawai_id_pegawai'    =>$request->pegawai_id_pegawai,
-            'user_id'       =>$request->user_id,
+            'no_st'                     =>$request->no_st,
+            'keperluan'                 =>$request->keperluan,
+            'tanggal'                   =>$request->tanggal,
+            'tempat'                    =>$request->tempat,
+            'tanggal_st'                =>$tgl,
+            'pegawai_id_pegawai'        =>$request->pegawai_id_pegawai,
+            'user_id'                   =>$request->user_id,
         ]);
         return redirect('surattugas');
     }

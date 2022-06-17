@@ -176,7 +176,7 @@
                 </tr>
                 <tr>
                   <th scope="col">Keperluan</th>
-                  <td>{{$item->keperluan}}</td>
+                  <td>{{$item->surattugas['kegiatan']}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tempat</th>

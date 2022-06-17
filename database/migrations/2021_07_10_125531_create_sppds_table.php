@@ -23,7 +23,6 @@ class CreateSppdsTable extends Migration
             $table->date('tgl_pulang');
             $table->string('provinsi', 100);
             $table->string('kota', 100);
-            $table->string('kegiatan', 100);
             $table->string('total_ajuan', 100);
             $table->timestamps();
         });

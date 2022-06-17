@@ -146,13 +146,6 @@
               @enderror
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">Kegiatan</label>
-            <textarea class="form-control @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" placeholder="Masukkan Kegiatan">{{old('kegiatan')}}</textarea>  
-            @error('kegiatan')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
-          </div>
-          <div class="form-group">
             <label for="exampleFormControlInput1">Provinsi</label>
             <textarea class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Masukkan Provinsi Tujuan" value="">{{old('provinsi')}}</textarea>  
             @error('provinsi')

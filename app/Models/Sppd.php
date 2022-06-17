@@ -18,10 +18,10 @@ class Sppd extends Model
         'tgl_berangkat',
         'tgl_pulang',
         'provinsi',
+        'provinsi',
         'kota',
-        'kegiatan',
-        'status',
         'tanggal_sppd',
+        'status',
     ];
     public function user(){
         return $this->belongsTo(User::class);
