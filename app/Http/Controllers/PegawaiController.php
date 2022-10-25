@@ -123,17 +123,17 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_pegawai)
+    public function update(Request $request, $id)
     {
-        $peg = Pegawai::findorfail($id_pegawai);
+        $peg = Pegawai::findorfail($id);
         //$jab = Jabfung::all();
         $peg->update($request->all());
         return redirect('pegawai')->with('status', 'Data berhasil diupdate');
     }
 
-    public function destroy($id_pegawai)
+    public function destroy($id)
         {
-            Pegawai::destroy($id_pegawai);
+            Pegawai::destroy($id);
             return back()->with('success', 'Data berhasil dihapus!');
             //return"hai";
         }

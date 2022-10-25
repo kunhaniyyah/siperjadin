@@ -10,7 +10,7 @@ class Surattugas extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ="surattugas";
-    protected $primaryKey ="id_surattugas";
+    // protected $primaryKey ="id";
     protected $fillable = [
         'no_st',
         'keperluan',
@@ -19,17 +19,20 @@ class Surattugas extends Model
         'status',
         'tanggal_st',
         'created_at',
-        'pegawai_id_pegawai',
     ];
-    public function user()
+    public function anggota()
     {
-        return $this->belongsTo(User::class);
-    }
-    public function pegawai()
-    {
-        return $this->belongsTo(Pegawai::class);
+        return $this->belongsToMany(Anggota::class);
     }
     public function sppd(){
         return $this->hasOne(Sppd::class);
+    }
+    public function pegawai()
+    {
+        return $this->belongsToMany(pegawai::class);
+    }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

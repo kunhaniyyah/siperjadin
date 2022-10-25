@@ -18,8 +18,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.js"></script>
     <!-- Theme style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/bower_components/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -50,9 +54,8 @@
                                     <th scope="col">No</th>
                                     <th scope="col">#</th>
                                     <th scope="col">No ST</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">NIP</th>
                                     <th scope="col">Tanggal</th>
+                                    <th scope="col">Nama Pegawai</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -69,26 +72,26 @@
                                 <td>{{ $loop->iteration}}</td>
                                 <td>
                                   @if($item->status==1)
-                                  <a href="{{ route('status', $item->id_surattugas)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
+                                  <a href="{{ route('status', $item->id)}}" class="btn btn-sm btn-success btn-xs">Aktifkan</a>
                                   @else 
-                                  <a href="{{ route('status' , $item->id_surattugas)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
+                                  <a href="{{ route('status' , $item->id)}}" class="btn btn-sm btn-danger btn-xs">Non Aktifkan</a>
                                   @endif
                                 </td>
                                 <td>{{ $item->no_st}}</td>
-                                <td>{{ $item->pegawai['nama'] }}</td>
-                                <td>{{ $item->pegawai['nip'] }}</td>
                                 <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
+                                <td><button class="btn btn-primary btn-sm" title="Tambah Pegawai"  data-toggle="modal" data-target="#tambahpegawai{{$item->id}}">Tambah Pegawai</button></td>
+                                
                                 <td><span class="badge {{ ($item->status == 1) ? 'badge-danger' : 'badge-success'   }}">{{ ($item->status == 1) ?   "Belum diverifikasi" : "Sudah diverifikasi" }}</span></td>
                                 <td>
-                                  <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id_surattugas}}"><i class="fas fa-pencil-alt"></i></button>
-                                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id_surattugas}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
-                                  <form action="{{ route('surattugas.destroy', $item->id_surattugas) }}" method="POST" class="d-inline">
+                                  <button class="btn btn-primary btn-sm" title="Edit Data"  data-toggle="modal" data-target="#editmodal{{$item->id}}"><i class="fas fa-pencil-alt"></i></button>
+                                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal{{$item->id}}" title="Detail Data" ><i class="fas fa-eye"></i></button>
+                                  <form action="{{ route('surattugas.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @method('Delete')
                                     @csrf
                                     <button class="btn btn-danger btn-sm" title="Delete Data" data-toggle="modal" data-target="#modal-danger"  type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
                                   </form>
                                   @if($item->status==0)
-                                  <a href="{{route('cetaksurat', $item->id_surattugas)}}" target="_blank" ><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
+                                  <a href="{{route('cetaksurat', $item->id)}}" target="_blank" ><button class="btn btn-warning btn-sm" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                                   @else
                                   <a href="#"><button class="btn btn-warning btn-sm disabled" title="Cetak Surat" ><i class="fas fa-print"></i></button></a>
                                   @endif
@@ -155,7 +158,7 @@
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                   <label for="exampleFormControlInput1">Nama</label>
                   <select class="form-control" id="pegawai_id_pegawai" name="pegawai_id_pegawai">
                     <option value="">Pilih Pegawai</option>
@@ -163,7 +166,7 @@
                     <option value="{{ $item->id_pegawai }}">{{ $item->nama }}</option>
                     @endforeach
                   </select>
-                </div>
+                </div> -->
               <!-- <div class="form-group">
                 <label for="exampleFormControlInput1">NIP</label>
                 @foreach ($pegawai as $item)
@@ -214,7 +217,7 @@
 
 <!-- modal detail -->
 @foreach ($datast as $item)
-<div class="modal fade" id="detailmodal{{$item->id_surattugas}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailmodal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -234,11 +237,11 @@
                 </tr>
                 <tr>
                   <th scope="col">NIP</th>
-                  <td>{{ $item->pegawai['nip']}}</td></td>
+                  <td>{{$item->nip}}</td></td>
                 </tr>
                 <tr>
                   <th scope="col">Nama</th>
-                  <td>{{$item->pegawai['nama']}}</td>
+                  <td>{{$item->nama}}</td>
                 </tr>
                 <tr>
                   <th scope="col">Tanggal</th>
@@ -268,7 +271,7 @@
 
 <!-- modal edit -->
 @foreach ($datast as $item)
-<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id_surattugas}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="editmodal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -277,7 +280,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('surattugas.update' , $item->id_surattugas)}}" method="post">
+      <form action="{{route('surattugas.update' , $item->id)}}" method="post">
       <div class="modal-body">
       {{ csrf_field() }}
       @method('PUT')
@@ -288,15 +291,15 @@
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                   <label for="exampleFormControlInput1">Nama</label>
                   <select class="form-control" id="pegawai_id_pegawai" name="pegawai_id_pegawai">
-                    <option value="">{{$item->pegawai['nama']}}</option>
+                    <option value="">{{$item->nama}}</option>
                     @foreach ($pegawai as $thing)
-                    <option value="{{ $thing->id_pegawai }}">{{ $thing->nama }}</option>
+                    <option value="{{ $thing->id }}">{{ $thing->nama }}</option>
                     @endforeach
                   </select>
-                </div>
+                </div> -->
               <div class="form-group">
                 <label for="exampleFormControlInput1">Keperluan</label>
                 <textarea class="form-control" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan">{{$item->keperluan}}</textarea>  
@@ -326,6 +329,55 @@
 </div>           
 @endforeach
 <!-- end modal -->
+
+
+
+<!-- modal tambah pegawai -->
+@foreach ($datast as $item)
+<div class="modal fade bd-example-modal-lg" id="tambahpegawai{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('surattugas.update' , $item->id)}}" method="post">
+      <div class="modal-body">
+      {{ csrf_field() }}
+      @method('PUT')
+                 
+               <!-- <div class="form-group">
+                  <label for="exampleFormControlInput1">Nama</label>
+                  <select class="form-control" id="pegawai_id_pegawai" name="pegawai_id_pegawai">
+                    <option value="">{{$item->pegawai['nama']}}</option>
+                    @foreach ($pegawai as $thing)
+                    <option value="{{ $thing->id}}">{{ $thing->nama }}</option>
+                    @endforeach
+                  </select>
+                </div> -->
+
+                <div class="form-group">
+                      <label>Nama Pegawai</label><br>
+                      <select class="js-example-basic-multiple" name="pegawai_id_pegawai" multiple="">
+                        <option value="">{{$item->nama}}</option>
+                        <!-- @foreach ($pegawai as $thing) -->
+                        <option value="{{ $thing->id }}">{{ $thing->nama }}</option>
+                         <!-- @endforeach -->
+                      </select>
+                </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>           
+@endforeach
+<!-- end modal -->
 </section>
 
 @include('layout.footer')
@@ -336,7 +388,11 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
 <script src="{{ asset('assets/dataTables/datatables.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
   $(document).ready( function () {
     $('#datatables').DataTable();
 } );

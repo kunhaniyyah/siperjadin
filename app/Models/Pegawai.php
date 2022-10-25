@@ -13,7 +13,7 @@ class Pegawai extends Model
     // By making it to false it will override the default setting.
     public $timestamps = false;
     protected $table ="pegawai";
-    protected $primaryKey ="id_pegawai";
+    //protected $primaryKey ="id";
     protected $fillable = [
         'nip',
         'nama',
@@ -22,13 +22,13 @@ class Pegawai extends Model
         'jabatan',
         'jabfung_id',
         'golongan_id',
-        'tingkat',
+        'tingkat',    
+        'surattugas_id',
     ];
-
     public function jabfung()
     {
         //belongsto , 1 jabfung memiliki banyak pegawai
-        return $this->belongsTo (Jabfung::class);
+        return $this->belongsTo(Jabfung::class);
     }
     public function user()
     {
@@ -36,7 +36,11 @@ class Pegawai extends Model
     }
     public function surattugas()
     {
-       return $this->hasManyThrough(Surattugas::class, Sppd::class);
+       return $this->belongsToMany(surattugas::class);
+    }
+    public function getFirstKategoriAttribute()
+    {
+        return $this->surattugas[0];
     }
    
 }

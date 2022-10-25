@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Exports\SurattugasExport;
+use App\Models\Anggota;
+use App\Models\Pegawai_surattugas;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
 
@@ -22,7 +24,26 @@ class SurattugasController extends Controller
         $datast = Surattugas::paginate(10);
         $user = User::all();
         $pegawai = Pegawai::all();
-        return view('surattugas.surattugas', compact('datast','user','pegawai'));
+        $pegawai_surattugas = Pegawai_surattugas::all();
+
+        $data = Pegawai::with('surattugas')
+        ->leftjoin('surattugas', 'surattugas.id', '=', 'pegawai.surattugas_id')
+        ->select('pegawai.id AS id', 'surattugas.keperluan','surattugas.tempat',
+        'surattugas.tanggal','surattugas.status','surattugas.tanggal_st','surattugas.no_st',
+        'pegawai.nip', 'pegawai.nama', 'pegawai.jabatan')
+        ->get();
+        //return($data);
+        // $data = Surattugas::with('pegawai')
+        // ->leftjoin('pegawai', 'pegawai.id','=','surattugas.pegawai_id')
+        // ->select('pegawai.nama','surattugas.keperluan','surattugas.tempat',
+        // 'surattugas.tanggal','surattugas.status','surattugas.tanggal_st','surattugas.no_st')
+        // ->get();
+        // dd($data);exit();
+        // $st = Surattugas::select('*')
+        // ->where('pegawai', 'pegawai.id', '=', 'pegawai_surattugas.pegawai_id')
+        // ->where('surattugas', 'surattugas.id', '=', 'pegawai_surattugas.surattugas_id');
+        //dd($st);
+        return view('surattugas.surattugas', compact('datast','user','pegawai','pegawai_surattugas','data'));
     }
 
     /**
@@ -53,9 +74,15 @@ class SurattugasController extends Controller
             'tanggal'                   =>$request->tanggal,
             'tempat'                    =>$request->tempat,
             'tanggal_st'                =>$tgl,
-            'pegawai_id_pegawai'        =>$request->pegawai_id_pegawai,
             'user_id'                   =>$request->user_id,
         ]);
+        if ($request->has('surattugas_id')) {
+            $surat_tugas = collect($request->surattugas_id)
+                ->map(function ($surat_tugas) {
+                    return $surat_tugas;
+                })->toArray();
+
+        }
         return redirect('surattugas');
     }
 
@@ -76,10 +103,10 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id_surattugas)
+    public function edit($id)
     {
         //$surat = Surattugas::findorfail($nip);
-        $st = Surattugas::findorfail($id_surattugas);
+        $st = Surattugas::findorfail($id);
         return view('surattugas.editst', compact('st'));
     }
 
@@ -90,9 +117,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_surattugas)
+    public function update(Request $request, $id)
     {
-        $st = Surattugas::findorfail($id_surattugas);
+        $st = Surattugas::findorfail($id);
         $st->update($request->all());
         return redirect('surattugas')->with('status', 'Data berhasil diupdate');
     }
@@ -103,9 +130,9 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_surattugas)
+    public function destroy($id)
     {
-        $st = Surattugas::findorfail($id_surattugas);
+        $st = Surattugas::findorfail($id);
         $st->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
@@ -114,24 +141,24 @@ class SurattugasController extends Controller
         $datast = Surattugas::whereBetween('tanggal', [$tglawal, $tglakhir])->get();
         return view('surattugas.cetakst',compact('datast'));
     }
-    public function status($id_surattugas){
-        $datast = Surattugas::where('id_surattugas', $id_surattugas)->first();
+    public function status($id){
+        $datast = Surattugas::where('id_surattugas', $id)->first();
         $status_sekarang= $datast->status;
         if($status_sekarang == 1)
         {
-            Surattugas::where('id_surattugas',$id_surattugas)->update([
+            Surattugas::where('id_surattugas',$id)->update([
                     'status'=>0
                 ]); 
         }else{
-            Surattugas::where('id_surattugas',$id_surattugas)->update([
+            Surattugas::where('id_surattugas',$id)->update([
                 'status'=>1
             ]); 
         }
         return back()->with('success', 'Status berhasil diubah!');
     }
-    public function cetaksurat($id_surattugas)
+    public function cetaksurat($id)
     {
-        $datast = Surattugas::where('id_surattugas', $id_surattugas)->get();
+        $datast = Surattugas::where('id_surattugas', $id)->get();
         return view('surattugas.cetaksurat', compact('datast'));
     }
     public function surattugasexport()

@@ -69,9 +69,9 @@
                               <td>{{ $item->fakultas}}</td>
                 
                               <td>
-                                <button onclick="$('#editpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
-                                <button onclick="$('#detailpegawai{{$item->id_pegawai}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
-                                <form action="{{ route('pegawai.destroy', $item->id_pegawai) }}" method="POST" class="d-inline">
+                                <button onclick="$('#editpegawai{{$item->id}}').modal('show')" type="button" title="Edit Data" class="btn btn-primary btn-sm edit"><i class="fas fa-pencil-alt"></i>  </button>
+                                <button onclick="$('#detailpegawai{{$item->id}}').modal('show')" type="button" title="Detail Data" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>  </button>
+                                <form action="{{ route('pegawai.destroy', $item->id) }}" method="POST" class="d-inline">
                                   @method('Delete')
                                   @csrf
                                   <button class="btn btn-danger btn-sm" title="Delete Data" type="submit" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash-alt"></i></button>
@@ -93,7 +93,7 @@
 
   <!-- Modal Edit -->
   @foreach($datapegawai as $data)
-<div class="modal fade" id="editpegawai{{$data->id_pegawai}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editpegawai{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -103,7 +103,7 @@
             </button>
         </div>
       <div class="modal-body">
-        <form action="{{route('pegawai.update', $data->id_pegawai)}}" method="post">
+        <form action="{{route('pegawai.update', $data->id)}}" method="post">
         {{ csrf_field() }}
             @method('PUT')
             <div class="form-group">
@@ -354,7 +354,7 @@
 
 <!-- modal detail data  -->
 @foreach($datapegawai as $data)
-<div class="modal fade" id="detailpegawai{{$data->id_pegawai}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailpegawai{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
